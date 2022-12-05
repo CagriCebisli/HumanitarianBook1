@@ -13,7 +13,28 @@ Humanitarian sector has a background of "monitoring and evaluation". There are m
 
 As for data analysis for humanitarian sector, with the motivation of donors, we are observing more "evidence-based" actions. One of the old-school WFP manager once told in a VAM training: "Back than we were disturbing in-kinds as food, hygiene whatsoever, and then come back home. Nobody was asking question neither we did care for it. We believed we did good and thats all. But now, there is data everywhere and logic is more stronger." This is a clear vision of experience, tolds us how data become more important during years.
 
-For red pillar, IFRC is pushing more for IM - when they are losing sight of M&E. A data scientist can become IM, but can not become M&E data analyst, since they have to have an experience for programme design-logframes-impact analysis and understanding concept of the programme. We did have an issues on this pillar. M&E Data Scientsit and IM is not the same thing. Through the book, one will realize this more. ICRC does cover a different path. They call this phenomenon as "Analysis and Evidence Team". Which does serve their structure well, as they are more enveloped and their work-groups are focusing on very different topics. Yet, they have intersections such as between protection and eco-sec and eco-sec and wathab. But mentality of the unit is the same. Have a team that makes knowledge out of your or any secondary data. Be more agile, move with evidence, not with insticts (tho sometimes it's better, we do not make data fetish here).
+For red pillar, IFRC is pushing more for IM - when they are losing sight of M&E. A data scientist can become IM, but can not become M&E data analyst, since they have to have an experience for programme design-logframes-impact analysis and understanding concept of the programme. We did have an issues on this pillar. M&E Data Scientsit and IM is not the same thing. Through the book, one will realize this more. ICRC does cover a different path. They call this phenomenon as "Analysis and Evidence Team". Which does serve their structure well, as they are more enveloped and their work-groups are focusing on very different topics. Yet, they have intersections such as between Protection(unit) - ECOSEC or ECOSEC - WATHAB. But mentality of the unit is the same. Have a team that makes knowledge out of your or any secondary data. Be more agile, move with evidence, not with instincts (tho sometimes it's better, we do not make data fetish here). Their team is an M&E Data Analyst team, undercovered. If you read their documents, they are pretty similar with any other M&E guidelines and handbooks. 
+
+Personally, I am not experienced with blue pillar (UN). Yet WFP is leading this concept and they are disaggregating more into "division of labor" doctrine. They have monitoring unit, sided by VAM unit (vulnerability analysis and mapping). Even there is a unit collaborated by UNHCR and WFP, just for targeting. No wonder why they are in a leading role, as they care and dig more into these lands. Most of the red-pillar managers does not understand what targeting is, yet other hand has an unit for it. As mentioned, personally, I do have very little information of other UN institutions. Yet, WFP is a shining role-model for sure.
+
+This is a one, dusty overlook to humanitarian sector and data. I am smelling a trend between cash based interventions and data-knowledge tree. Huge correlation is lurking, if you check ECHOs latest Large-scale cash programme guidelines, lots on monitoring and evaluation explained and M&E without data is useless. Thus, if humanitarian sector evolves more into large-scale cash, data and m&e will become more and more important. In this book, I will not dig into if it is possible to do more cash-based interventions and infrastructure of banks or stakeholders' potential. Yet we all can agree that cash still has a big future and a room in our daily lives as humanitarians and Ukraine crisis proves that right. So lets build more towards data analysis and M&E to increase accountability, evidence-based actions and to have better programmes.Note that in this paper, I am assuming that reader has basic understanding of M&E, and stresses more on the data dimension.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
