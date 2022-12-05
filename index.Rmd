@@ -5,5 +5,15 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Introduction
+
+This book is tailored for revealing key concepts of intersections between "data scientist" and "monitoring and evaluation" for humanitarian sector. Do not question the language since most of these thoughts and conclusions are personal, and this book acts as a notebook of my experiences. Five years in humanitarian sector as Data Scientist with background of industrial engineering and management information systems, I have encountered gaps and common mistakes in the sector. For some parts, I will be questioning these gaps and unknowns for building a collective knowledge, hoping that it will help the future actions.
+
+Humanitarian sector has a background of "monitoring and evaluation". There are many individuals whom got mindset and experiences towards this aspect. Yet, in the latest versions of M&E, inevitably this aspects merges with data and knowledge. One of the most experienced individuals with humanitarian data Aldo Benini reflects in his notes; "Keep it simple. You may use R or Python, but if you want to be a voice for this spectacular community, stay with excel, since most of the people are more relaxed using this." This conclusion of years of experience is still valid. Yet, I am observing two types of individuals. On one hand you have mid-class proficient excel users, whom can conduct (descriptive) analysis. On the other hand one has very skilled individuals whom can use R or Python with their amazing machine learning skills and so on. Thus, in the sector, we do not have one common ground but two.
+
+As for data analysis for humanitarian sector, with the motivation of donors, we are observing more "evidence-based" actions. One of the old-school WFP manager once told in a VAM training: "Back than we were disturbing in-kinds as food, hygiene whatsoever, and then come back home. Nobody was asking question neither we did care for it. We believed we did good and thats all. But now, there is data everywhere and logic is more stronger." This is a clear vision of experience, tolds us how data become more important during years.
+
+For red pillar, IFRC is pushing more for IM - when they are losing sight of M&E. A data scientist can become IM, but can not become M&E data analyst, since they have to have an experience for programme design-logframes-impact analysis and understanding concept of the programme. We did have an issues on this pillar. M&E Data Scientsit and IM is not the same thing. Through the book, one will realize this more. ICRC does cover a different path. They call this phenomenon as "Analysis and Evidence Team". Which does serve their structure well, as they are more enveloped and their work-groups are focusing on very different topics. Yet, they have intersections such as between protection and eco-sec and eco-sec and wathab. But mentality of the unit is the same. Have a team that makes knowledge out of your or any secondary data. Be more agile, move with evidence, not with insticts (tho sometimes it's better, we do not make data fetish here).
+
+
 
