@@ -19,9 +19,50 @@ Personally, I am not experienced with blue pillar (UN). Yet WFP is leading this 
 
 This is a one, dusty overlook to humanitarian sector and data. I am smelling a trend between cash based interventions and data-knowledge tree. Huge correlation is lurking, if you check ECHOs latest Large-scale cash programme guidelines, lots on monitoring and evaluation explained and M&E without data is useless. Thus, if humanitarian sector evolves more into large-scale cash, data and M&E will become more and more important. In this book, I will not dig into if it is possible to do more cash-based interventions and infrastructure of banks or stakeholders' potential. Yet we all can agree that cash still has a big future and a room in our daily lives as humanitarians and Ukraine crisis proves that right. So lets build more towards data analysis and M&E to increase accountability, evidence-based actions and to have better programmes.Note that in this paper, I am assuming that reader has basic understanding of M&E, and stresses more on the data dimension.
 
-##    Humanitarian Projects and Monitoring and Evaluation
+##    Audiance
+
+The primary audience for this book is data science / data analyst practitioners whom works for monitoring and evaluation units, from organisations directly involved in the design, implementation, monitoring, and accountability of projects using cash and vouchers to deliver humanitarian relief. For example:
+
+-    Monitoring and evaluation data analysts
+-    PMER staff with data skills
+-    IM teams involved in humanitarian data analysis
+-    MEAL specialists etc.
+
+The secondary intended audience is other humanitarian stakeholders involved in advancing CTP monitoring and evaluation practices. Thus, may include TPM institutions.
+
+##    Why Is This a Book Needed?
+
+As mentioned in introduction, data analysis within monitoring and evaluation is a growing aspect. Many new colleagues are taking part, some of them has skills towards data analysis and grades up from field teams, some are just new to the sector or to data analysis. In this book, I will mention about M&E aspect and give some examples through operation, data cleaning, data analysis and basic examples of calculating humanitarian indicators (few important ones usually involves with cash-based interventions) with R. Thus, my belief is to make this book an honest starter for my colleagues, to read and learn from each other. Having no other hands-on guidance and written experiences was missing for me, so I am trying to fill that gap. Of course, every institution has their SOPs, but these SOPs are usually serves and limited with their current context.
+
+##    Book Structure
+
+This book mainly runs in two pillars; i) Monitoring and evaluation design in humanitarian sector ii) Data Science methods
+
+![Structure of the Book](C:\R Working Directory\R Bookdown\HumanitarianBook1\BookStructure.JPG)
+
+```{r}
+
+```
+
+
+#    Humanitarian Projects and Monitoring and Evaluation
 
 In this section, I will try to stress M&E aspect, but including data aspect into it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
