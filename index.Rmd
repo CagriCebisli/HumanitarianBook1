@@ -11,9 +11,11 @@ This book is tailored for revealing key concepts of intersections between "data 
 
 Humanitarian sector has a background of "monitoring and evaluation". There are many individuals whom got mindset and experiences towards this aspect. Yet, in the latest versions of M&E, inevitably this aspects merges with data and knowledge. One of the most experienced individuals with humanitarian data Aldo Benini reflects in his notes; "Keep it simple. You may use R or Python, but if you want to be a voice for this spectacular community, stay with excel, since most of the people are more relaxed using this." This conclusion of years of experience is still valid. Yet, I am observing two types of individuals. On one hand you have mid-class proficient excel users, whom can conduct (descriptive) analysis. On the other hand one has very skilled individuals whom can use R or Python with their amazing machine learning skills and so on. Thus, in the sector, we do not have one common ground but two.
 
-As for data analysis for humanitarian sector, with the motivation of donors, we are observing more "evidence-based" actions. One of the old-school WFP manager once told in a VAM training: "Back than we were disturbing in-kinds as food, hygiene whatsoever, and then come back home. Nobody was asking question neither we did care for it. We believed we did good and thats all. But now, there is data everywhere and logic is more stronger." This is a clear vision of experience, tolds us how data become more important during years.
+As for data analysis for humanitarian sector, with the motivation of donors, we are observing more "evidence-based" actions. One of the old-school WFP manager once told in a VAM training: "Back than we were disturbing in-kinds as food, hygiene whatsoever, and then come back home. Nobody was asking question neither we did care for it. We believed we did good and that's all. But now, there is data everywhere and logic is more stronger." This is a clear vision of experience, tolds us how data become more important during years.
 
-For red pillar, IFRC is pushing more for IM - when they are losing sight of M&E analysts and mark this concept as PMER where these individuals mostly have no idea about data analysis. So it looks like quantitative staff is IM and qualitative staff is PMER, which is a terrible idea. A data scientist can become IM, but can not become M&E data analyst, since they have to have an experience for programme design-logframes-impact analysis and understanding concept of the programme. Frankly, we did have an issues with this mindset while working with IFRC. M&E Data Scientist and IM persons are not the same thing. Through the book, one will realize this more. ICRC does cover a different path which I would prefer as well. They call this phenomenon as "Analysis and Evidence Team". Which does serve their structure well, as they are more enveloped and their work-groups are focusing on very different topics. Yet, they have intersections such as between Protection(unit) - ECOSEC or ECOSEC - WATHAB. But mentality of the unit is the same. It is like having a team that makes knowledge out of ones data or any secondary data. That team creates room for being more agile, moving with evidence, not with instincts (tho sometimes it's better, we do not make data fetish here). Their team can be interpreted as M&E Data Analyst team, under covered. If you read their documents, they are pretty similar with any other M&E guidelines and handbooks. 
+For red pillar, IFRC is pushing more for IM - when they are losing sight of M&E analysts and mark this concept as PMER where these individuals mostly have no idea about data analysis. So it looks like quantitative staff is IM and qualitative staff is PMER, which is a terrible idea. A data scientist can become IM, but can not become M&E data analyst, since they have to have an experience for programme design-logframes-impact analysis and understanding concept of the programme. Frankly, we did have an issues with this mindset while working with IFRC. M&E Data Scientist and IM persons are not the same thing. Through the book, one will realize this more. ICRC does cover a different path which I would prefer as well. They call this phenomenon as "Analysis and Evidence Team". Which does serve their structure well, as they are more enveloped and their work-groups are focusing on very different topics. Yet, they have intersections such as between Protection(unit) - ECOSEC or ECOSEC (economic security) - WATHAB (water habitat). But mentality of the unit is the same. It is like having a team that makes knowledge out of ones data or any secondary data. That team creates room for being more agile, moving with evidence, not with instincts (tho sometimes it's better, we do not make data fetish here). Their team can be interpreted as M&E Data Analyst team, under covered. If you read their documents, they are pretty similar with any other M&E guidelines and handbooks. For some programme coordinators (usually happens in National Societies) I am seeing the attitude of taking data analysis, evidence-based decision making and M&E is a layer of quality of a programme instead of considering M&E as core foundation of any humanitarian programming which should shape other operational/programmatic components. This mindset is an eclipse in humanitarian sector. These thoughts are belongs to past, what WFP manager refers to. This eclipsed-mind still lives in 50 years ago, where only aim of a programme is to deliver assistance, without any monitoring, without understanding needs, without any targeting, without any reporting at all. If you see an environment and attitude like that, just leave the ship. Donors will not approve that either.
+
+For someone who worked for ESSN, biggest cash programme of ECHO and in humanitarian sector. ECHO does care about evidence-based management style, and M&E. They do respect their logframes. Thus, if one puts an indicator there, expect a set of questions. Also in interim reports they are so interested in calculation of MEB, how indicators talks with each other and so on. So if you are an M&E data analyst with ECHO supported programme, expect series of questions and prepare good story-telling 3-pagers. It will be a challenge!
 
 Personally, I am not experienced with blue pillar (UN). Yet WFP is leading this concept and they are disaggregating more into "division of labor" doctrine. They have monitoring unit, sided by VAM unit (vulnerability analysis and mapping). Even there is a unit collaborated by UNHCR and WFP, just for targeting. No wonder why they are in a leading role, as they care and dig more into these lands. Most of the red-pillar managers does not understand what targeting is, yet other hand has an unit for it. As mentioned, personally, I do have very little information of other UN institutions. Yet, WFP is a shining role-model for sure.
 
@@ -47,8 +49,88 @@ This book mainly runs in two pillars; i) Monitoring and evaluation design in hum
 
 #    Humanitarian Projects and Monitoring and Evaluation
 
-In this section, I will try to stress M&E aspect, but including data aspect into it.
+In this section, I will try to stress M&E aspect, but including data aspect into it. There are several types of monitoring such as; process monitoring, results monitoring, context monitoring, risk monitoring etc. One great visual is explaining all the flows with research design pillars, is coming from "Monitoring4CTP; Monitoring Guidance for CTP in Emergencies" prepared by USAID and CALP. This document is one of the best and I strongly recommend to read this document to anyone who is involved with M&E or to any programme managers.
 
+![Project Monitoring by CALP](C:\R Working Directory\R Bookdown\HumanitarianBook1\Project Monitoring.JPG)
+
+As per monitoring type, there are several intersections of method. Yet, the data skills comes into play when we ask evaluation questions. An amazing visual prepared by IFRC, we can clearly see those steps and questions. Like the questions in impact. The one looks for an answer to "We did an intervention, what happened?". To answer this question, PDMs are comes into play. We will mention about this in a broader way in "Questionnaire Design" section.
+
+![Project Monitoring by CALP](C:\R Working Directory\R Bookdown\HumanitarianBook1\Evaluation and Logframe.JPG)
+
+Yes, all good, but why M&E is important ?
+
+-   Support project/programme implementation with accurate, evidence-based reporting that informs management and decision-making to guide and improve project/programme performance.
+
+-   Contribute to organizational learning and knowledge sharing by reflecting upon and sharing experiences and lessons so that we can gain the full benefit from what we do and how we do it.
+
+-   Uphold accountability and compliance by demonstrating whether or not our work has been carried out as agreed and in compliance with established standards.
+
+-   Provide opportunities for stakeholder feedback, especially beneficiaries, to provide input into and perceptions of our work, modelling openness to criticism, and willingness to learn from experiences and to adapt to changing needs.
+
+- Promote and celebrate our work by highlighting our accomplishments and achievements, building morale and contributing to resource mobilization
+
+These points are quoted from M&E guide of IFRC. All smooth right? Did you ever see a humanitarian programme, especially cash without any M&E? I did and it was horrible. No accountability, no promotion and celebration of work, no highlights, no lessons learned, no voice of beneficiaries. Just distribute cash and come back home. Still think a programme without M&E or AAP/CEA is a good idea? Still think that this is a quality layer and not a must? You will not survive in humanitarian sector. Imagine you are a donor, would give your money to someone with good M&E system and plan or would you pick other way around. Tho M&E, means that there will be field work and data collection, thus it is an expensive exercise, as a donor, you would still pick %5 of your budget for M&E, to observe what is happening and to accountability of your implementers.
+
+#   Research Design for Monitoring and Evaluation Studies
+
+In humanitarian sector research design is actually links with monitoring and evaluation plan of the programme. Through all different style of M&E plans (actually can be called as research design of making programmes accountable and measurable), there are several topics that I see as a must.
+
+-   An introduction
+    -   What is happening in context and objective of the programme
+    -   If secondary data available, most changing elements like a brief summary of markets etc.
+-   Purpose of the plan
+    -   By implementing this plan, which questions we will answer? (Is programme impactful as intended? could be a research question for M&E)
+    -   Why we are doing M&E and where are the bottlenecks
+    -   Expected outcomes and reporting
+-   Description of the process, which activities will be implement?
+    -   Example of activities; FGD, PDMs, KIIs, Needs Assessments etc.
+-   Scope of each activity
+    -   How data will collect? What will be modality of data collection.
+    -   Requirements on the field. Tools needed to conduct activities.
+    -   How many man/work hours do we need?
+    -   What will be the frequency of reports?
+-   Data flows
+    -   What is the data collection tool, KOBO/ODK etc?
+    -   Where is the database?
+    -   Data security
+    
+##    Logframes, Indicators and Questionnaire Design
+
+Through logframe, there will be several indicators that is measured by M&E teams. Team must tailor surveys to collect these indicators. There are several different methods of reflecting a log frame, yet, the one I propose is below. This version reflects anything needed; a description of indicator, data source, baseline, target, data source, frequency, main responsible, and most importantly, assumption and risks.
+
+![Logframe overlook, kindly zoom in to read, sorry!](C:\R Working Directory\R Bookdown\HumanitarianBook1\Logframe Indicators.JPG)
+
+Lets say, you are an M&E specialist to a humanitarian programme. Donor asks you to use SMART indicators (please do google it, very useful topic). Then, with the blessings of donor, or in your proposal to a donor, you reflect that your indicators will be rCSI and FCS. Then, second step is to designing your PDMs. rCSI is an indicator that builds over 5 questions. Thus, you have to have these questions to calculate and report rCSI. We will dig more into these indicators, how to calculate them with R in the following sessions. In a nutshell, questionnaire design orients around logframe indicators. Simple as that. 
+
+![Calculation of rCSI](C:\R Working Directory\R Bookdown\HumanitarianBook1\rCSI Indicator.JPG)
+
+Additional parts of questionnaire design comes from analyst. If analyst wants to conduct a vulnerability study depending on multi-dimensional aspect, that includes household assets, these can be added as question. So any metric compounds of set of questions can be added to the questionnaire. There are two things analyst must be careful about;
+
+-   Data collection modality.
+    -   If modality is via phone, surveys must be short, respecting data quality.
+    -   Questions must be understandable and easy to collect via phone.
+    -   Even for the face to face surveys, length of questionnaire is an important aspect.
+    -   Communication must be clear and questions must not be complicated or open to bias.
+    
+-   Every question must serve to a purpose. Avoid unnecessary questions or any open-ended ones for quantitative study.
+
+##    Data Collection Tools
+
+There are several different tools to collect data. IFRC generally uses KOBO. If you google, there are two links for KOBO. IFRC one called https://kobonew.ifrc.org/ and other one is https://www.kobotoolbox.org/. As far as I am aware Kobotoolbox is under OCHA's administration. But why we have two different KOBO? That is because of servers. IFRC servers in Frankfurt, OCHA based in US. Thus, your data copyrights are protected by those laws.
+
+https://humanitarian.atlassian.net/wiki/spaces/imtoolbox/pages/3190489103/Kobo+Toolbox+Terms+of+Service:
+
+
+U.S. DIGITAL MILLENNIUM COPYRIGHT ACT.
+If UNOCHA receives a notice alleging that material from your account infringes another party’s copyright, UNOCHA may disable your user account or remove alleged material in accordance with Title II of the Digital Millennium Copyright Act of 1998 (Section 512 of the U.S. Copyright Act).
+
+ICRC uses "Device Magic" and they have their own servers. Turkish Red Crescent uses different elements, in ESSN they are using ODK and servers are based in Turkey. 
+
+So there are several different means of data collection tools. My perspective, I find KOBO very efficient, but there is always a question of data security if you don't own the server. 
+
+In this book, I will dodge how to use those platforms. Yet, they are pretty simple and KOBO even has UI to do it. Took me two nights to completely understand how it works. Also, there are several trainings on-line.
+
+##    Sample
 
 
 
