@@ -197,21 +197,18 @@ glimpse(diamonds)
 
 Lets take "cut" as region here. This variable is categorical with 5 unique values. There are several good-ends of taking sample with data partition. More info can be found in: **http://topepo.github.io/caret/data-splitting.html**
 
+If you need to calculate threshold (desired number for representative sample), **Raosoft (http://www.raosoft.com/samplesize.html)** is a good sample size calculator. So in this example, lets decide metrics wih Raosoft; with %5 margin of error, %95 confidence level, population size of 53940 and %50 response distribution (maximum unknown) our sample size is 382. Including %50 non-response rate sample size (a call list or interviewee list) is 764. In the current situation we are using cluster sampling so that for five different categories (could be region, nationality etc. in humanitarian sector) we need to draw 382 (764) for each of them. We did take 'cut' as our layer in the sampling. Thus, for five categories we need sample of 764 * 5 = 3820 sample which is ~%7.1 of our population.
+
 ```{r}
-#Select rows - proportionally depending on "cut"~ acts as region.
-#library caret contains "createDataPartition" function.
-library(caret)
+#Easiest way to draw layered sample.
 
-diamonds_index <- createDataPartition(diamonds$cut, p = .25, 
-                                  list = FALSE,
-                                  times = 1)
-
-#Divide data by sample: selected -> sampled & Not in sample -> outsample
-diamonds_sample <- diamonds[ diamonds_index,]
-diamonds_outsample  <- diamonds[-diamonds_index,]
+layered_sample <- diamonds %>% group_by(cut) %>% slice_sample(n=780,replace = FALSE)
+table(layered_sample$cut)
 ```
 
-Now that we draw sample. It is .25 of the total population. But, we have to compare population metrics with sample metrics. As stressed in scenario paragraph, we are trying to understand socio-economic variables from sample, and then we will assume these findings applies to whole population. 
+If you need to calculate threshold (desired number for representative sample), **Raosoft (http://www.raosoft.com/samplesize.html)** is a good sample size calculator. So in this example, lets decide metrics wih Raosoft; with %5 margin of error, %95 confidence level, population size of 53940 and %50 response distribution (maximum unknown) our sample size is 382. Including %50 non-response rate sample size (a call list or interviewee list) is 764. In the current situation we are using cluster sampling so that for five different categories (could be region, nationality etc. in humanitarian sector) we need to draw 382 (764) for each of them. We did take 'cut' as our layer in the sampling. Thus, for five categories we need sample of 764 * 5 = 3820 sample which is ~%7.1 of our population.
+
+Now that we draw sample. But, we have to compare population metrics with sample metrics. As stressed in scenario paragraph, we are trying to understand socio-economic variables from sample, and then we will assume these findings applies to whole population. 
 
 A small trick, we might forecast how successful our sampling in terms of making conclusions. We do have an information about our sample; lets say household size. So if your sample household size distribution and your population is not statistically different, we can assume that our sample does well and outcomes of socio-economic conclusions are applies to whole population.
 
@@ -219,8 +216,8 @@ Lets start with categorical variables. Below, from graphs, one can see that dist
 
 ```{r}
 diamonds$Type <- 'Population'
-diamonds_sample$Type <- 'Sampled'
-Compare <- rbind(diamonds_sample,diamonds)
+layered_sample$Type <- 'Sampled'
+Compare <- rbind(layered_sample,diamonds)
 
 ggplot(Compare, aes(clarity, Type)) +
   geom_jitter(aes(color = clarity), size = 0.3)+
@@ -228,7 +225,7 @@ ggplot(Compare, aes(clarity, Type)) +
   ggpubr::theme_pubclean()
 ```
 
-Let's double check with numeric variables and compare them by type. Depth and Table variables taken into consider. Check how both linear models aligns with each other perfectly. Here, we can assume that our sample does really well!
+Let's double check with numeric variables and compare them by type. Depth and Table variables taken into consider. Check how both linear models does not aligns with each other perfectly, but does well enough. Here, we can assume that our sample does really well!
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 library(hrbrthemes)
@@ -241,7 +238,23 @@ ggplot(aes(x = depth, y = table, group = Type, color = Type)) +
 theme_ipsum()
 ```
 
+Key differences between sample and population happens due to we give same importance to each cut category. But in reality, their distribution is different. This is where one must apply weights in order to balance the outcomes and to have better accuracy while making assumptions of population values. Weights can be calculated as: each categories' sample size ratio (# of survey of each category divided by total sample-survey number) divided by each categories' population size ratio (frequency of each category divided by total population number) will give you weights. 
 
+**PUT WEIGHT TABLE HERE**
+
+```{r}
+#Select rows - proportionally depending on "cut"~ acts as region.
+#library caret contains "createDataPartition" function.
+library(caret)
+
+diamonds_index <- createDataPartition(diamonds$cut, p = .071, 
+                                  list = FALSE,
+                                  times = 1)
+
+#Divide data by sample: selected -> sampled & Not in sample -> outsample
+diamonds_sample <- diamonds[ diamonds_index,]
+diamonds_outsample  <- diamonds[-diamonds_index,]
+```
 
 
 
