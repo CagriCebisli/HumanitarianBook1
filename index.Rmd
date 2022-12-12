@@ -5,9 +5,13 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
+bookdown::render_book("index.Rmd")
+
 # Introduction
 
-This book is tailored for revealing key concepts of intersections between "data science" and "monitoring and evaluation" for humanitarian sector. Do not question the language since most of these thoughts and conclusions are personal, and this book acts as a notebook of my experiences. Five years in humanitarian sector as data scientist with background of industrial engineering and management information systems, I have encountered gaps and common mistakes in the sector. For some parts, I will be questioning these gaps and unknowns for building a collective knowledge, hoping that it will help the future actions. Through the book I will take a guess that reader have basic knowledge of monitoring and evaluation in humanitarian sector so I will dodge going in-depth of the aspect, and the book will focus on data analysis and tips&tricks of designing operational planning.
+This book is tailored for revealing key concepts of intersections between "data science" and "monitoring and evaluation" for humanitarian sector. Do not question the language since most of these thoughts and conclusions are personal, and this book acts as a notebook of my experiences, also, I am horrible at writing stuff down. No shame, that is the golden rule of being monitoring and evaluation person. Shame triggers emotions, and as outcome one hides stuff and reflects only bright side, and that reduces lessons learned capacity for sure.
+
+Five years in humanitarian sector as data scientist with background of industrial engineering and management information systems, I have encountered gaps and common mistakes in the sector. For some parts, I will be questioning these gaps and unknowns for building a collective knowledge, hoping that it will help the future actions. Through the book I will take a guess that reader have basic knowledge of monitoring and evaluation in humanitarian sector so I will dodge going in-depth of the aspect, and the book will focus on data analysis and tips&tricks of designing operational planning.
 
 Humanitarian sector actors has background of "monitoring and evaluation". There are many individuals whom got mindset and experiences towards this aspect. Yet, in the latest versions of M&E, inevitably this aspects merges with data and knowledge. One of the most experienced individuals with humanitarian data Aldo Benini reflects in his notes; "Keep it simple. You may use R or Python, but if you want to be a voice for this spectacular community, stay with excel, since most of the people are more relaxed using this." This conclusion of years of experience is still valid. Yet, I am observing two types of individuals. On one hand you have mid-class proficient excel users, whom can conduct (descriptive) analysis. On the other hand one has very skilled individuals whom can use R or Python with their amazing machine learning skills and so on. Thus, in the sector, we do not have one common ground but two.
 
@@ -17,7 +21,7 @@ For red pillar, IFRC is pushing more for IM - when they are losing sight of M&E 
 
 For someone who worked for ESSN, biggest cash programme of ECHO and in humanitarian sector, I have an understanding of how ECHO interprets monitoring and what they expect out of evaluation studies. ECHO does care about evidence-based management style, and M&E. They do respect their logframes. Thus, if one puts an indicator there can expect a set of questions towards its interpretation. Also in interim reports they are very interested in calculation of MEB, how indicators talks with each other and so on. So if you are an M&E data analyst with ECHO supported programme, expect series of questions and prepare good story-telling 3-pagers. It will be a challenge! I strongly recommend to read out DG Echo Thematic Polict Document No 3 - Cash Transfers, March 2022.
 
-Personally, I am not experienced with blue pillar (UN). Yet WFP is leading this concept and they are disaggregating more into "division of labor" doctrine. They have monitoring unit, sided by VAM unit (vulnerability analysis and mapping). Even there is a unit collaborated by UNHCR and WFP, just for targeting. No wonder why they are in a leading role, as they care and dig more into these lands. Most of the red-pillar managers does not understand what targeting is, yet other hand has an unit for it. As mentioned, personally, I do have very little information of other UN institutions. Yet, WFP is a shining role-model for sure.
+Personally, I am not experienced with blue pillar (UN). Yet WFP is leading this concept and they are disaggregating more into "division of labor" doctrine. They have monitoring unit, sided by VAM unit (vulnerability analysis and mapping). Even there is a unit collaborated by UNHCR and WFP, just for targeting. Also they have an unit studies targeting. Worked with them for targeting exercises for camps, and I learned a lot from them! No wonder why they are in a leading role, as they care and dig more into these lands. Most of the red-pillar managers does not understand what targeting is, yet other hand has an unit for it. As mentioned, personally, I do have very little information of other UN institutions. Yet, WFP is a shining role-model for sure.
 
 This is a one, dusty overlook to humanitarian sector and data. I am smelling a trend between cash based interventions and data-knowledge tree. Huge correlation is lurking, if you check ECHOs latest Large-scale cash programme guidelines, lots on monitoring and evaluation explained and M&E without data is useless. Thus, if humanitarian sector evolves more into large-scale cash, data and M&E will become more and more important. In this book, I will not dig into if it is possible to do more cash-based interventions and infrastructure of banks or stakeholders' potential. Yet we all can agree that cash still has a big future and a room in our daily lives as humanitarians and Ukraine crisis proves that right. So lets build more towards data analysis and M&E to increase accountability, evidence-based actions and to have better programmes.Note that in this paper, I am assuming that reader has basic understanding of M&E, and stresses more on the data dimension.
 
@@ -174,7 +178,9 @@ Attention is required for analysis unit-container relationship. If your analysis
 
 ###   Drawing Sample with R
 
-There are several different methods for sampling. I personally like machine learning style of sampling. 
+####    Layered-Clustered Sample
+
+In humanitarian sector, I see that programme monitors usually applies clustered samples. Cluster layers could be regions, nationality, gender etc. where researchers wants to have a representative knowledge for each cluster group. There are several different methods for sampling. I personally like machine learning style of sampling. 
 
 
 ```{r}
@@ -200,13 +206,12 @@ Lets take "cut" as region here. This variable is categorical with 5 unique value
 If you need to calculate threshold (desired number for representative sample), **Raosoft (http://www.raosoft.com/samplesize.html)** is a good sample size calculator. So in this example, lets decide metrics wih Raosoft; with %5 margin of error, %95 confidence level, population size of 53940 and %50 response distribution (maximum unknown) our sample size is 382. Including %50 non-response rate sample size (a call list or interviewee list) is 764. In the current situation we are using cluster sampling so that for five different categories (could be region, nationality etc. in humanitarian sector) we need to draw 382 (764) for each of them. We did take 'cut' as our layer in the sampling. Thus, for five categories we need sample of 764 * 5 = 3820 sample which is ~%7.1 of our population.
 
 ```{r}
-#Easiest way to draw layered sample.
+#Easiest way to draw layered sample. One row coding, amazing package!
 
 layered_sample <- diamonds %>% group_by(cut) %>% slice_sample(n=780,replace = FALSE)
 table(layered_sample$cut)
 ```
 
-If you need to calculate threshold (desired number for representative sample), **Raosoft (http://www.raosoft.com/samplesize.html)** is a good sample size calculator. So in this example, lets decide metrics wih Raosoft; with %5 margin of error, %95 confidence level, population size of 53940 and %50 response distribution (maximum unknown) our sample size is 382. Including %50 non-response rate sample size (a call list or interviewee list) is 764. In the current situation we are using cluster sampling so that for five different categories (could be region, nationality etc. in humanitarian sector) we need to draw 382 (764) for each of them. We did take 'cut' as our layer in the sampling. Thus, for five categories we need sample of 764 * 5 = 3820 sample which is ~%7.1 of our population.
 
 Now that we draw sample. But, we have to compare population metrics with sample metrics. As stressed in scenario paragraph, we are trying to understand socio-economic variables from sample, and then we will assume these findings applies to whole population. 
 
@@ -238,9 +243,14 @@ ggplot(aes(x = depth, y = table, group = Type, color = Type)) +
 theme_ipsum()
 ```
 
-Key differences between sample and population happens due to we give same importance to each cut category. But in reality, their distribution is different. This is where one must apply weights in order to balance the outcomes and to have better accuracy while making assumptions of population values. Weights can be calculated as: each categories' sample size ratio (# of survey of each category divided by total sample-survey number) divided by each categories' population size ratio (frequency of each category divided by total population number) will give you weights. 
+Key differences between sample and population happens due to we give same importance to each cut category. But in reality, their distribution (their frequency-density in population) is different, yet we did draw 780 sample from each of them. This is where one must apply weights in order to balance the outcomes and to have better accuracy while making assumptions of population values. Weights can be calculated as: each categories' sample size ratio (# of survey of each category divided by total sample-survey number) divided by each categories' population size ratio (frequency of each category divided by total population number) will give you weights. 
 
 **PUT WEIGHT TABLE HERE**
+
+####    Random Sampling
+
+For random sampling, without any clusters, data partition technique is amazing. Lets say we want to draw 3820 sample out of 53940 (row number of diamonds data), which is ~7.1% of our total population. "p" metric in data goes as 0.71. We mark selected cases as index, and split data by sampled and outsampled. Distribution here will be more accurate then layered sampling. Please do check linear line and table of cut variable.
+
 
 ```{r}
 #Select rows - proportionally depending on "cut"~ acts as region.
@@ -255,6 +265,70 @@ diamonds_index <- createDataPartition(diamonds$cut, p = .071,
 diamonds_sample <- diamonds[ diamonds_index,]
 diamonds_outsample  <- diamonds[-diamonds_index,]
 ```
+
+```{r}
+#As you see, frequency of cut category is not same with clustered version.
+#Percentage of each cut category is same with population percentages now.
+table(diamonds_sample$cut)
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+library(hrbrthemes)
+
+diamonds$Type <- 'Population'
+diamonds_sample$Type <- 'Sampled'
+Compare_partition <- rbind(diamonds_sample,diamonds)
+
+Compare_partition %>% 
+ggplot(aes(x = depth, y = table, group = Type, color = Type)) +
+        geom_point() +
+        geom_smooth(method = "lm", se = FALSE) +
+        labs(x = "Variable Table",
+             y = "Variable depth") +    
+theme_ipsum()
+```
+
+You can see that linear models are overlaps better, if you compare it to clustered sample. This is also another good example of why we need to apply weights in clustered samples, before making an assumption towards population.
+
+####    Lessons Learned from Sampling
+
+I would also like to reflect few lessons learned from my end towards sampling-operational balance.
+
+-   If you cluster your sample with regions, select proper enumerator for proper regions. In some cases, some regions may speak different language, or attendees may be more coherent when enumerator speaks their language or when enumerators are from same region.
+
+-   Selecting an enumerator from or experience with that region usually reduces survey time and increases data quality. Also they are better when you ask for feedback towards questionnaire.
+
+-   Take into consideration of gender of your enumerator, where in some regions female enumerators can have positive added values while surveying.
+
+-   Keep in touch with enumerators, if they feel something is wrong with sampling, let them warn you. For ex; all the attendees saying that they are living in some other region than your sampling list-call list.
+
+-   Keep track of enumerators if you have clustered sample. Lets say you are calculating %50 of non-response rate of 300 survey, thus your sampling is 600. For some clusters non response rate might be lower, so they may exceed the number of 300, means that you have to stop those enumerators to do extra calls. But of course, always have some extra calls since you might delete some records during data cleaning. And vice-versa, some clusters may have non response rate more than %50, so you might need to give them extra call list during operation.
+
+-   When you share your coding, do not forget to add seeds into your coding, so that your studies can be reproducible by others.
+
+-   When you do random sampling over population data, if you do care a bit about some categories as well (like region, sex, nationality etc.), their frequency might be low like 30~ish in your sample. Round them up to at least 50-60 to get an idea about those disaggregations so that you can conduct some t-test etc.
+
+This marks the end of our sampling section. Always remember, we need good sampling to make accurate decisions. There is a chance of stat error or human error, so if you find any conclusion with your studies, cross check it with reality, talk with someone experienced with context and talk with locals. Hope this helps with your sampling operation in humanitarian studies! Best!
+
+##   Modality of Surveys
+
+Personally, I can not go into details of this section. This concept is directly linked with context. Yet, there are some points that I experienced. Basically, if you have the opportunity of phone surveys, amazing. They are cheap and fast. If you have a target group scattered wide geographical areas, face to face surveys are hard to conduct and very expensive. 
+
+In my concept, we are doing PDMs via phone and there is a study called IVS (intersectoral vulnerability study) helds by house visits. In context of ESSN, we do have capacity to conduct face to face surveys, yet, our target group is all around Türkiye. So if you do a random sampling, you may end up someone with 300 KM away in a village, just one person to visit there. Not a good plan for operation. Your field staff most likely will not even visit that village. What we did to prevent that is we see that 10 provinces covers %95 of our target group, out of 81 provinces. So we focus on these ones to make study more budget-operational friendly. Also, we reduced confidence level from 95 to 90. So there was a trade off of losing some information of population, but having more in-depth information of others. Because, face to face surveys gives you more room to study with. You can observe household assets, data quality is better and your FMAs (field monitoring assistants) can observe vulnerability of the households. For phone surveys, as we mentioned, they must be short and understandable. One cannot go into detailed complex questionnaires with that modality.
+
+Selected survey modality affects questionnaire design step, so first thing is to decide the survey modality and than decide indicators of logframe and their means of verification (data source). To decide modality, you need to know operational capacity and budget- with an understanding of geographical coverage of the programme and target group characteristics.
+
+Also there are different methods of sampling useful for face to face surveys. I would recommend to check those methods if you are to organize F2F modality; check Annex I -Sampling of CVME held by WFP. (https://docs.wfp.org/api/documents/WFP-0000112161/download/)
+
+
+
+
+
+
+
+
+
+
 
 
 

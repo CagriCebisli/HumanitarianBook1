@@ -1,0 +1,154 @@
+# Descriptive - Primelinary Analysis
+
+##    Motivation
+
+-   To make sure data cleaning step is automatized and consistent.
+-   To make sure data contains relevant variable before analysis.
+-   To make sure there are no unexpected variable type issues.
+-   Detect any missing values, especially in numeric columns to understand if it should be NA or 0.
+-   Control and compare different users` values for specific variables.
+-   Calculate must-have indicators such as LCSI and RCSI.
+-   Make data TIDY... Such as: multiple selection questions are in dummy variables and binary now.
+
+##   Column Renaming
+
+If there is an error on this part, check error details. Following issues might be in-place;
+
+-   Duplication on column names
+-   Removal of some columns from the original data
+
+Basically, if the following code and imported data sets column names does not match, this error is inevitable.
+
+**For solution steps:**
+
+-   Check error message, find out which columns have error.
+-   Correct the chunk of coding below by accurate names.
+
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Code example; I am using rename function but there might be better ones for sure.
+#Lets keep using diamonds data for this as well.
+#rename comes with dplyr.
+DiamondsRenamed <- diamonds %>% rename("renamed_table"="table")
+colnames(diamonds)
+colnames(DiamondsRenamed)
+```
+
+##    Converting Multiple Selections into Dummy Variables
+
+This issue happens with ODK or Device Magic, as they put multiple selections into one variable. KOBO does this dummy coding it self, which is amazing. It can consume a bit of time, let me introduce you how I manage this bothering situation... If you have a better way to do it, let me know!
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Lets add a column to diamonds to work with
+#We added multiple selections divided by comma
+DiamondsRenamed$MultSelec <- "Selection1,Selection2,Selection5"
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Take this column as data frame 
+df_multselec <- as.data.frame(DiamondsRenamed$MultSelec)
+#Rename this column
+colnames(df_multselec)<- "examplecolumn"
+
+#We will use cSplit_e function within splitstackshape package
+library(splitstackshape)
+
+#Now you have these columns as dummy ones, if it is selected it goes as 1 otherwise as 0.
+#Each category becomes a column.
+df_multselec_seperated <- cSplit_e(df_multselec, split.col = "examplecolumn", 
+sep = ",", type = "character", mode = "binary", fixed = TRUE, fill = 0)
+
+#Remove original column before merging with original data, so that you will not have duplicate columns.
+df_multselec_seperated$examplecolumn <- NULL
+
+#With column bind, add new dummy columns into original data. Done.
+DiamondsRenamed <- cbind(DiamondsRenamed,df_multselec_seperated)
+
+#Lets see what happened. Check last three columns as examplecolumn.
+glimpse(DiamondsRenamed)
+```
+
+##    Missing Values
+
+###   Defining Missing Values of Dataframe
+
+Usually we do not have missing values, if questionnaire design tailored well in Kobo or ODK. Conditional or mandatory questions can be defined during this phase. Still, checking missing data makes sense. for cross checks. Data cleaning step should be held with whoever design KOBO-ODK forms.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Required packages are visdat and naniar.
+library(visdat)
+library(naniar)
+
+#Lets see if diamonds data have some missing values here and there.
+vis_dat(diamonds)
+```
+
+No missing values in diamonds data. One of the amazing thing of this visual is it gives you types and structures of the each variable. This thing sure is an art! Amazing! Lets remove some values and see that amazing visual again.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Required packages for adding random NAs to data is missMethods.
+library(missMethods)
+
+#With delete_MCAR function, we delete random values to 25% of the data and make them NA.
+diamonds_missing <- delete_MCAR(diamonds, p = 0.25)
+
+vis_dat(diamonds_missing)
+```
+
+So now, grey lines in the visual reflects NAs. Amazing! Lets check the percentage of missings now:
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Percentage of missing by variable.
+vis_miss(diamonds_missing)
+```
+
+Amazing. delete_MCAR function is king. You can see %25 missing randomly from each column. To have a better knowledge about these operations please visit: https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html
+
+###   Imputation of Missing Values
+
+There are several methods for imputation such as median-mean imputations or one can go all in and use some regressions even. Most of the cases, for some numeric values, you need to replace NAs with zeros in humanitarian data. So lets say, questionnaire designer linked two questions; do you have income?-Yes or no question ; if yes, how much? If the answer is NO, then how much question is not appearing in data, means that this value will be NA. On the other hand, for analysis purposes, you need to embed zero to those values. Happens a lot! Let me show you how I handle this in R (also adding few useful codes that I use during data cleaning);
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Lets do this operation for only numeric columns of diamnonds data.
+#setnafill comes with data.table package. Mapping numeric columns map_lgl comes with purrr package.
+library(purrr)
+library(data.table)
+diamonds_missing[ , purrr::map_lgl(diamonds_missing, is.numeric)]
+
+setnafill(diamonds_missing[ , purrr::map_lgl(diamonds_missing, is.numeric)], fill=0)
+vis_miss(diamonds_missing)
+```
+
+Now, we do not have any missing values for numeric columns as they are converted to (filled with) zeros. Job well done! setnafill is a great piece of function that you can use, please do check it further.
+
+**Some useful coding lines;**
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#This piece of code shows you how to select columns starts with etc.
+#Not related with this concept but I will add those here, very useful piece of code.
+
+#CashUsageReplace <- colnames(x1 %>% dplyr::select(ends_with("_cash",ignore.case = TRUE)))
+#EcmenReplace <- colnames(x1 %>% dplyr::select(starts_with("ecmen_",ignore.case = TRUE)))
+
+
+#Also, if you want to delete variables, lets say which has missing values greater than %80 of their records, you can use a piece of code given below. 
+
+#x2 <- x1[colSums(is.na(x1))/nrow(x1) < .8]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
