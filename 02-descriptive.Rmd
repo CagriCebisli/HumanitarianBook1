@@ -1,4 +1,4 @@
-# Descriptive - Primelinary Analysis
+# Descriptive - Primelinary Analysis (Exploratory Data Analysis - EDA)
 
 ##    Motivation
 
@@ -10,7 +10,9 @@
 -   Calculate must-have indicators such as LCSI and RCSI.
 -   Make data TIDY... Such as: multiple selection questions are in dummy variables and binary now.
 
-##   Column Renaming
+##    Data Cleaning
+
+###   Column Renaming
 
 If there is an error on this part, check error details. Following issues might be in-place;
 
@@ -34,7 +36,7 @@ colnames(diamonds)
 colnames(DiamondsRenamed)
 ```
 
-##    Converting Multiple Selections into Dummy Variables
+###    Converting Multiple Selections into Dummy Variables
 
 This issue happens with ODK or Device Magic, as they put multiple selections into one variable. KOBO does this dummy coding it self, which is amazing. It can consume a bit of time, let me introduce you how I manage this bothering situation... If you have a better way to do it, let me know!
 
@@ -68,9 +70,9 @@ DiamondsRenamed <- cbind(DiamondsRenamed,df_multselec_seperated)
 glimpse(DiamondsRenamed)
 ```
 
-##    Missing Values
+###    Missing Values
 
-###   Defining Missing Values of Dataframe
+####   Defining Missing Values of Dataframe
 
 Usually we do not have missing values, if questionnaire design tailored well in Kobo or ODK. Conditional or mandatory questions can be defined during this phase. Still, checking missing data makes sense. for cross checks. Data cleaning step should be held with whoever design KOBO-ODK forms.
 
@@ -104,7 +106,7 @@ vis_miss(diamonds_missing)
 
 Amazing. delete_MCAR function is king. You can see %25 missing randomly from each column. To have a better knowledge about these operations please visit: https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html
 
-###   Imputation of Missing Values
+####   Imputation of Missing Values
 
 There are several methods for imputation such as median-mean imputations or one can go all in and use some regressions even. Most of the cases, for some numeric values, you need to replace NAs with zeros in humanitarian data. So lets say, questionnaire designer linked two questions; do you have income?-Yes or no question ; if yes, how much? If the answer is NO, then how much question is not appearing in data, means that this value will be NA. On the other hand, for analysis purposes, you need to embed zero to those values. Happens a lot! Let me show you how I handle this in R (also adding few useful codes that I use during data cleaning);
 
@@ -136,7 +138,37 @@ Now, we do not have any missing values for numeric columns as they are converted
 #x2 <- x1[colSums(is.na(x1))/nrow(x1) < .8]
 ```
 
+###    Outliers
 
+Outliers are more bothering than missing values. Humanitarian data contains outliers but the trick is, you do not know if it is true or not. Lets say you are collecting expenditure data, disaggregated by components such as rent, health, education, celebrations etc. You may end up with a case of 10000-25000, while mean is 100, median is 150. So these cases are clearly an outlier. Are they? When you contact your enumerators for these type of cases, there are stories behind. A man find a debt from somewhere and got really serious health surgery, or family got wedding that boost their expenditure towards celebrations. 
+
+To deal with those cases, I have two copings;
+
+-   Use median if you are to report those values.
+-   If you are doing a simple reporting include them. If you are doing some sense of regression or any inferential analysis, remove them because they will mess up with your whole formula.
+
+
+
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+library(dlookr)
+library(dplyr)
+
+# The mean before and after the imputation of the sodium variable
+heartfailure %>%
+  mutate(sodium_imp = imputate_outlier(heartfailure, sodium, 
+                                      method = "capping", no_attrs = TRUE)) %>%
+  group_by(death_event) %>%
+  summarise(orig = mean(sodium, na.rm = TRUE),
+            imputation = mean(sodium_imp, na.rm = TRUE))
+            
+# If the variable of interest is a numerical variables
+sodium <- imputate_outlier(heartfailure, sodium)
+sodium
+summary(sodium)
+
+plot(sodium)
+```
 
 
 
