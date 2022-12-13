@@ -11,5 +11,15 @@ analysis-unit
 non-response-rates
 camp-context
 drawing-sample-with-r
-the-pool-of-tears
+layered-clustered-sample
+random-sampling
+lessons-learned-from-sampling
+modality-of-surveys
+descriptive---primelinary-analysis
+motivation
+column-renaming
+converting-multiple-selections-into-dummy-variables
+missing-values
+defining-missing-values-of-dataframe
+imputation-of-missing-values
 a-caucus-race-and-a-long-tale
