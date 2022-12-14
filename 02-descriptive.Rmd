@@ -32,6 +32,8 @@ Basically, if the following code and imported data sets column names does not ma
 #Code example; I am using rename function but there might be better ones for sure.
 #Lets keep using diamonds data for this as well.
 #rename comes with dplyr.
+library(dplyr)
+library(tidyverse)
 DiamondsRenamed <- diamonds %>% rename("renamed_table"="table")
 colnames(diamonds)
 colnames(DiamondsRenamed)
@@ -108,6 +110,18 @@ vis_miss(diamonds_missing)
 
 Amazing. delete_MCAR function is king. You can see %25 missing randomly from each column. To have a better knowledge about these operations please visit: https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html
 
+**Missing frequency.**
+
+```{r}
+gg_miss_var(diamonds_missing) + theme_bw() 
+```
+
+**Missing frequency disaggregated by categorical variable.**
+
+```{r}
+gg_miss_var(diamonds_missing, facet = cut)
+```
+
 ####   Imputation of Missing Values
 
 There are several methods for imputation such as median-mean imputations or one can go all in and use some regressions even. Most of the cases, for some numeric values, you need to replace NAs with zeros in humanitarian data. So lets say, questionnaire designer linked two questions; do you have income?-Yes or no question ; if yes, how much? If the answer is NO, then how much question is not appearing in data, means that this value will be NA. On the other hand, for analysis purposes, you need to embed zero to those values. Happens a lot! Let me show you how I handle this in R (also adding few useful codes that I use during data cleaning);
@@ -119,11 +133,19 @@ library(purrr)
 library(data.table)
 diamonds_missing[ , purrr::map_lgl(diamonds_missing, is.numeric)]
 
+#Fill NA values with zero only for numeric variables.
 setnafill(diamonds_missing[ , purrr::map_lgl(diamonds_missing, is.numeric)], fill=0)
 vis_miss(diamonds_missing)
 ```
 
 Now, we do not have any missing values for numeric columns as they are converted to (filled with) zeros. Job well done! setnafill is a great piece of function that you can use, please do check it further.
+
+####   Imputation of Missing Values with Regression
+
+```{r}
+# da1 <- impute_lm(dat, Sepal.Length ~ Sepal.Width + Species)
+# da2 <- impute_median(da1, Sepal.Length ~ Species)
+```
 
 **Some useful coding lines;**
 
@@ -163,8 +185,6 @@ diamonds %>%
             
 # If the variable of interest is a numerical variables
 price <- imputate_outlier(diamonds, price)
-price
-summary(price)
 
 plot(price)
 ```

@@ -15,11 +15,14 @@ layered-clustered-sample
 random-sampling
 lessons-learned-from-sampling
 modality-of-surveys
-descriptive---primelinary-analysis
+descriptive---primelinary-analysis-exploratory-data-analysis---eda
 motivation
+data-cleaning
 column-renaming
 converting-multiple-selections-into-dummy-variables
 missing-values
 defining-missing-values-of-dataframe
 imputation-of-missing-values
+imputation-of-missing-values-with-regression
+outliers
 a-caucus-race-and-a-long-tale
