@@ -155,19 +155,19 @@ library(dlookr)
 library(dplyr)
 
 # The mean before and after the imputation of the sodium variable
-heartfailure %>%
-  mutate(sodium_imp = imputate_outlier(heartfailure, sodium, 
-                                      method = "capping", no_attrs = TRUE)) %>%
-  group_by(death_event) %>%
-  summarise(orig = mean(sodium, na.rm = TRUE),
-            imputation = mean(sodium_imp, na.rm = TRUE))
+diamonds %>%
+  mutate(price_imp = imputate_outlier(diamonds, price, 
+                                      method = "capping", no_attrs = FALSE)) %>%
+  group_by(cut) %>%
+  summarise(orig = mean(price, na.rm = TRUE),
+            imputation = mean(price_imp, na.rm = TRUE))
             
 # If the variable of interest is a numerical variables
-sodium <- imputate_outlier(heartfailure, sodium)
-sodium
-summary(sodium)
+price <- imputate_outlier(diamonds, price)
+price
+summary(price)
 
-plot(sodium)
+plot(price)
 ```
 
 
