@@ -3,12 +3,13 @@
 ##    Motivation
 
 -   To make sure data cleaning step is automatized and consistent.
--   To make sure data contains relevant variable before analysis.
+-   To make sure data contains relevant variables before analysis.
 -   To make sure there are no unexpected variable type issues.
 -   Detect any missing values, especially in numeric columns to understand if it should be NA or 0.
 -   Control and compare different users` values for specific variables.
 -   Calculate must-have indicators such as LCSI and RCSI.
 -   Make data TIDY... Such as: multiple selection questions are in dummy variables and binary now.
+-   Setting the scene for having reproducible studies.
 
 ##    Data Cleaning
 
@@ -24,7 +25,7 @@ Basically, if the following code and imported data sets column names does not ma
 **For solution steps:**
 
 -   Check error message, find out which columns have error.
--   Correct the chunk of coding below by accurate names.
+-   Correct the column names using chunk of coding below by accurate names.
 
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
@@ -38,7 +39,7 @@ colnames(DiamondsRenamed)
 
 ###    Converting Multiple Selections into Dummy Variables
 
-This issue happens with ODK or Device Magic, as they put multiple selections into one variable. KOBO does this dummy coding it self, which is amazing. It can consume a bit of time, let me introduce you how I manage this bothering situation... If you have a better way to do it, let me know!
+This issue happens with ODK or Device Magic, as they put multiple selections question into one variable. KOBO does this dummy coding it self, which is amazing. Converting these columns might consume a bit of time, let me introduce you how I manage this bothering situation... If you have a better way to do it, let me know!
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 #Lets add a column to diamonds to work with
@@ -47,16 +48,16 @@ DiamondsRenamed$MultSelec <- "Selection1,Selection2,Selection5"
 ```
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
-#Take this column as data frame 
+#Take this column as data frame from our main data frame
 df_multselec <- as.data.frame(DiamondsRenamed$MultSelec)
-#Rename this column
+#Rename this data frame column
 colnames(df_multselec)<- "examplecolumn"
 
 #We will use cSplit_e function within splitstackshape package
 library(splitstackshape)
 
 #Now you have these columns as dummy ones, if it is selected it goes as 1 otherwise as 0.
-#Each category becomes a column.
+#Each category becomes a column with binary format.
 df_multselec_seperated <- cSplit_e(df_multselec, split.col = "examplecolumn", 
 sep = ",", type = "character", mode = "binary", fixed = TRUE, fill = 0)
 
@@ -66,7 +67,8 @@ df_multselec_seperated$examplecolumn <- NULL
 #With column bind, add new dummy columns into original data. Done.
 DiamondsRenamed <- cbind(DiamondsRenamed,df_multselec_seperated)
 
-#Lets see what happened. Check last three columns as examplecolumn.
+#Lets see what happened. Check last three columns as example column.
+library(dplyr)
 glimpse(DiamondsRenamed)
 ```
 
@@ -74,7 +76,7 @@ glimpse(DiamondsRenamed)
 
 ####   Defining Missing Values of Dataframe
 
-Usually we do not have missing values, if questionnaire design tailored well in Kobo or ODK. Conditional or mandatory questions can be defined during this phase. Still, checking missing data makes sense. for cross checks. Data cleaning step should be held with whoever design KOBO-ODK forms.
+Usually we do not have missing values, if questionnaire design tailored well in Kobo or ODK. Conditional or mandatory questions can be defined during this phase. Still, checking missing data always a must. Data cleaning step should be held with consultation of whoever design KOBO-ODK forms. These persons can explain you tips and tricks of the data and could give you a parade of the data.
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 #Required packages are visdat and naniar.
@@ -85,7 +87,7 @@ library(naniar)
 vis_dat(diamonds)
 ```
 
-No missing values in diamonds data. One of the amazing thing of this visual is it gives you types and structures of the each variable. This thing sure is an art! Amazing! Lets remove some values and see that amazing visual again.
+There are no missing values in diamonds data. One of the amazing thing of this visual is it gives you types and structures of the each variable. This thing sure is an art! Amazing! Lets remove some (put some NA values intentionally) values and see that amazing visual again.
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 #Required packages for adding random NAs to data is missMethods.
@@ -97,7 +99,7 @@ diamonds_missing <- delete_MCAR(diamonds, p = 0.25)
 vis_dat(diamonds_missing)
 ```
 
-So now, grey lines in the visual reflects NAs. Amazing! Lets check the percentage of missings now:
+So now, grey lines in the visual reflects NAs. Amazing! Lets check the percentage of missing now:
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 #Percentage of missing by variable.
@@ -140,15 +142,12 @@ Now, we do not have any missing values for numeric columns as they are converted
 
 ###    Outliers
 
-Outliers are more bothering than missing values. Humanitarian data contains outliers but the trick is, you do not know if it is true or not. Lets say you are collecting expenditure data, disaggregated by components such as rent, health, education, celebrations etc. You may end up with a case of 10000-25000, while mean is 100, median is 150. So these cases are clearly an outlier. Are they? When you contact your enumerators for these type of cases, there are stories behind. A man find a debt from somewhere and got really serious health surgery, or family got wedding that boost their expenditure towards celebrations. 
+Outliers are more bothering than missing values. Humanitarian data contains outliers but the trick is, you do not know if it is true or not. Lets say you are collecting expenditure data, disaggregated by components such as rent, health, education, celebrations etc. You may end up with a cases like 10000-25000, while mean is 100, median is 150. So these cases are clearly an outlier. Are they? When you contact your enumerators for these type of cases, you may realize some of them are key-entry error, yet some have stories behind. A man might find a debt from somewhere and gets really serious health surgery, or family does a wedding that boost their expenditure towards celebrations. 
 
 To deal with those cases, I have two copings;
 
--   Use median if you are to report those values.
--   If you are doing a simple reporting include them. If you are doing some sense of regression or any inferential analysis, remove them because they will mess up with your whole formula.
-
-
-
+-   Use median if you are to report those values. Medians are more resistant to outliers.
+-   If you are doing a simple reporting include them (outliers with stories since they are reflecting truth). If you are doing some sense of regression or any inferential analysis, remove them because they will mess up with your whole algorithm.
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 library(dlookr)
