@@ -191,7 +191,29 @@ price <- imputate_outlier(diamonds, price)
 plot(price)
 ```
 
+## Exploratory Data Analysis (EDA)
 
+There are some really cool packages for EDA in R. These packages-codings below gives really long, boring reports. It goes variable by variable and reflects;
+
+-   Information of variables (n, % missing, unique count etc.)
+-   Univariate analysis
+-   Distributions, normality test, transformations
+-   Comparison of variables by distributions 
+-   Outlier densities and more...
+
+Here is the deal. These outputs are very long consumes time to read it all. But, I strongly recommend creating and reading these reports. If you go somewhere as delegate and your task is to writing a report over monitoring survey data, this exercise allows you to feel the data, all variables and their distributions. Spending an hour will make you to have way more efficient data analysis step.
+
+```{r,error=FALSE,echo=FALSE,warning=FALSE}
+#ExpReport(xEDA, op_file = 'smarteda.html')
+#diagnose_report(xEDA)
+colnames(diamonds)
+library(dlookr)
+diamonds %>%
+  eda_report(
+    target        = clarity, 
+    output_format = "html", 
+    output_file   = "EDA_diamonds.html")
+```
 
 
 
