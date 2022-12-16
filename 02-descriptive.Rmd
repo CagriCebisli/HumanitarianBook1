@@ -1,3 +1,8 @@
+```{r,warning=FALSE,error=FALSE,message=FALSE,echo=FALSE}
+
+
+```
+
 # Descriptive - Primelinary Analysis (Exploratory Data Analysis - EDA)
 
 ##    Motivation
@@ -185,7 +190,7 @@ diamonds %>%
   summarise(orig = mean(price, na.rm = TRUE),
             imputation = mean(price_imp, na.rm = TRUE))
             
-# If the variable of interest is a numerical variables
+# If the variable of interest is a numerical variable
 price <- imputate_outlier(diamonds, price)
 
 plot(price)
@@ -201,22 +206,103 @@ There are some really cool packages for EDA in R. These packages-codings below g
 -   Comparison of variables by distributions 
 -   Outlier densities and more...
 
-Here is the deal. These outputs are very long consumes time to read it all. But, I strongly recommend creating and reading these reports. If you go somewhere as delegate and your task is to writing a report over monitoring survey data, this exercise allows you to feel the data, all variables and their distributions. Spending an hour will make you to have way more efficient data analysis step.
+Here is the deal. These outputs are very long consumes time to read it all. But, I strongly recommend creating and reading these reports. If you go somewhere as delegate and your task is to writing a report over monitoring survey data, this exercise allows you to intimate the data, all of the variables and their distributions. Spending an hour with this output will make you to have a way more efficient data analysis step.
 
-```{r,error=FALSE,echo=FALSE,warning=FALSE}
-#ExpReport(xEDA, op_file = 'smarteda.html')
-#diagnose_report(xEDA)
-colnames(diamonds)
+********
+ExpReport(diamonds, op_file = 'smarteda.html')
+
+diagnose_report(diamonds)
+
 library(dlookr)
 diamonds %>%
   eda_report(
     target        = clarity, 
     output_format = "html", 
     output_file   = "EDA_diamonds.html")
+********
+
+**Kindly run this code and check output. It will be saved as "EDA_diamonds.html"**
+
+##    Designing the Logframe - Calculation of Exampled Indicators
+
+Through this page, you will see basic logframe indicators of cash-based interventions. As mentioned, these indicators are accepted generally, including ECHO. I will also put documentations about mentioned indicators. Personally, I do love WFP VAM Resource center. I would recommend to check this amazing cookbook as well: https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook
+
+
+Also, it would be nice to go and check *https://www.indikit.net/* where you can find a detailed explanations and examples of most of the humanitarian indicators.
+
+
+###   RCSI (Reduced Coping Strategy Index)
+
+https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs
+
+```{r}
+PAB$rCSI <- PAB$cope_lessexpfood * 1 +
+            PAB$cope_borrowfood * 2 +
+            PAB$cope_reduceportionsize *1 +
+            PAB$cope_reduceadultfood * 3 +
+            PAB$cope_reducemealno *1
 ```
 
+### FCS (Food Consumption Score)
+
+https://resources.vam.wfp.org/data-analysis/quantitative/food-security/food-consumption-score
+
+FCS <- cons_cereal * 2 + cons_pulses * 3 + cons_veg * 1 + cons_fruit * 1 + cons_meat * 4   + cons_dairy * 4  + cons_sugar * 0.5 + cons_oil*0.5
+
+FCG <- ifelse(FCS <=28,"PoorConsumption", ifelse(FCS <42, "Borderline","AcceptableConsumption"))
+
+prop.table(table(FCG))*100
 
 
+### LCSI (Livelihood Coping Strategy Index)
+
+Note that LCSI does variates by concept, a lot. Please kindly refer to VAM guidances before designing your LCSI.
+
+https://resources.vam.wfp.org/data-analysis/quantitative/essential-needs/livelihood-coping-strategies-essential-needs
+  
+
+https://resources.vam.wfp.org/data-analysis/quantitative/food-security/livelihood-coping-strategies-food-security
+
+
+
+**Extract, colmn names of each component of LCSI starts with lhood_**
+
+
+-   livelihoodcoping <- PAB %>% select(starts_with("lhood_"))
+
+**Recode, if it is not binary, convert related columns to numeric 0 and 1**
+
+
+-   vars <- names(livelihoodcoping)
+-   livelihoodcoping <- livelihoodcoping %>% mutate(across(all_of(vars), ~ recode(., "No" = 0, "Yes" = 1)))
+
+
+
+**LCSI Calculation**
+
+
+LCSI <-  
+
+*Stress*
+
+(lhood_ST_soldhhasset + lhood_ST_spentsavings + lhood_ST_foodcredit + lhood_ST_borrowmoney + lhood_ST_unusualfood ) + 
+
+*Crisis*
+
+(lhood_CR_soldprodasset + lhood_CR_noschool + lhood_CR_lesshealth + lhood_CR_lessedu) * 2 +
+
+*Emergency*
+
+(lhood_EM_hhmove + lhood_EM_childwork + lhood_EM_beg +lhood_EM_return) * 3
+
+###    Other SMART Logframe Indicators for CVA
+
+-   Average Total debt / percentage of households with debt
+-   MEB based analysis
+-   Exclusion - inclusion errors
+-   Resilience scores
+-   Beneficiary perception positive ratios 
+-   ECMEN based indicators (please kindly google this aspect, very important)
 
 
 

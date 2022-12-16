@@ -25,4 +25,10 @@ defining-missing-values-of-dataframe
 imputation-of-missing-values
 imputation-of-missing-values-with-regression
 outliers
+exploratory-data-analysis-eda
+designing-the-logframe---calculation-of-exampled-indicators
+rcsi-reduced-coping-strategy-index
+fcs-food-consumption-score
+lcsi-livelihood-coping-strategy-index
+other-smart-logframe-indicators-for-cva
 a-caucus-race-and-a-long-tale

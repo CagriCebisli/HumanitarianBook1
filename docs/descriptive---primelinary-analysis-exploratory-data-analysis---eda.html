@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2022-12-14" />
+<meta name="date" content="2022-12-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -165,6 +165,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.2" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#converting-multiple-selections-into-dummy-variables"><i class="fa fa-check"></i><b>4.2.2</b> Converting Multiple Selections into Dummy Variables</a></li>
 <li class="chapter" data-level="4.2.3" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#missing-values"><i class="fa fa-check"></i><b>4.2.3</b> Missing Values</a></li>
 <li class="chapter" data-level="4.2.4" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#outliers"><i class="fa fa-check"></i><b>4.2.4</b> Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#exploratory-data-analysis-eda"><i class="fa fa-check"></i><b>4.3</b> Exploratory Data Analysis (EDA)</a></li>
+<li class="chapter" data-level="4.4" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#designing-the-logframe---calculation-of-exampled-indicators"><i class="fa fa-check"></i><b>4.4</b> Designing the Logframe - Calculation of Exampled Indicators</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#rcsi-reduced-coping-strategy-index"><i class="fa fa-check"></i><b>4.4.1</b> RCSI (Reduced Coping Strategy Index)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#fcs-food-consumption-score"><i class="fa fa-check"></i><b>4.4.2</b> FCS (Food Consumption Score)</a></li>
+<li class="chapter" data-level="4.4.3" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#lcsi-livelihood-coping-strategy-index"><i class="fa fa-check"></i><b>4.4.3</b> LCSI (Livelihood Coping Strategy Index)</a></li>
+<li class="chapter" data-level="4.4.4" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#other-smart-logframe-indicators-for-cva"><i class="fa fa-check"></i><b>4.4.4</b> Other SMART Logframe Indicators for CVA</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>5</b> A caucus-race and a long tale</a></li>
@@ -322,16 +330,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 53,940 × 7
 ##    carat depth table price     x     y     z
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  0.23  61.5    NA   326  3.95  3.98  2.43
-##  2  0.21  59.8    NA   326  3.89  3.84  2.31
-##  3  0.23  56.9    65   327 NA     4.07 NA   
-##  4 NA     62.4    58   334  4.2  NA     2.63
-##  5  0.31  63.3    58   335 NA    NA     2.75
+##  1 NA     61.5    NA   326  3.95 NA     2.43
+##  2  0.21  59.8    61   326  3.89  3.84  2.31
+##  3  0.23  56.9    65   327  4.05  4.07 NA   
+##  4  0.29  62.4    58   334  4.2   4.23  2.63
+##  5 NA     63.3    NA   335 NA    NA     2.75
 ##  6 NA     62.8    NA   336  3.94  3.96  2.48
-##  7  0.24  NA      57   336 NA     3.98 NA   
-##  8 NA     61.9    55   337  4.07 NA     2.53
-##  9  0.22  NA      61   337  3.87  3.78  2.49
-## 10 NA     59.4    61   338  4     4.05  2.39
+##  7  0.24  62.3    57   336  3.95  3.98  2.47
+##  8  0.26  61.9    55   337  4.07 NA    NA   
+##  9 NA     65.1    61   337  3.87  3.78 NA   
+## 10 NA     59.4    61   338 NA     4.05  2.39
 ## # … with 53,930 more rows</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Fill NA values with zero only for numeric variables.</span></span>
 <span id="cb29-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setnafill</span>(diamonds_missing[ , purrr<span class="sc">::</span><span class="fu">map_lgl</span>(diamonds_missing, is.numeric)], <span class="at">fill=</span><span class="dv">0</span>)</span>
@@ -341,6 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="imputation-of-missing-values-with-regression" class="section level4 hasAnchor" number="4.2.3.3">
 <h4><span class="header-section-number">4.2.3.3</span> Imputation of Missing Values with Regression<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#imputation-of-missing-values-with-regression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This method is amazing where you can fill values by categories. Think of humanitarian data and you have some missing values in income.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># da1 &lt;- impute_lm(dat, Sepal.Length ~ Sepal.Width + Species)</span></span>
 <span id="cb30-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># da2 &lt;- impute_median(da1, Sepal.Length ~ Species)</span></span></code></pre></div>
 <p><strong>Some useful coding lines;</strong></p>
@@ -382,11 +391,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 Very Good 3982.      3864.
 ## 4 Premium   4584.      4414.
 ## 5 Ideal     3458.      3362.</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If the variable of interest is a numerical variables</span></span>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If the variable of interest is a numerical variable</span></span>
 <span id="cb34-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-2" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fu">imputate_outlier</span>(diamonds, price)</span>
 <span id="cb34-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exploratory-data-analysis-eda" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Exploratory Data Analysis (EDA)<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#exploratory-data-analysis-eda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are some really cool packages for EDA in R. These packages-codings below gives really long, boring reports. It goes variable by variable and reflects;</p>
+<ul>
+<li>Information of variables (n, % missing, unique count etc.)</li>
+<li>Univariate analysis</li>
+<li>Distributions, normality test, transformations</li>
+<li>Comparison of variables by distributions</li>
+<li>Outlier densities and more…</li>
+</ul>
+<p>Here is the deal. These outputs are very long consumes time to read it all. But, I strongly recommend creating and reading these reports. If you go somewhere as delegate and your task is to writing a report over monitoring survey data, this exercise allows you to intimate the data, all of the variables and their distributions. Spending an hour with this output will make you to have a way more efficient data analysis step.</p>
+<hr />
+<p>ExpReport(diamonds, op_file = ‘smarteda.html’)</p>
+<p>diagnose_report(diamonds)</p>
+<p>library(dlookr)
+diamonds %&gt;%
+eda_report(
+target = clarity,
+output_format = “html”,
+output_file = “EDA_diamonds.html”)
+********</p>
+<p><strong>Kindly run this code and check output. It will be saved as “EDA_diamonds.html”</strong></p>
+</div>
+<div id="designing-the-logframe---calculation-of-exampled-indicators" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Designing the Logframe - Calculation of Exampled Indicators<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#designing-the-logframe---calculation-of-exampled-indicators" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Through this page, you will see basic logframe indicators of cash-based interventions. As mentioned, these indicators are accepted generally, including ECHO. I will also put documentations about mentioned indicators. Personally, I do love WFP VAM Resource center. I would recommend to check this amazing cookbook as well: <a href="https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook" class="uri">https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook</a></p>
+<p>Also, it would be nice to go and check <em><a href="https://www.indikit.net/" class="uri">https://www.indikit.net/</a></em> where you can find a detailed explanations and examples of most of the humanitarian indicators.</p>
+<div id="rcsi-reduced-coping-strategy-index" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> RCSI (Reduced Coping Strategy Index)<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#rcsi-reduced-coping-strategy-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs" class="uri">https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs</a></p>
+<p>rCSI &lt;- cope_lessexpfood * 1 +
+cope_borrowfood * 2 +
+cope_reduceportionsize <em>1 +
+cope_reduceadultfood </em> 3 +
+cope_reducemealno *1</p>
+</div>
+<div id="fcs-food-consumption-score" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> FCS (Food Consumption Score)<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#fcs-food-consumption-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://resources.vam.wfp.org/data-analysis/quantitative/food-security/food-consumption-score" class="uri">https://resources.vam.wfp.org/data-analysis/quantitative/food-security/food-consumption-score</a></p>
+<p>FCS &lt;- cons_cereal * 2 + cons_pulses * 3 + cons_veg * 1 + cons_fruit * 1 + cons_meat * 4 + cons_dairy * 4 + cons_sugar * 0.5 + cons_oil*0.5</p>
+<p>FCG &lt;- ifelse(FCS &lt;=28,“PoorConsumption”, ifelse(FCS &lt;42, “Borderline”,“AcceptableConsumption”))</p>
+<p>prop.table(table(FCG))*100</p>
+</div>
+<div id="lcsi-livelihood-coping-strategy-index" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> LCSI (Livelihood Coping Strategy Index)<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#lcsi-livelihood-coping-strategy-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Note that LCSI does variates by concept, a lot. Please kindly refer to VAM guidances before designing your LCSI.</p>
+<p><a href="https://resources.vam.wfp.org/data-analysis/quantitative/essential-needs/livelihood-coping-strategies-essential-needs" class="uri">https://resources.vam.wfp.org/data-analysis/quantitative/essential-needs/livelihood-coping-strategies-essential-needs</a></p>
+<p><a href="https://resources.vam.wfp.org/data-analysis/quantitative/food-security/livelihood-coping-strategies-food-security" class="uri">https://resources.vam.wfp.org/data-analysis/quantitative/food-security/livelihood-coping-strategies-food-security</a></p>
+<p><strong>Extract, colmn names of each component of LCSI starts with lhood_</strong></p>
+<ul>
+<li>livelihoodcoping &lt;- PAB %&gt;% select(starts_with(“lhood_”))</li>
+</ul>
+<p><strong>Recode, if it is not binary, convert related columns to numeric 0 and 1</strong></p>
+<ul>
+<li>vars &lt;- names(livelihoodcoping)</li>
+<li>livelihoodcoping &lt;- livelihoodcoping %&gt;% mutate(across(all_of(vars), ~ recode(., “No” = 0, “Yes” = 1)))</li>
+</ul>
+<p><strong>LCSI Calculation</strong>
+LCSI &lt;-</p>
+<p><em>Stress</em></p>
+<p>(lhood_ST_soldhhasset + lhood_ST_spentsavings + lhood_ST_foodcredit + lhood_ST_borrowmoney + lhood_ST_unusualfood ) +</p>
+<p><em>Crisis</em></p>
+<p>(lhood_CR_soldprodasset + lhood_CR_noschool + lhood_CR_lesshealth + lhood_CR_lessedu) * 2 +</p>
+<p><em>Emergency</em></p>
+<p>(lhood_EM_hhmove + lhood_EM_childwork + lhood_EM_beg +lhood_EM_return) * 3</p>
+</div>
+<div id="other-smart-logframe-indicators-for-cva" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Other SMART Logframe Indicators for CVA<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#other-smart-logframe-indicators-for-cva" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Average Total debt / percentage of households with debt</li>
+<li>MEB based analysis</li>
+<li>Exclusion - inclusion errors</li>
+<li>Resilience scores</li>
+<li>Beneficiary perception positive ratios</li>
+<li>ECMEN based indicators (please kindly google this aspect, very important)</li>
+</ul>
 
 </div>
 </div>
