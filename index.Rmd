@@ -208,7 +208,7 @@ Attention is required for analysis unit-container relationship. If your analysis
 In humanitarian sector, I see that programme monitors usually applies clustered samples. Cluster layers could be regions, nationality, gender etc. where researchers wants to have a representative knowledge for each cluster group. There are several different methods for sampling. I personally like machine learning style of sampling. 
 
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 library(tidyverse)
 library(ggplot2)
 head(diamonds,5)
@@ -221,7 +221,7 @@ Lets do this exercise over "Diamonds" data comes with tidyverse package. Thus, t
 You are a data scientist works with monitoring and evaluation unit in country office x. There is a cash-based intervention and you are responsible for designing a PDM. In programme objective, it says; increasing economic situation of the target population. So this is basically your research question. Now it is time to build a research design. In secondary data review, you find out that for specific regions, socio-economical indicators are very different (livelihoods and expenditures etc.). Thus, to have an accurate outcomes, you design a representative sample for each region, to have a better understanding of the concept. Operationally, you have enough capacity to collect data within promised time (I am stating that because dividing sample into layers means more surveys, it could be overall 385 or for two regions 385 x 2). Now, you have the population data and sample stage is at hand. In first version, we will draw a quick sample from overall population and then move to more simplified version of layered sample.
 
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 #A quick overlook to data
 glimpse(diamonds)
 ```
@@ -244,7 +244,7 @@ A small trick, we might forecast how successful our sampling in terms of making 
 
 Lets start with categorical variables. Below, from graphs, one can see that distribution of clarity and type (Remember these are coming from diamonds data. You can interpret them as any other categorical variable that is available in humanitarian sector). What this visual tells us is this: density of group taken into consideration and distributions applies to whole case, without leaving any different characteristic behind. So that is a good sample!
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 diamonds$Type <- 'Population'
 layered_sample$Type <- 'Sampled'
 Compare <- rbind(layered_sample,diamonds)
@@ -277,7 +277,7 @@ Key differences between sample and population happens due to we give same import
 For random sampling, without any clusters, data partition technique is amazing. Lets say we want to draw 3820 sample out of 53940 (row number of diamonds data), which is ~7.1% of our total population. "p" metric in data goes as 0.71. We mark selected cases as index, and split data by sampled and outsampled. Distribution here will be more accurate then layered sampling. Please do check linear line and table of cut variable.
 
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 #Select rows - proportionally depending on "cut"~ acts as region.
 #library caret contains "createDataPartition" function.
 library(caret)
@@ -291,7 +291,7 @@ diamonds_sample <- diamonds[ diamonds_index,]
 diamonds_outsample  <- diamonds[-diamonds_index,]
 ```
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 #As you see, frequency of cut category is not same with clustered version.
 #Percentage of each cut category is same with population percentages now.
 table(diamonds_sample$cut)

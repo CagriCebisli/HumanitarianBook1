@@ -30,5 +30,16 @@ designing-the-logframe---calculation-of-exampled-indicators
 rcsi-reduced-coping-strategy-index
 fcs-food-consumption-score
 lcsi-livelihood-coping-strategy-index
+resilience-capacity-score
+calculation-of-rcs
+normalization-of-rcs
+categorization-of-rcs
+percentage-of-groups
+disaggregation-by-eligibility
+disaggregation-by-genderhhh
+disaggregation-by-stratum
+individual-statement-score-calculation
+rcs-data-viz
+spider-map
 other-smart-logframe-indicators-for-cva
-a-caucus-race-and-a-long-tale
+creating-a-dashboard-with-r

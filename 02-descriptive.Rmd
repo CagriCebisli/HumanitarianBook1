@@ -1,6 +1,16 @@
 ```{r,warning=FALSE,error=FALSE,message=FALSE,echo=FALSE}
-
-
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+library(readxl)
+library(xlsx)
+library(dplyr)
+library(visdat)
+library(naniar)
+library(ggplot2)
+library(simputation)
+library(fmsb)
+library(rstatix)
+library(ggpubr)
+PAB<- read_xlsx("C:/R Working Directory/R Bookdown/HumanitarianBook1/Dummy Data.xlsx",sheet = "RawPDM")
 ```
 
 # Descriptive - Primelinary Analysis (Exploratory Data Analysis - EDA)
@@ -117,13 +127,13 @@ Amazing. delete_MCAR function is king. You can see %25 missing randomly from eac
 
 **Missing frequency.**
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 gg_miss_var(diamonds_missing) + theme_bw() 
 ```
 
 **Missing frequency disaggregated by categorical variable.**
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 gg_miss_var(diamonds_missing, facet = cut)
 ```
 
@@ -149,7 +159,7 @@ Now, we do not have any missing values for numeric columns as they are converted
 
 This method is amazing where you can fill values by categories. Think of humanitarian data and you have some missing values in income. 
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 # da1 <- impute_lm(dat, Sepal.Length ~ Sepal.Width + Species)
 # da2 <- impute_median(da1, Sepal.Length ~ Species)
 ```
@@ -230,12 +240,13 @@ Through this page, you will see basic logframe indicators of cash-based interven
 
 Also, it would be nice to go and check *https://www.indikit.net/* where you can find a detailed explanations and examples of most of the humanitarian indicators.
 
+Disaggregation of indicators are important. Here, disaggregation only made for resilience capacity score index to show how I personally do it. 
 
 ###   RCSI (Reduced Coping Strategy Index)
 
 https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs
 
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 PAB$rCSI <- PAB$cope_lessexpfood * 1 +
             PAB$cope_borrowfood * 2 +
             PAB$cope_reduceportionsize *1 +
@@ -247,53 +258,149 @@ PAB$rCSI <- PAB$cope_lessexpfood * 1 +
 
 https://resources.vam.wfp.org/data-analysis/quantitative/food-security/food-consumption-score
 
-FCS <- cons_cereal * 2 + cons_pulses * 3 + cons_veg * 1 + cons_fruit * 1 + cons_meat * 4   + cons_dairy * 4  + cons_sugar * 0.5 + cons_oil*0.5
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+PAB$FCS <- PAB$cons_cereal*2 + PAB$cons_pulses*3 + PAB$cons_veg*1 + PAB$cons_fruit*1 + 
+           PAB$cons_meat*4   + PAB$cons_dairy*4  + PAB$cons_sugar*0.5 + PAB$cons_oil*0.5
 
-FCG <- ifelse(FCS <=28,"PoorConsumption", ifelse(FCS <42, "Borderline","AcceptableConsumption"))
+PAB$FCG <- ifelse(PAB$FCS <=28,"PoorConsumption", ifelse(PAB$FCS <42, "Borderline","AcceptableConsumption"))
 
-prop.table(table(FCG))*100
+                  
+prop.table(table(PAB$FCG))*100
+```
 
 
 ### LCSI (Livelihood Coping Strategy Index)
 
-Note that LCSI does variates by concept, a lot. Please kindly refer to VAM guidances before designing your LCSI.
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#Extract
+livelihoodcoping <- PAB %>% select(starts_with("lhood_"))
 
-https://resources.vam.wfp.org/data-analysis/quantitative/essential-needs/livelihood-coping-strategies-essential-needs
-  
+#Recode
+vars <- names(livelihoodcoping)
+livelihoodcoping <- livelihoodcoping %>%
+                    mutate(across(all_of(vars), ~ recode(., "No" = 0, "Yes" = 1)))
 
-https://resources.vam.wfp.org/data-analysis/quantitative/food-security/livelihood-coping-strategies-food-security
-
-
-
-**Extract, colmn names of each component of LCSI starts with lhood_**
-
-
--   livelihoodcoping <- PAB %>% select(starts_with("lhood_"))
-
-**Recode, if it is not binary, convert related columns to numeric 0 and 1**
-
-
--   vars <- names(livelihoodcoping)
--   livelihoodcoping <- livelihoodcoping %>% mutate(across(all_of(vars), ~ recode(., "No" = 0, "Yes" = 1)))
-
-
-
-**LCSI Calculation**
+#LCSI Calculation
+livelihoodcoping$LCSI <-  
+#Stress
+(livelihoodcoping$lhood_ST_soldhhasset + livelihoodcoping$lhood_ST_spentsavings + livelihoodcoping$lhood_ST_foodcredit +
+livelihoodcoping$lhood_ST_borrowmoney + livelihoodcoping$lhood_ST_unusualfood ) + 
+#Crisis
+(livelihoodcoping$lhood_CR_soldprodasset + livelihoodcoping$lhood_CR_noschool + livelihoodcoping$lhood_CR_lesshealth +
+livelihoodcoping$lhood_CR_lessedu) * 2 +
+#Emergency
+(livelihoodcoping$lhood_EM_hhmove + livelihoodcoping$lhood_EM_childwork + livelihoodcoping$lhood_EM_beg +livelihoodcoping$lhood_EM_return) * 3
 
 
-LCSI <-  
 
-*Stress*
+PAB$LCSI <- livelihoodcoping$LCSI
+```
 
-(lhood_ST_soldhhasset + lhood_ST_spentsavings + lhood_ST_foodcredit + lhood_ST_borrowmoney + lhood_ST_unusualfood ) + 
+### Resilience Capacity Score
 
-*Crisis*
+#### Calculation of RCS
 
-(lhood_CR_soldprodasset + lhood_CR_noschool + lhood_CR_lesshealth + lhood_CR_lessedu) * 2 +
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+PAB <- PAB %>%
+  rowwise() %>%
+  mutate(
+    RCS = sum(c(Anticipatory + Absorptive + Transformative + Adaptive + Financial + Social +
+          Institutional + Humancapital + Information)))
 
-*Emergency*
+mean(PAB$RCS)
+```
 
-(lhood_EM_hhmove + lhood_EM_childwork + lhood_EM_beg +lhood_EM_return) * 3
+#### Normalization of RCS
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+PAB$RCSX <- (((PAB$RCS /9) -1)/ (5-1)) * 100
+mean(PAB$RCSX)
+```
+
+#### Categorization of RCS
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+PAB$RCSG <- ifelse(PAB$RCSX <33,"LOWRCS",
+                   ifelse(PAB$RCSX <66, "MediumRCS","HighRCS"))
+
+table(PAB$RCSG)
+```
+
+#### Percentage of Groups
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+prop.table(table(PAB$RCSG)) * 100
+```
+
+#### Disaggregation by Eligibility
+
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+PAB %>% group_by(ESSN_Status,Control) %>% summarise(mean(RCSX))
+```
+
+#### Disaggregation by GenderHHH
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+PAB %>% group_by(gender_hh,Control) %>% summarise(mean(RCSX))
+```
+
+#### Disaggregation by Stratum
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+PAB %>% group_by(stratum,Control) %>% summarise(mean(RCSX))
+```
+
+#### Individual Statement Score Calculation
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+a <-      colMeans(subset(PAB, select = c(Anticipatory , Absorptive , Transformative , Adaptive , Financial, Social ,
+          Institutional ,Humancapital , Information)), na.rm = TRUE)
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+a <- as.matrix(a)
+colnames(a) <- "AverageValue"
+a
+```
+
+#### RCS Data Viz
+
+##### Spider Map
+
+**Resilience Capacities Spider Map**
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+sResilienceCapacities <- PAB %>% group_by(Control) %>% summarise(Anticipatory = mean(Anticipatory),
+                                                                 Absorptive   = mean(Absorptive         ),
+                                                                 Transformative = mean(Transformative     ),
+                                                                 Adaptive = mean(Adaptive           ))
+sRowMax <- c(5,5,5,5)
+sRowMin <- c(1,1,1,1)
+
+
+sResilienceCapacities <- rbind(sResilienceCapacities, sRowMax, sRowMin)
+sResilienceCapacities <-  as.data.frame(sResilienceCapacities)
+sResilienceCapacities <- data.frame(sResilienceCapacities[,-1], row.names=sResilienceCapacities[,1])
+sResilienceCapacities <- sResilienceCapacities[c(3,4,1,2),] 
+
+areas <- c(rgb(1, 0, 0, 0.25),
+           rgb(0, 1, 0, 0.25))
+
+
+# Fill colors
+areas <- c(rgb(1, 0, 0, 0.25),
+           rgb(0, 1, 0, 0.25))
+
+radarchart(sResilienceCapacities,
+           cglty = 1,       # Grid line type
+           cglcol = "gray", # Grid line color
+           pcol = 2:4,      # Color for each line
+           plwd = 2,        # Width for each line
+           plty = 1,        # Line type for each line
+           pfcol = areas)   # Color of the areas  
+```
+
 
 ###    Other SMART Logframe Indicators for CVA
 
