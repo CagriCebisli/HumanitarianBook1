@@ -142,6 +142,8 @@ Now, we do not have any missing values for numeric columns as they are converted
 
 ####   Imputation of Missing Values with Regression
 
+This method is amazing where you can fill values by categories. Think of humanitarian data and you have some missing values in income. 
+
 ```{r}
 # da1 <- impute_lm(dat, Sepal.Length ~ Sepal.Width + Species)
 # da2 <- impute_median(da1, Sepal.Length ~ Species)
