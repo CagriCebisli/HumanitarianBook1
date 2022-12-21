@@ -46,9 +46,9 @@ For me, there are several pillars for cash-based programme monitoring. By order;
 -   Transfer value analysis 
 -   Food security
 
-#   Core Pillars and Codes of Visuals of a Dashboard
+##   Core Pillars and Codes of Visuals of a Dashboard
 
-##    Income and Expenditure
+###    Income and Expenditure
 
 Same graph can be made for income as well. Here, one can see the distribution and density levels of the expenditure, reflected by PDMs. Main takeaways will be;
 
@@ -67,7 +67,7 @@ More takeaways can be noted with this graph. Amazing visual to understand the le
     geom_vline(xintercept = median(pdmbt[ pdmbt$PDM=="PDM1" ,]$x_total),color = "red", size = 1) +labs(x ="Expenditure Levels", y = "Density Levels")
 ```
 
-##    Income and Expenditure, Disaggregated by Cluster
+###    Income and Expenditure, Disaggregated by Cluster
 
 Comparing latest two PDMs or latest PDM makes this viz easy to read. Also it does make sense not to go backwards, there should be a limit. As mentioned, last two seems fine.
 
@@ -79,7 +79,7 @@ geom_density(adjust=1.5, alpha=.4) +
 theme_ipsum() +labs(x ="Regions", y = "Income Levels") + theme(legend.position = "none") + facet_grid(. ~ PDM)+coord_flip()
 ```
 
-##    Reporting Programme Indicators
+###    Reporting Programme Indicators
 
 **Static Reporting**
 

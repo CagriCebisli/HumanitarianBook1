@@ -188,13 +188,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.5" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#other-smart-logframe-indicators-for-cva"><i class="fa fa-check"></i><b>4.4.5</b> Other SMART Logframe Indicators for CVA</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a></li>
-<li class="chapter" data-level="6" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><i class="fa fa-check"></i><b>6</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure"><i class="fa fa-check"></i><b>6.1</b> Income and Expenditure</a></li>
-<li class="chapter" data-level="6.2" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>6.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
-<li class="chapter" data-level="6.3" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>6.3</b> Reporting Programme Indicators</a></li>
-<li class="chapter" data-level="6.4" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>6.4</b> Preparing Outcome-Activity Based X-Table</a></li>
+<li class="chapter" data-level="5.1" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#core-pillars-and-codes-of-visuals-of-a-dashboard"><i class="fa fa-check"></i><b>5.1</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#income-and-expenditure"><i class="fa fa-check"></i><b>5.1.1</b> Income and Expenditure</a></li>
+<li class="chapter" data-level="5.1.2" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>5.1.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
+<li class="chapter" data-level="5.1.3" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>5.1.3</b> Reporting Programme Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>5.2</b> Preparing Outcome-Activity Based X-Table</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -373,7 +375,7 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <span id="cb7-6"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">color =</span> clarity), <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
 <span id="cb7-7"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">color_palette</span>(<span class="st">&quot;jco&quot;</span>)<span class="sc">+</span></span>
 <span id="cb7-8"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubclean</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Let’s double check with numeric variables and compare them by type. Depth and Table variables taken into consider. Check how both linear models does not aligns with each other perfectly, but does well enough. Here, we can assume that our sample does really well!</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hrbrthemes)</span>
 <span id="cb8-2"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-2" aria-hidden="true" tabindex="-1"></a>Compare <span class="sc">%&gt;%</span> </span>
@@ -383,7 +385,7 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <span id="cb8-6"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Variable Table&quot;</span>,</span>
 <span id="cb8-7"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">&quot;Variable depth&quot;</span>) <span class="sc">+</span>    </span>
 <span id="cb8-8"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_ipsum</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Key differences between sample and population happens due to we give same importance to each cut category. But in reality, their distribution (their frequency-density in population) is different, yet we did draw 780 sample from each of them. This is where one must apply weights in order to balance the outcomes and to have better accuracy while making assumptions of population values. Weights can be calculated as: each categories’ sample size ratio (# of survey of each category divided by total sample-survey number) divided by each categories’ population size ratio (frequency of each category divided by total population number) will give you weights.</p>
 <div class="figure">
 <img src="SampleWeights.JPG" alt="" />
@@ -423,7 +425,7 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <span id="cb12-11"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Variable Table&quot;</span>,</span>
 <span id="cb12-12"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb12-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">&quot;Variable depth&quot;</span>) <span class="sc">+</span>    </span>
 <span id="cb12-13"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_ipsum</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>You can see that linear models are overlaps better, if you compare it to clustered sample. This is also another good example of why we need to apply weights in clustered samples, before making an assumption towards population.</p>
 </div>
 <div id="lessons-learned-from-sampling" class="section level4 hasAnchor" number="3.3.4.3">

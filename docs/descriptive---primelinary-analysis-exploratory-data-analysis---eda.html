@@ -188,13 +188,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.5" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#other-smart-logframe-indicators-for-cva"><i class="fa fa-check"></i><b>4.4.5</b> Other SMART Logframe Indicators for CVA</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a></li>
-<li class="chapter" data-level="6" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><i class="fa fa-check"></i><b>6</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure"><i class="fa fa-check"></i><b>6.1</b> Income and Expenditure</a></li>
-<li class="chapter" data-level="6.2" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>6.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
-<li class="chapter" data-level="6.3" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>6.3</b> Reporting Programme Indicators</a></li>
-<li class="chapter" data-level="6.4" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>6.4</b> Preparing Outcome-Activity Based X-Table</a></li>
+<li class="chapter" data-level="5.1" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#core-pillars-and-codes-of-visuals-of-a-dashboard"><i class="fa fa-check"></i><b>5.1</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#income-and-expenditure"><i class="fa fa-check"></i><b>5.1.1</b> Income and Expenditure</a></li>
+<li class="chapter" data-level="5.1.2" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>5.1.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
+<li class="chapter" data-level="5.1.3" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>5.1.3</b> Reporting Programme Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>5.2</b> Preparing Outcome-Activity Based X-Table</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -314,7 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lets see if diamonds data have some missing values here and there.</span></span>
 <span id="cb20-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_dat</span>(diamonds)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>There are no missing values in diamonds data. One of the amazing thing of this visual is it gives you types and structures of the each variable. This thing sure is an art! Amazing! Lets remove some (put some NA values intentionally) values and see that amazing visual again.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Required packages for adding random NAs to data is missMethods.</span></span>
 <span id="cb21-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(missMethods)</span>
@@ -323,18 +325,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-5" aria-hidden="true" tabindex="-1"></a>diamonds_missing <span class="ot">&lt;-</span> <span class="fu">delete_MCAR</span>(diamonds, <span class="at">p =</span> <span class="fl">0.25</span>)</span>
 <span id="cb21-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_dat</span>(diamonds_missing)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>So now, grey lines in the visual reflects NAs. Amazing! Lets check the percentage of missing now:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Percentage of missing by variable.</span></span>
 <span id="cb22-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(diamonds_missing)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Amazing. delete_MCAR function is king. You can see %25 missing randomly from each column. To have a better knowledge about these operations please visit: <a href="https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html" class="uri">https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html</a></p>
 <p><strong>Missing frequency.</strong></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_var</span>(diamonds_missing) <span class="sc">+</span> <span class="fu">theme_bw</span>() </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p><strong>Missing frequency disaggregated by categorical variable.</strong></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_var</span>(diamonds_missing, <span class="at">facet =</span> cut)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 <div id="imputation-of-missing-values" class="section level4 hasAnchor" number="4.2.3.2">
 <h4><span class="header-section-number">4.2.3.2</span> Imputation of Missing Values<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#imputation-of-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -347,21 +349,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 53,940 × 7
 ##    carat depth table price     x     y     z
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  0.23  61.5    55   326  3.95  3.98  2.43
-##  2  0.21  59.8    61   326 NA     3.84 NA   
-##  3  0.23  56.9    65    NA NA    NA     2.31
-##  4  0.29  NA      NA   334  4.2   4.23 NA   
-##  5  0.31  63.3    NA   335  4.34  4.35  2.75
-##  6  0.24  62.8    NA   336  3.94  3.96 NA   
-##  7  0.24  62.3    57   336 NA     3.98 NA   
-##  8  0.26  61.9    55   337  4.07  4.11  2.53
-##  9  0.22  NA      61    NA  3.87 NA     2.49
-## 10  0.23  59.4    61   338  4    NA     2.39
+##  1  0.23  NA      NA   326  3.95  3.98  2.43
+##  2  0.21  NA      61   326 NA    NA     2.31
+##  3  0.23  NA      65   327  4.05  4.07  2.31
+##  4  0.29  62.4    58   334  4.2   4.23  2.63
+##  5  0.31  63.3    58    NA  4.34  4.35  2.75
+##  6  0.24  62.8    57   336  3.94  3.96  2.48
+##  7  0.24  NA      57   336  3.95  3.98  2.47
+##  8  0.26  61.9    55   337  4.07 NA    NA   
+##  9  0.22  65.1    61   337 NA     3.78  2.49
+## 10  0.23  NA      61   338  4     4.05  2.39
 ## # … with 53,930 more rows</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Fill NA values with zero only for numeric variables.</span></span>
 <span id="cb27-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setnafill</span>(diamonds_missing[ , purrr<span class="sc">::</span><span class="fu">map_lgl</span>(diamonds_missing, is.numeric)], <span class="at">fill=</span><span class="dv">0</span>)</span>
 <span id="cb27-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(diamonds_missing)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Now, we do not have any missing values for numeric columns as they are converted to (filled with) zeros. Job well done! setnafill is a great piece of function that you can use, please do check it further.</p>
 </div>
 <div id="imputation-of-missing-values-with-regression" class="section level4 hasAnchor" number="4.2.3.3">
@@ -412,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb32-2" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fu">imputate_outlier</span>(diamonds, price)</span>
 <span id="cb32-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 </div>
 <div id="exploratory-data-analysis-eda" class="section level2 hasAnchor" number="4.3">
@@ -619,7 +621,7 @@ output_file   = &quot;EDA_diamonds.html&quot;)</code></pre>
 <span id="cb55-26"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">plwd =</span> <span class="dv">2</span>,        <span class="co"># Width for each line</span></span>
 <span id="cb55-27"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">plty =</span> <span class="dv">1</span>,        <span class="co"># Line type for each line</span></span>
 <span id="cb55-28"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">pfcol =</span> areas)   <span class="co"># Color of the areas  </span></span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
 </div>
 <div id="other-smart-logframe-indicators-for-cva" class="section level3 hasAnchor" number="4.4.5">

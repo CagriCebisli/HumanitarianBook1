@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"/>
-<link rel="next" href="core-pillars-and-codes-of-visuals-of-a-dashboard.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -188,13 +188,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.5" data-path="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#other-smart-logframe-indicators-for-cva"><i class="fa fa-check"></i><b>4.4.5</b> Other SMART Logframe Indicators for CVA</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a></li>
-<li class="chapter" data-level="6" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><i class="fa fa-check"></i><b>6</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure"><i class="fa fa-check"></i><b>6.1</b> Income and Expenditure</a></li>
-<li class="chapter" data-level="6.2" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>6.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
-<li class="chapter" data-level="6.3" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>6.3</b> Reporting Programme Indicators</a></li>
-<li class="chapter" data-level="6.4" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>6.4</b> Preparing Outcome-Activity Based X-Table</a></li>
+<li class="chapter" data-level="5.1" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#core-pillars-and-codes-of-visuals-of-a-dashboard"><i class="fa fa-check"></i><b>5.1</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#income-and-expenditure"><i class="fa fa-check"></i><b>5.1.1</b> Income and Expenditure</a></li>
+<li class="chapter" data-level="5.1.2" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>5.1.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
+<li class="chapter" data-level="5.1.3" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>5.1.3</b> Reporting Programme Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>5.2</b> Preparing Outcome-Activity Based X-Table</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -229,14 +231,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Transfer value analysis</li>
 <li>Food security</li>
 </ul>
+<div id="core-pillars-and-codes-of-visuals-of-a-dashboard" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Core Pillars and Codes of Visuals of a Dashboard<a href="creating-a-dashboard-with-r.html#core-pillars-and-codes-of-visuals-of-a-dashboard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="income-and-expenditure" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Income and Expenditure<a href="creating-a-dashboard-with-r.html#income-and-expenditure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Same graph can be made for income as well. Here, one can see the distribution and density levels of the expenditure, reflected by PDMs. Main takeaways will be;</p>
+<ul>
+<li>If curve is getting skewed towards right, one can assume that expenditure(income) levels are increasing by PDMs.</li>
+<li>Draw a line on the median point. That will reflect you an understanding of where the middle is. If you are to report, report that line.</li>
+<li>Tops are important. If curve has two tops, means that there is two group within those expenditure(income) levels. So population is not homogen.</li>
+<li>If heigh of distribution is getting lower and lower, means that some households are moving from middle-section to lower or upper sections of expenditure(income).</li>
+</ul>
+<p>More takeaways can be noted with this graph. Amazing visual to understand the levels and story(if have more than two PDms) of the variable.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="creating-a-dashboard-with-r.html#cb56-1" aria-hidden="true" tabindex="-1"></a>    pdmbt <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x_total <span class="sc">&lt;</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="creating-a-dashboard-with-r.html#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x_total, <span class="at">group=</span>PDM, <span class="at">fill=</span>PDM)) <span class="sc">+</span></span>
+<span id="cb56-3"><a href="creating-a-dashboard-with-r.html#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">adjust=</span><span class="fl">1.5</span>, <span class="at">alpha=</span>.<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb56-4"><a href="creating-a-dashboard-with-r.html#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ipsum</span>() <span class="sc">+</span> </span>
+<span id="cb56-5"><a href="creating-a-dashboard-with-r.html#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(pdmbt[ pdmbt<span class="sc">$</span>PDM<span class="sc">==</span><span class="st">&quot;PDM1&quot;</span> ,]<span class="sc">$</span>x_total),<span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span><span class="fu">labs</span>(<span class="at">x =</span><span class="st">&quot;Expenditure Levels&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density Levels&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+</div>
+<div id="income-and-expenditure-disaggregated-by-cluster" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Income and Expenditure, Disaggregated by Cluster<a href="creating-a-dashboard-with-r.html#income-and-expenditure-disaggregated-by-cluster" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Comparing latest two PDMs or latest PDM makes this viz easy to read. Also it does make sense not to go backwards, there should be a limit. As mentioned, last two seems fine.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="creating-a-dashboard-with-r.html#cb57-1" aria-hidden="true" tabindex="-1"></a>pdmbt <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PDM<span class="sc">==</span><span class="st">&quot;PDM4&quot;</span> <span class="sc">|</span> PDM<span class="sc">==</span><span class="st">&quot;PDM5&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Income <span class="sc">&lt;</span> <span class="dv">7500</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(BenefitSit<span class="sc">==</span><span class="st">&quot;Recipient&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="creating-a-dashboard-with-r.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> stratum, <span class="at">y =</span> Income))<span class="sc">+</span> </span>
+<span id="cb57-3"><a href="creating-a-dashboard-with-r.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> stratum), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>    </span>
+<span id="cb57-4"><a href="creating-a-dashboard-with-r.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_density</span>(<span class="at">adjust=</span><span class="fl">1.5</span>, <span class="at">alpha=</span>.<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb57-5"><a href="creating-a-dashboard-with-r.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_ipsum</span>() <span class="sc">+</span><span class="fu">labs</span>(<span class="at">x =</span><span class="st">&quot;Regions&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Income Levels&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(. <span class="sc">~</span> PDM)<span class="sc">+</span><span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+</div>
+<div id="reporting-programme-indicators" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Reporting Programme Indicators<a href="creating-a-dashboard-with-r.html#reporting-programme-indicators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Static Reporting</strong></p>
+<p>For reporting programme log frame indicators, there are two steps. For the first step, report them as success=target, warning=%10 below baseline, danger=%20 below baseline. Report indicators one by one with same method, use flex dashboard, and use page vertically. I am giving an example for FCS. Same coding can be applied to all SMART indicators of log frames.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="creating-a-dashboard-with-r.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gauge</span>(</span>
+<span id="cb58-2"><a href="creating-a-dashboard-with-r.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb58-3"><a href="creating-a-dashboard-with-r.html#cb58-3" aria-hidden="true" tabindex="-1"></a>pi <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PDMs<span class="sc">==</span><span class="st">&quot;PDM5&quot;</span> <span class="sc">&amp;</span> BenefitSituation <span class="sc">==</span><span class="st">&quot;Recipient&quot;</span>) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(FCS) <span class="sc">%&gt;%</span> <span class="fu">colMeans</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">as.vector</span>(),</span>
+<span id="cb58-4"><a href="creating-a-dashboard-with-r.html#cb58-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb58-5"><a href="creating-a-dashboard-with-r.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="at">min=</span><span class="dv">0</span>,<span class="at">max=</span><span class="dv">112</span>,</span>
+<span id="cb58-6"><a href="creating-a-dashboard-with-r.html#cb58-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">gaugeSectors</span>(<span class="at">success =</span> <span class="fu">c</span>(<span class="dv">63</span>,<span class="dv">65</span>),</span>
+<span id="cb58-7"><a href="creating-a-dashboard-with-r.html#cb58-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">warning =</span> <span class="fu">c</span>(<span class="dv">41</span>,<span class="dv">62</span>),</span>
+<span id="cb58-8"><a href="creating-a-dashboard-with-r.html#cb58-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">danger =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">41</span>))</span>
+<span id="cb58-9"><a href="creating-a-dashboard-with-r.html#cb58-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="htmlwidget-ece85a47028f403d51a4" style="width:672px;height:480px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ece85a47028f403d51a4">{"x":{"value":61.5,"min":0,"max":112,"customSectors":{"percents":false,"ranges":[{"lo":63,"hi":65,"color":"rgba(63, 182, 24, 0.7)"},{"lo":41,"hi":62,"color":"rgba(255, 117, 24, 0.7)"},{"lo":0,"hi":41,"color":"rgba(255, 0, 57, 0.7)"}]},"symbol":null,"label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<p><strong>Dynamic Reporting</strong></p>
+<p>If you have more than one PDM (PAB / baseline) it does makes sense to report this all together, including confidence levels. From graph below you can easily interpret:</p>
+<ul>
+<li>Trend of indicator.</li>
+<li>%95 CI of indicator, where it may land in next PDM.</li>
+<li>Comparison of control and treatment group.</li>
+</ul>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="creating-a-dashboard-with-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a>pi <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Programme <span class="sc">==</span> <span class="st">&quot;ProgrammeA&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-2"><a href="creating-a-dashboard-with-r.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>PDMs, <span class="at">y=</span>Debt, <span class="at">group=</span>BenefitSituation, <span class="at">color=</span>BenefitSituation)) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="creating-a-dashboard-with-r.html#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb59-4"><a href="creating-a-dashboard-with-r.html#cb59-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb59-5"><a href="creating-a-dashboard-with-r.html#cb59-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;PDMs&quot;</span>,</span>
+<span id="cb59-6"><a href="creating-a-dashboard-with-r.html#cb59-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">&quot;Debt Held by Target Population&quot;</span>) <span class="sc">+</span>    </span>
+<span id="cb59-7"><a href="creating-a-dashboard-with-r.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_ipsum</span>() <span class="sc">+</span> </span>
+<span id="cb59-8"><a href="creating-a-dashboard-with-r.html#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1500</span>, <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, </span>
+<span id="cb59-9"><a href="creating-a-dashboard-with-r.html#cb59-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb59-10"><a href="creating-a-dashboard-with-r.html#cb59-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb59-11"><a href="creating-a-dashboard-with-r.html#cb59-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb59-12"><a href="creating-a-dashboard-with-r.html#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>))  <span class="sc">+</span></span>
+<span id="cb59-13"><a href="creating-a-dashboard-with-r.html#cb59-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>Debt), <span class="at">vjust=</span><span class="dv">0</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+</div>
+</div>
+<div id="preparing-outcome-activity-based-x-table" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Preparing Outcome-Activity Based X-Table<a href="creating-a-dashboard-with-r.html#preparing-outcome-activity-based-x-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Probably there is a better way to report this, but this is how I do it. If you know a better way to make a Gannt; please do contact me!</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="creating-a-dashboard-with-r.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DiagrammeR)</span>
+<span id="cb60-2"><a href="creating-a-dashboard-with-r.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co">#title Monitoring and Evaluation Outcome Indicators</span></span>
+<span id="cb60-3"><a href="creating-a-dashboard-with-r.html#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="creating-a-dashboard-with-r.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mermaid</span>(<span class="st">&quot;</span></span>
+<span id="cb60-5"><a href="creating-a-dashboard-with-r.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="st">gantt</span></span>
+<span id="cb60-6"><a href="creating-a-dashboard-with-r.html#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="st">dateFormat  YYYY-MM-DD</span></span>
+<span id="cb60-7"><a href="creating-a-dashboard-with-r.html#cb60-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-8"><a href="creating-a-dashboard-with-r.html#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="st">section PDMs</span></span>
+<span id="cb60-9"><a href="creating-a-dashboard-with-r.html#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="st">PDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01</span></span>
+<span id="cb60-10"><a href="creating-a-dashboard-with-r.html#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="st">PDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15</span></span>
+<span id="cb60-11"><a href="creating-a-dashboard-with-r.html#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="st">PDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15</span></span>
+<span id="cb60-12"><a href="creating-a-dashboard-with-r.html#cb60-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-13"><a href="creating-a-dashboard-with-r.html#cb60-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-14"><a href="creating-a-dashboard-with-r.html#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="st">section FGDs</span></span>
+<span id="cb60-15"><a href="creating-a-dashboard-with-r.html#cb60-15" aria-hidden="true" tabindex="-1"></a><span class="st">FGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01</span></span>
+<span id="cb60-16"><a href="creating-a-dashboard-with-r.html#cb60-16" aria-hidden="true" tabindex="-1"></a><span class="st">FGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01</span></span>
+<span id="cb60-17"><a href="creating-a-dashboard-with-r.html#cb60-17" aria-hidden="true" tabindex="-1"></a><span class="st">FGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01</span></span>
+<span id="cb60-18"><a href="creating-a-dashboard-with-r.html#cb60-18" aria-hidden="true" tabindex="-1"></a><span class="st">FGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01</span></span>
+<span id="cb60-19"><a href="creating-a-dashboard-with-r.html#cb60-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-20"><a href="creating-a-dashboard-with-r.html#cb60-20" aria-hidden="true" tabindex="-1"></a><span class="st">section OSMs</span></span>
+<span id="cb60-21"><a href="creating-a-dashboard-with-r.html#cb60-21" aria-hidden="true" tabindex="-1"></a><span class="st">On Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01</span></span>
+<span id="cb60-22"><a href="creating-a-dashboard-with-r.html#cb60-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-fc707f5bf9d895ac01b4" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fc707f5bf9d895ac01b4">{"x":{"diagram":"\ngantt\ndateFormat  YYYY-MM-DD\n\nsection PDMs\nPDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01\nPDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15\nPDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15\n\n\nsection FGDs\nFGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01\nFGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01\nFGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01\nFGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01\n\nsection OSMs\nOn Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01\n"},"evals":[],"jsHooks":[]}</script>
+<p>This Gannt is a must to follow-up activities mentioned in M&amp;E plan and programme proposal. I strongly advise to make one during designing M&amp;E plan and costs.</p>
+<p>This marks the end of this section. Main take aways are:</p>
+<ul>
+<li><p>Use flexdashboard or shiny (I don’t know how to use shiny, tho it may be better than flex dashboard) to report indicators, give clear messages and tailor graphs for different audience.</p></li>
+<li><p>I reflected few visuals that I like to use. You can expand this and use different version as well.</p></li>
+<li><p>Carefully track down indicators. They must speak with each other and reflect a full story of what is happening with target group and programme efficiency.</p></li>
+</ul>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
