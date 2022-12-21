@@ -1,0 +1,166 @@
+# Creating a Dashboard with R
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(flexdashboard)
+library(flextable)
+library(DT)
+library(flexdashboard)
+library(xlsx)
+library(readxl)
+library(ggplot2)
+library(MASS)
+#library(shiny)
+library(stringr)
+library("PerformanceAnalytics")
+library(dplyr)
+library(ggridges)
+library(hrbrthemes)
+library(dplyr)
+library(tidyr)
+library(viridis)
+library(viridisLite)
+library(gganimate)
+library(babynames)
+library(hrbrthemes)
+library(data.table)
+options(java.parameters = "-Xmx1000m")
+#pi <- read_excel("C:/R Working Directory/R Bookdown/HumanitarianBook1/Dummy Data.xlsx",sheet = "Programme Indicators")
+#pdmbt <- read_excel("C:/R Working Directory/R Bookdown/HumanitarianBook1/Dummy Data.xlsx",sheet = "PDMByTime")
+
+pi <- read_excel("Dummy Data.xlsx",sheet = "Programme Indicators")
+pdmbt <- read_excel("Dummy Data.xlsx",sheet = "PDMByTime")
+```
+
+Dashboards are very important communication tools, especially with management end. They like to see numbers and digestible graphs. Personally, selecting correct tool for dashboards are best approach. Two big rivals are in play lately, PowerBI and Tableau. I do personally like PowerBi for simplified dashboards. If your team uses MS Teams, there is an embed option, where you can put your dashboards as tabs within teams channels. Makes life of your manager and related teams easier.
+
+R presents few options as shiny or flexdashboard. Flexdashboard is easy to use and learn. Let me quickly introduce you some of my best-in-use graphs. All these data are dummy and made up, so do not focus on making sense, focus on the visualts itself.
+
+For me, there are several pillars for cash-based programme monitoring. By order;
+
+-   Income and expenditure
+-   Classification (region, nationality etc.) based income and expenditure, if available
+-   Log frame programme indicators
+-   Indicators by time (if available, if have more than 2 PDMs-data collection)
+-   Correlation and Regression analysis of core indicators
+-   Transfer value analysis 
+-   Food security
+
+#   Core Pillars and Codes of Visuals of a Dashboard
+
+##    Income and Expenditure
+
+Same graph can be made for income as well. Here, one can see the distribution and density levels of the expenditure, reflected by PDMs. Main takeaways will be;
+
+-   If curve is getting skewed towards right, one can assume that expenditure(income) levels are increasing by PDMs.
+-   Draw a line on the median point. That will reflect you an understanding of where the middle is. If you are to report, report that line.
+-   Tops are important. If curve has two tops, means that there is two group within those expenditure(income) levels. So population is not homogen.
+-   If heigh of distribution is getting lower and lower, means that some households are moving from middle-section to lower or upper sections of expenditure(income).
+
+More takeaways can be noted with this graph. Amazing visual to understand the levels and story(if have more than two PDms) of the variable.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+    pdmbt %>% filter(x_total < 10000) %>% 
+    ggplot(aes(x=x_total, group=PDM, fill=PDM)) +
+    geom_density(adjust=1.5, alpha=.4) +
+    theme_ipsum() + 
+    geom_vline(xintercept = median(pdmbt[ pdmbt$PDM=="PDM1" ,]$x_total),color = "red", size = 1) +labs(x ="Expenditure Levels", y = "Density Levels")
+```
+
+##    Income and Expenditure, Disaggregated by Cluster
+
+Comparing latest two PDMs or latest PDM makes this viz easy to read. Also it does make sense not to go backwards, there should be a limit. As mentioned, last two seems fine.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+pdmbt %>% filter(PDM=="PDM4" | PDM=="PDM5") %>% filter(Income < 7500) %>% filter(BenefitSit=="Recipient") %>%
+ggplot(aes(x = stratum, y = Income))+ 
+geom_boxplot(aes(fill = stratum), show.legend = FALSE) +    
+geom_density(adjust=1.5, alpha=.4) +
+theme_ipsum() +labs(x ="Regions", y = "Income Levels") + theme(legend.position = "none") + facet_grid(. ~ PDM)+coord_flip()
+```
+
+##    Reporting Programme Indicators
+
+**Static Reporting**
+
+For reporting programme log frame indicators, there are two steps. For the first step, report them as success=target, warning=%10 below baseline, danger=%20 below baseline. Report indicators one by one with same method, use flex dashboard, and use page vertically. I am giving an example for FCS. Same coding can be applied to all SMART indicators of log frames.
+
+```{r}
+gauge(
+  
+pi %>% filter(PDMs=="PDM5" & BenefitSituation =="Recipient") %>% dplyr::select(FCS) %>% colMeans(na.rm = TRUE) %>% as.vector(),
+  
+min=0,max=112,
+      gaugeSectors(success = c(63,65),
+                   warning = c(41,62),
+                   danger =  c(0,41))
+)
+```
+
+**Dynamic Reporting**
+
+If you have more than one PDM (PAB / baseline) it does makes sense to report this all together, including confidence levels. From graph below you can easily interpret:
+
+-   Trend of indicator.
+-   %95 CI of indicator, where it may land in next PDM.
+-   Comparison of control and treatment group.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+pi %>% filter(Programme == "ProgrammeA") %>%
+ggplot(aes(x=PDMs, y=Debt, group=BenefitSituation, color=BenefitSituation)) +
+    geom_line() +
+    geom_point() +  
+        labs(x = "PDMs",
+             y = "Debt Held by Target Population") +    
+theme_ipsum() + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +  geom_hline(yintercept=1500, linetype="dashed", 
+                color = "red", size=2) +
+        geom_point() +
+        geom_smooth(method = "lm") + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))  +
+    geom_text(aes(label=Debt), vjust=0)
+```
+
+##    Preparing Outcome-Activity Based X-Table
+
+Probably there is a better way to report this, but this is how I do it. If you know a better way to make a Gannt; please do contact me!
+
+```{r}
+library(DiagrammeR)
+#title Monitoring and Evaluation Outcome Indicators
+
+mermaid("
+gantt
+dateFormat  YYYY-MM-DD
+
+section PDMs
+PDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01
+PDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15
+PDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15
+
+
+section FGDs
+FGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01
+FGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01
+FGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01
+FGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01
+
+section OSMs
+On Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01
+")
+```
+
+This Gannt is a must to follow-up activities mentioned in M&E plan and programme proposal. I strongly advise to make one during designing M&E plan and costs.
+
+This marks the end of this section. Main take aways are:
+
+-   Use flexdashboard or shiny (I don't know how to use shiny, tho it may be better than flex dashboard) to report indicators, give clear messages and tailor graphs for different audience.
+
+-   I reflected few visuals that I like to use. You can expand this and use different version as well.
+
+-   Carefully track down indicators. They must speak with each other and reflect a full story of what is happening with target group and programme efficiency.
+
+
+
+
+

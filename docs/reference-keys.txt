@@ -39,7 +39,11 @@ disaggregation-by-eligibility
 disaggregation-by-genderhhh
 disaggregation-by-stratum
 individual-statement-score-calculation
-rcs-data-viz
-spider-map
+resilience-capacity-score-spider-map
 other-smart-logframe-indicators-for-cva
 creating-a-dashboard-with-r
+core-pillars-and-codes-of-visuals-of-a-dashboard
+income-and-expenditure
+income-and-expenditure-disaggregated-by-cluster
+reporting-programme-indicators
+preparing-outcome-activity-based-x-table

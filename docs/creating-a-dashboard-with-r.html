@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2022-12-16" />
+<meta name="date" content="2022-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"/>
-
+<link rel="next" href="core-pillars-and-codes-of-visuals-of-a-dashboard.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,18 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/raphael-2.1.4/raphael-2.1.4.min.js"></script>
+<link href="libs/justgage-1.2.2.1/justgage.css" rel="stylesheet" />
+<script src="libs/justgage-1.2.2.1/justgage.js"></script>
+<script src="libs/gauge-binding-0.6.0/gauge.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -177,6 +189,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a></li>
+<li class="chapter" data-level="6" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><i class="fa fa-check"></i><b>6</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure"><i class="fa fa-check"></i><b>6.1</b> Income and Expenditure</a></li>
+<li class="chapter" data-level="6.2" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>6.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
+<li class="chapter" data-level="6.3" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>6.3</b> Reporting Programme Indicators</a></li>
+<li class="chapter" data-level="6.4" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>6.4</b> Preparing Outcome-Activity Based X-Table</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -198,15 +217,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="creating-a-dashboard-with-r" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Creating a Dashboard with R<a href="creating-a-dashboard-with-r.html#creating-a-dashboard-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-
+<p>Dashboards are very important communication tools, especially with management end. They like to see numbers and digestible graphs. Personally, selecting correct tool for dashboards are best approach. Two big rivals are in play lately, PowerBI and Tableau. I do personally like PowerBi for simplified dashboards. If your team uses MS Teams, there is an embed option, where you can put your dashboards as tabs within teams channels. Makes life of your manager and related teams easier.</p>
+<p>R presents few options as shiny or flexdashboard. Flexdashboard is easy to use and learn. Let me quickly introduce you some of my best-in-use graphs. All these data are dummy and made up, so do not focus on making sense, focus on the visualts itself.</p>
+<p>For me, there are several pillars for cash-based programme monitoring. By order;</p>
+<ul>
+<li>Income and expenditure</li>
+<li>Classification (region, nationality etc.) based income and expenditure, if available</li>
+<li>Log frame programme indicators</li>
+<li>Indicators by time (if available, if have more than 2 PDMs-data collection)</li>
+<li>Correlation and Regression analysis of core indicators</li>
+<li>Transfer value analysis</li>
+<li>Food security</li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -237,7 +267,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/CagriCebisli/HumanitarianBook1/edit/master/03-race.Rmd",
+"link": "https://github.com/CagriCebisli/HumanitarianBook1/edit/master/03-dashboards.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -245,7 +275,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/CagriCebisli/HumanitarianBook1/blob/master/03-race.Rmd",
+"link": "https://github.com/CagriCebisli/HumanitarianBook1/blob/master/03-dashboards.Rmd",
 "text": null
 },
 "download": null,

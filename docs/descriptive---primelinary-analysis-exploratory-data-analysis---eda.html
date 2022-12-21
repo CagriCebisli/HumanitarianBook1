@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2022-12-16" />
+<meta name="date" content="2022-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,18 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/raphael-2.1.4/raphael-2.1.4.min.js"></script>
+<link href="libs/justgage-1.2.2.1/justgage.css" rel="stylesheet" />
+<script src="libs/justgage-1.2.2.1/justgage.js"></script>
+<script src="libs/gauge-binding-0.6.0/gauge.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
 
 
 <style type="text/css">
@@ -177,6 +189,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html"><i class="fa fa-check"></i><b>5</b> Creating a Dashboard with R</a></li>
+<li class="chapter" data-level="6" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><i class="fa fa-check"></i><b>6</b> Core Pillars and Codes of Visuals of a Dashboard</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure"><i class="fa fa-check"></i><b>6.1</b> Income and Expenditure</a></li>
+<li class="chapter" data-level="6.2" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#income-and-expenditure-disaggregated-by-cluster"><i class="fa fa-check"></i><b>6.2</b> Income and Expenditure, Disaggregated by Cluster</a></li>
+<li class="chapter" data-level="6.3" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#reporting-programme-indicators"><i class="fa fa-check"></i><b>6.3</b> Reporting Programme Indicators</a></li>
+<li class="chapter" data-level="6.4" data-path="core-pillars-and-codes-of-visuals-of-a-dashboard.html"><a href="core-pillars-and-codes-of-visuals-of-a-dashboard.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>6.4</b> Preparing Outcome-Activity Based X-Table</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -233,10 +252,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb13-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb13-6" aria-hidden="true" tabindex="-1"></a>DiamondsRenamed <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">&quot;renamed_table&quot;</span><span class="ot">=</span><span class="st">&quot;table&quot;</span>)</span>
 <span id="cb13-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(diamonds)</span></code></pre></div>
-<pre><code>##  [1] &quot;carat&quot;   &quot;cut&quot;     &quot;color&quot;   &quot;clarity&quot; &quot;depth&quot;   &quot;table&quot;   &quot;price&quot;   &quot;x&quot;       &quot;y&quot;       &quot;z&quot;       &quot;veg&quot;     &quot;Type&quot;</code></pre>
+<pre><code>##  [1] &quot;carat&quot;   &quot;cut&quot;     &quot;color&quot;   &quot;clarity&quot; &quot;depth&quot;   &quot;table&quot;   &quot;price&quot;   &quot;x&quot;       &quot;y&quot;       &quot;z&quot;       &quot;Type&quot;</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DiamondsRenamed)</span></code></pre></div>
-<pre><code>##  [1] &quot;carat&quot;         &quot;cut&quot;           &quot;color&quot;         &quot;clarity&quot;       &quot;depth&quot;         &quot;renamed_table&quot; &quot;price&quot;         &quot;x&quot;             &quot;y&quot;             &quot;z&quot;            
-## [11] &quot;veg&quot;           &quot;Type&quot;</code></pre>
+<pre><code>##  [1] &quot;carat&quot;         &quot;cut&quot;           &quot;color&quot;         &quot;clarity&quot;       &quot;depth&quot;         &quot;renamed_table&quot; &quot;price&quot;         &quot;x&quot;            
+##  [9] &quot;y&quot;             &quot;z&quot;             &quot;Type&quot;</code></pre>
 </div>
 <div id="converting-multiple-selections-into-dummy-variables" class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Converting Multiple Selections into Dummy Variables<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#converting-multiple-selections-into-dummy-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -267,23 +286,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-21"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb18-22"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(DiamondsRenamed)</span></code></pre></div>
 <pre><code>## Rows: 53,940
-## Columns: 16
-## $ carat                    &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22, 0.31, 0.20, 0.32, 0.30, 0.30, 0.30, 0.30, 0.30, 0.2…
-## $ cut                      &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, Very Good, Good, Ideal, Premium, Ideal, Premium, Prem…
-## $ color                    &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G, I, J, D, F, F, F, E, E, D, F, E, H, D, I, I, J, D, …
-## $ clarity                  &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2, I1, SI2, SI1, SI1, SI1, SI2, VS2, VS1, SI1, SI1, VVS…
-## $ depth                    &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4, 62.2, 60.2, 60.9, 62.0, 63.4, 63.8, 62.7, 63.3, 63.…
-## $ renamed_table            &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, 59, 56, 55, 57, 62, 62, 58, 57, 57, 61, 57, 57, 57, 5…
-## $ price                    &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 345, 348, 351, 351, 351, 351, 352, 353, 353, 353, 354,…
-## $ x                        &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88, 4.35, 3.79, 4.38, 4.31, 4.23, 4.23, 4.21, 4.26, 3.8…
-## $ y                        &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84, 4.37, 3.75, 4.42, 4.34, 4.29, 4.26, 4.27, 4.30, 3.9…
-## $ z                        &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33, 2.71, 2.27, 2.68, 2.68, 2.70, 2.71, 2.66, 2.71, 2.4…
-## $ veg                      &lt;chr&gt; &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal&quot;, &quot;Orginal…
-## $ Type                     &lt;chr&gt; &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Po…
-## $ MultSelec                &lt;chr&gt; &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection…
-## $ examplecolumn_Selection1 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
-## $ examplecolumn_Selection2 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
-## $ examplecolumn_Selection5 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …</code></pre>
+## Columns: 15
+## $ carat                    &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22, 0.31, 0.20, 0.32, 0.30, 0.30, 0.30…
+## $ cut                      &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, Very Good, Good, Ideal, Premium, Ide…
+## $ color                    &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G, I, J, D, F, F, F, E, E, D, F, E, H…
+## $ clarity                  &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2, I1, SI2, SI1, SI1, SI1, SI2, VS2, V…
+## $ depth                    &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4, 62.2, 60.2, 60.9, 62.0, 63.4, 63.8…
+## $ renamed_table            &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, 59, 56, 55, 57, 62, 62, 58, 57, 57, …
+## $ price                    &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 345, 348, 351, 351, 351, 351, 352, 35…
+## $ x                        &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88, 4.35, 3.79, 4.38, 4.31, 4.23, 4.23…
+## $ y                        &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84, 4.37, 3.75, 4.42, 4.34, 4.29, 4.26…
+## $ z                        &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33, 2.71, 2.27, 2.68, 2.68, 2.70, 2.71…
+## $ Type                     &lt;chr&gt; &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, …
+## $ MultSelec                &lt;chr&gt; &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection2,Selection5&quot;, &quot;Sel…
+## $ examplecolumn_Selection1 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ examplecolumn_Selection2 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ examplecolumn_Selection5 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…</code></pre>
 </div>
 <div id="missing-values" class="section level3 hasAnchor" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Missing Values<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -296,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lets see if diamonds data have some missing values here and there.</span></span>
 <span id="cb20-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_dat</span>(diamonds)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>There are no missing values in diamonds data. One of the amazing thing of this visual is it gives you types and structures of the each variable. This thing sure is an art! Amazing! Lets remove some (put some NA values intentionally) values and see that amazing visual again.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Required packages for adding random NAs to data is missMethods.</span></span>
 <span id="cb21-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(missMethods)</span>
@@ -305,18 +323,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-5" aria-hidden="true" tabindex="-1"></a>diamonds_missing <span class="ot">&lt;-</span> <span class="fu">delete_MCAR</span>(diamonds, <span class="at">p =</span> <span class="fl">0.25</span>)</span>
 <span id="cb21-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_dat</span>(diamonds_missing)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>So now, grey lines in the visual reflects NAs. Amazing! Lets check the percentage of missing now:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Percentage of missing by variable.</span></span>
 <span id="cb22-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(diamonds_missing)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>Amazing. delete_MCAR function is king. You can see %25 missing randomly from each column. To have a better knowledge about these operations please visit: <a href="https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html" class="uri">https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html</a></p>
 <p><strong>Missing frequency.</strong></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_var</span>(diamonds_missing) <span class="sc">+</span> <span class="fu">theme_bw</span>() </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p><strong>Missing frequency disaggregated by categorical variable.</strong></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_var</span>(diamonds_missing, <span class="at">facet =</span> cut)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 </div>
 <div id="imputation-of-missing-values" class="section level4 hasAnchor" number="4.2.3.2">
 <h4><span class="header-section-number">4.2.3.2</span> Imputation of Missing Values<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#imputation-of-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -329,21 +347,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 53,940 × 7
 ##    carat depth table price     x     y     z
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  0.23  61.5    NA   326  3.95 NA     2.43
-##  2  0.21  59.8    61    NA  3.89  3.84  2.31
-##  3  0.23  56.9    65   327 NA     4.07  2.31
-##  4 NA     62.4    58   334  4.2   4.23  2.63
-##  5 NA     63.3    58   335  4.34 NA    NA   
-##  6  0.24  62.8    NA   336 NA    NA    NA   
-##  7 NA     62.3    57    NA  3.95 NA    NA   
-##  8 NA     61.9    55   337  4.07 NA     2.53
-##  9 NA     NA      61   337  3.87  3.78  2.49
-## 10  0.23  59.4    61   338  4     4.05  2.39
+##  1  0.23  61.5    55   326  3.95  3.98  2.43
+##  2  0.21  59.8    61   326 NA     3.84 NA   
+##  3  0.23  56.9    65    NA NA    NA     2.31
+##  4  0.29  NA      NA   334  4.2   4.23 NA   
+##  5  0.31  63.3    NA   335  4.34  4.35  2.75
+##  6  0.24  62.8    NA   336  3.94  3.96 NA   
+##  7  0.24  62.3    57   336 NA     3.98 NA   
+##  8  0.26  61.9    55   337  4.07  4.11  2.53
+##  9  0.22  NA      61    NA  3.87 NA     2.49
+## 10  0.23  59.4    61   338  4    NA     2.39
 ## # … with 53,930 more rows</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Fill NA values with zero only for numeric variables.</span></span>
 <span id="cb27-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setnafill</span>(diamonds_missing[ , purrr<span class="sc">::</span><span class="fu">map_lgl</span>(diamonds_missing, is.numeric)], <span class="at">fill=</span><span class="dv">0</span>)</span>
 <span id="cb27-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(diamonds_missing)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Now, we do not have any missing values for numeric columns as they are converted to (filled with) zeros. Job well done! setnafill is a great piece of function that you can use, please do check it further.</p>
 </div>
 <div id="imputation-of-missing-values-with-regression" class="section level4 hasAnchor" number="4.2.3.3">
@@ -394,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb32-2" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fu">imputate_outlier</span>(diamonds, price)</span>
 <span id="cb32-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 </div>
 </div>
 <div id="exploratory-data-analysis-eda" class="section level2 hasAnchor" number="4.3">
@@ -408,16 +426,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Outlier densities and more…</li>
 </ul>
 <p>Here is the deal. These outputs are very long consumes time to read it all. But, I strongly recommend creating and reading these reports. If you go somewhere as delegate and your task is to writing a report over monitoring survey data, this exercise allows you to intimate the data, all of the variables and their distributions. Spending an hour with this output will make you to have a way more efficient data analysis step.</p>
-<hr />
 <p>ExpReport(diamonds, op_file = ‘smarteda.html’)</p>
 <p>diagnose_report(diamonds)</p>
-<p>library(dlookr)
-diamonds %&gt;%
-eda_report(
-target = clarity,
-output_format = “html”,
-output_file = “EDA_diamonds.html”)
-********</p>
+<p>library(dlookr)</p>
+<p>diamonds %&gt;%</p>
+<p>eda_report(</p>
+<pre><code>target        = clarity, 
+
+output_format = &quot;html&quot;, 
+
+output_file   = &quot;EDA_diamonds.html&quot;)</code></pre>
 <p><strong>Kindly run this code and check output. It will be saved as “EDA_diamonds.html”</strong></p>
 </div>
 <div id="designing-the-logframe---calculation-of-exampled-indicators" class="section level2 hasAnchor" number="4.4">
@@ -425,93 +443,95 @@ output_file = “EDA_diamonds.html”)
 <p>Through this page, you will see basic logframe indicators of cash-based interventions. As mentioned, these indicators are accepted generally, including ECHO. I will also put documentations about mentioned indicators. Personally, I do love WFP VAM Resource center. I would recommend to check this amazing cookbook as well: <a href="https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook" class="uri">https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook</a></p>
 <p>Also, it would be nice to go and check <em><a href="https://www.indikit.net/" class="uri">https://www.indikit.net/</a></em> where you can find a detailed explanations and examples of most of the humanitarian indicators.</p>
 <p>Disaggregation of indicators are important. Here, disaggregation only made for resilience capacity score index to show how I personally do it.</p>
+<p>Visualization of indicators and their codings will be shared in <strong>“dashboards”</strong> section.</p>
 <div id="rcsi-reduced-coping-strategy-index" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> RCSI (Reduced Coping Strategy Index)<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#rcsi-reduced-coping-strategy-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs" class="uri">https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs</a></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb33-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>rCSI <span class="ot">&lt;-</span> PAB<span class="sc">$</span>cope_lessexpfood <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span></span>
-<span id="cb33-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb33-2" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_borrowfood <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span></span>
-<span id="cb33-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb33-3" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_reduceportionsize <span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span></span>
-<span id="cb33-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb33-4" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_reduceadultfood <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb33-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb33-5" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_reducemealno <span class="sc">*</span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>rCSI <span class="ot">&lt;-</span> PAB<span class="sc">$</span>cope_lessexpfood <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span></span>
+<span id="cb34-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-2" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_borrowfood <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span></span>
+<span id="cb34-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-3" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_reduceportionsize <span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span></span>
+<span id="cb34-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-4" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_reduceadultfood <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb34-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-5" aria-hidden="true" tabindex="-1"></a>            PAB<span class="sc">$</span>cope_reducemealno <span class="sc">*</span><span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="fcs-food-consumption-score" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> FCS (Food Consumption Score)<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#fcs-food-consumption-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://resources.vam.wfp.org/data-analysis/quantitative/food-security/food-consumption-score" class="uri">https://resources.vam.wfp.org/data-analysis/quantitative/food-security/food-consumption-score</a></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>FCS <span class="ot">&lt;-</span> PAB<span class="sc">$</span>cons_cereal<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_pulses<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_veg<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_fruit<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> </span>
-<span id="cb34-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-2" aria-hidden="true" tabindex="-1"></a>           PAB<span class="sc">$</span>cons_meat<span class="sc">*</span><span class="dv">4</span>   <span class="sc">+</span> PAB<span class="sc">$</span>cons_dairy<span class="sc">*</span><span class="dv">4</span>  <span class="sc">+</span> PAB<span class="sc">$</span>cons_sugar<span class="sc">*</span><span class="fl">0.5</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_oil<span class="sc">*</span><span class="fl">0.5</span></span>
-<span id="cb34-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-4" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>FCG <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(PAB<span class="sc">$</span>FCS <span class="sc">&lt;=</span><span class="dv">28</span>,<span class="st">&quot;PoorConsumption&quot;</span>, <span class="fu">ifelse</span>(PAB<span class="sc">$</span>FCS <span class="sc">&lt;</span><span class="dv">42</span>, <span class="st">&quot;Borderline&quot;</span>,<span class="st">&quot;AcceptableConsumption&quot;</span>))</span>
-<span id="cb34-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-6" aria-hidden="true" tabindex="-1"></a>                  </span>
-<span id="cb34-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(PAB<span class="sc">$</span>FCG))<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb35-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>FCS <span class="ot">&lt;-</span> PAB<span class="sc">$</span>cons_cereal<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_pulses<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_veg<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_fruit<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb35-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb35-2" aria-hidden="true" tabindex="-1"></a>           PAB<span class="sc">$</span>cons_meat<span class="sc">*</span><span class="dv">4</span>   <span class="sc">+</span> PAB<span class="sc">$</span>cons_dairy<span class="sc">*</span><span class="dv">4</span>  <span class="sc">+</span> PAB<span class="sc">$</span>cons_sugar<span class="sc">*</span><span class="fl">0.5</span> <span class="sc">+</span> PAB<span class="sc">$</span>cons_oil<span class="sc">*</span><span class="fl">0.5</span></span>
+<span id="cb35-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb35-4" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>FCG <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(PAB<span class="sc">$</span>FCS <span class="sc">&lt;=</span><span class="dv">28</span>,<span class="st">&quot;PoorConsumption&quot;</span>, <span class="fu">ifelse</span>(PAB<span class="sc">$</span>FCS <span class="sc">&lt;</span><span class="dv">42</span>, <span class="st">&quot;Borderline&quot;</span>,<span class="st">&quot;AcceptableConsumption&quot;</span>))</span>
+<span id="cb35-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb35-6" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb35-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(PAB<span class="sc">$</span>FCG))<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## 
 ## AcceptableConsumption            Borderline       PoorConsumption 
 ##              43.03109              29.43005              27.53886</code></pre>
 </div>
 <div id="lcsi-livelihood-coping-strategy-index" class="section level3 hasAnchor" number="4.4.3">
 <h3><span class="header-section-number">4.4.3</span> LCSI (Livelihood Coping Strategy Index)<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#lcsi-livelihood-coping-strategy-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract</span></span>
-<span id="cb36-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-2" aria-hidden="true" tabindex="-1"></a>livelihoodcoping <span class="ot">&lt;-</span> PAB <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;lhood_&quot;</span>))</span>
-<span id="cb36-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Recode</span></span>
-<span id="cb36-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-5" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">names</span>(livelihoodcoping)</span>
-<span id="cb36-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-6" aria-hidden="true" tabindex="-1"></a>livelihoodcoping <span class="ot">&lt;-</span> livelihoodcoping <span class="sc">%&gt;%</span></span>
-<span id="cb36-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-7" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(vars), <span class="sc">~</span> <span class="fu">recode</span>(., <span class="st">&quot;No&quot;</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="st">&quot;Yes&quot;</span> <span class="ot">=</span> <span class="dv">1</span>)))</span>
-<span id="cb36-8"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-9"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#LCSI Calculation</span></span>
-<span id="cb36-10"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-10" aria-hidden="true" tabindex="-1"></a>livelihoodcoping<span class="sc">$</span>LCSI <span class="ot">&lt;-</span>  </span>
-<span id="cb36-11"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Stress</span></span>
-<span id="cb36-12"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-12" aria-hidden="true" tabindex="-1"></a>(livelihoodcoping<span class="sc">$</span>lhood_ST_soldhhasset <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_ST_spentsavings <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_ST_foodcredit <span class="sc">+</span></span>
-<span id="cb36-13"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-13" aria-hidden="true" tabindex="-1"></a>livelihoodcoping<span class="sc">$</span>lhood_ST_borrowmoney <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_ST_unusualfood ) <span class="sc">+</span> </span>
-<span id="cb36-14"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Crisis</span></span>
-<span id="cb36-15"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-15" aria-hidden="true" tabindex="-1"></a>(livelihoodcoping<span class="sc">$</span>lhood_CR_soldprodasset <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_CR_noschool <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_CR_lesshealth <span class="sc">+</span></span>
-<span id="cb36-16"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-16" aria-hidden="true" tabindex="-1"></a>livelihoodcoping<span class="sc">$</span>lhood_CR_lessedu) <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span></span>
-<span id="cb36-17"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Emergency</span></span>
-<span id="cb36-18"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-18" aria-hidden="true" tabindex="-1"></a>(livelihoodcoping<span class="sc">$</span>lhood_EM_hhmove <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_EM_childwork <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_EM_beg <span class="sc">+</span>livelihoodcoping<span class="sc">$</span>lhood_EM_return) <span class="sc">*</span> <span class="dv">3</span></span>
-<span id="cb36-19"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-20"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-21"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-22"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb36-22" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>LCSI <span class="ot">&lt;-</span> livelihoodcoping<span class="sc">$</span>LCSI</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract</span></span>
+<span id="cb37-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-2" aria-hidden="true" tabindex="-1"></a>livelihoodcoping <span class="ot">&lt;-</span> PAB <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(dplyr<span class="sc">::</span><span class="fu">starts_with</span>(<span class="st">&quot;lhood_&quot;</span>))</span>
+<span id="cb37-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Recode</span></span>
+<span id="cb37-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-5" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">names</span>(livelihoodcoping)</span>
+<span id="cb37-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-6" aria-hidden="true" tabindex="-1"></a>livelihoodcoping <span class="ot">&lt;-</span> livelihoodcoping <span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-7" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(vars), <span class="sc">~</span> <span class="fu">recode</span>(., <span class="st">&quot;No&quot;</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="st">&quot;Yes&quot;</span> <span class="ot">=</span> <span class="dv">1</span>)))</span>
+<span id="cb37-8"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#LCSI Calculation</span></span>
+<span id="cb37-10"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-10" aria-hidden="true" tabindex="-1"></a>livelihoodcoping<span class="sc">$</span>LCSI <span class="ot">&lt;-</span>  </span>
+<span id="cb37-11"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Stress</span></span>
+<span id="cb37-12"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-12" aria-hidden="true" tabindex="-1"></a>(livelihoodcoping<span class="sc">$</span>lhood_ST_soldhhasset <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_ST_spentsavings <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_ST_foodcredit <span class="sc">+</span></span>
+<span id="cb37-13"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-13" aria-hidden="true" tabindex="-1"></a>livelihoodcoping<span class="sc">$</span>lhood_ST_borrowmoney <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_ST_unusualfood ) <span class="sc">+</span> </span>
+<span id="cb37-14"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Crisis</span></span>
+<span id="cb37-15"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-15" aria-hidden="true" tabindex="-1"></a>(livelihoodcoping<span class="sc">$</span>lhood_CR_soldprodasset <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_CR_noschool <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_CR_lesshealth <span class="sc">+</span></span>
+<span id="cb37-16"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-16" aria-hidden="true" tabindex="-1"></a>livelihoodcoping<span class="sc">$</span>lhood_CR_lessedu) <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span></span>
+<span id="cb37-17"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Emergency</span></span>
+<span id="cb37-18"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-18" aria-hidden="true" tabindex="-1"></a>(livelihoodcoping<span class="sc">$</span>lhood_EM_hhmove <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_EM_childwork <span class="sc">+</span> livelihoodcoping<span class="sc">$</span>lhood_EM_beg <span class="sc">+</span>livelihoodcoping<span class="sc">$</span>lhood_EM_return) <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb37-19"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-20"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-21"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-22" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>LCSI <span class="ot">&lt;-</span> livelihoodcoping<span class="sc">$</span>LCSI</span></code></pre></div>
 </div>
 <div id="resilience-capacity-score" class="section level3 hasAnchor" number="4.4.4">
 <h3><span class="header-section-number">4.4.4</span> Resilience Capacity Score<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#resilience-capacity-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs" class="uri">https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs</a></p>
 <div id="calculation-of-rcs" class="section level4 hasAnchor" number="4.4.4.1">
 <h4><span class="header-section-number">4.4.4.1</span> Calculation of RCS<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#calculation-of-rcs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="ot">&lt;-</span> PAB <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb37-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">RCS =</span> <span class="fu">sum</span>(<span class="fu">c</span>(Anticipatory <span class="sc">+</span> Absorptive <span class="sc">+</span> Transformative <span class="sc">+</span> Adaptive <span class="sc">+</span> Financial <span class="sc">+</span> Social <span class="sc">+</span></span>
-<span id="cb37-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-5" aria-hidden="true" tabindex="-1"></a>          Institutional <span class="sc">+</span> Humancapital <span class="sc">+</span> Information)))</span>
-<span id="cb37-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(PAB<span class="sc">$</span>RCS)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb38-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="ot">&lt;-</span> PAB <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">RCS =</span> <span class="fu">sum</span>(<span class="fu">c</span>(Anticipatory <span class="sc">+</span> Absorptive <span class="sc">+</span> Transformative <span class="sc">+</span> Adaptive <span class="sc">+</span> Financial <span class="sc">+</span> Social <span class="sc">+</span></span>
+<span id="cb38-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb38-5" aria-hidden="true" tabindex="-1"></a>          Institutional <span class="sc">+</span> Humancapital <span class="sc">+</span> Information)))</span>
+<span id="cb38-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(PAB<span class="sc">$</span>RCS)</span></code></pre></div>
 <pre><code>## [1] 28.98212</code></pre>
 </div>
 <div id="normalization-of-rcs" class="section level4 hasAnchor" number="4.4.4.2">
 <h4><span class="header-section-number">4.4.4.2</span> Normalization of RCS<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#normalization-of-rcs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb39-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>RCSX <span class="ot">&lt;-</span> (((PAB<span class="sc">$</span>RCS <span class="sc">/</span><span class="dv">9</span>) <span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span> (<span class="dv">5-1</span>)) <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb39-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(PAB<span class="sc">$</span>RCSX)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb40-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>RCSX <span class="ot">&lt;-</span> (((PAB<span class="sc">$</span>RCS <span class="sc">/</span><span class="dv">9</span>) <span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span> (<span class="dv">5-1</span>)) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb40-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(PAB<span class="sc">$</span>RCSX)</span></code></pre></div>
 <pre><code>## [1] 55.5059</code></pre>
 </div>
 <div id="categorization-of-rcs" class="section level4 hasAnchor" number="4.4.4.3">
 <h4><span class="header-section-number">4.4.4.3</span> Categorization of RCS<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#categorization-of-rcs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb41-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>RCSG <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(PAB<span class="sc">$</span>RCSX <span class="sc">&lt;</span><span class="dv">33</span>,<span class="st">&quot;LOWRCS&quot;</span>,</span>
-<span id="cb41-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ifelse</span>(PAB<span class="sc">$</span>RCSX <span class="sc">&lt;</span><span class="dv">66</span>, <span class="st">&quot;MediumRCS&quot;</span>,<span class="st">&quot;HighRCS&quot;</span>))</span>
-<span id="cb41-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PAB<span class="sc">$</span>RCSG)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb42-1" aria-hidden="true" tabindex="-1"></a>PAB<span class="sc">$</span>RCSG <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(PAB<span class="sc">$</span>RCSX <span class="sc">&lt;</span><span class="dv">33</span>,<span class="st">&quot;LOWRCS&quot;</span>,</span>
+<span id="cb42-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ifelse</span>(PAB<span class="sc">$</span>RCSX <span class="sc">&lt;</span><span class="dv">66</span>, <span class="st">&quot;MediumRCS&quot;</span>,<span class="st">&quot;HighRCS&quot;</span>))</span>
+<span id="cb42-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PAB<span class="sc">$</span>RCSG)</span></code></pre></div>
 <pre><code>## 
 ##   HighRCS    LOWRCS MediumRCS 
 ##       759        74      3027</code></pre>
 </div>
 <div id="percentage-of-groups" class="section level4 hasAnchor" number="4.4.4.4">
 <h4><span class="header-section-number">4.4.4.4</span> Percentage of Groups<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#percentage-of-groups" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(PAB<span class="sc">$</span>RCSG)) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(PAB<span class="sc">$</span>RCSG)) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
 <pre><code>## 
 ##   HighRCS    LOWRCS MediumRCS 
 ## 19.663212  1.917098 78.419689</code></pre>
 </div>
 <div id="disaggregation-by-eligibility" class="section level4 hasAnchor" number="4.4.4.5">
 <h4><span class="header-section-number">4.4.4.5</span> Disaggregation by Eligibility<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#disaggregation-by-eligibility" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb45-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(ESSN_Status,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb46-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(ESSN_Status,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ## # Groups:   ESSN_Status [2]
 ##   ESSN_Status     Control  `mean(RCSX)`
@@ -523,7 +543,7 @@ output_file = “EDA_diamonds.html”)
 </div>
 <div id="disaggregation-by-genderhhh" class="section level4 hasAnchor" number="4.4.4.6">
 <h4><span class="header-section-number">4.4.4.6</span> Disaggregation by GenderHHH<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#disaggregation-by-genderhhh" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb47-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(gender_hh,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb48-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(gender_hh,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ## # Groups:   gender_hh [2]
 ##   gender_hh Control  `mean(RCSX)`
@@ -535,7 +555,7 @@ output_file = “EDA_diamonds.html”)
 </div>
 <div id="disaggregation-by-stratum" class="section level4 hasAnchor" number="4.4.4.7">
 <h4><span class="header-section-number">4.4.4.7</span> Disaggregation by Stratum<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#disaggregation-by-stratum" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb49-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(stratum,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb50-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(stratum,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 3
 ## # Groups:   stratum [5]
 ##    stratum         Control  `mean(RCSX)`
@@ -553,11 +573,11 @@ output_file = “EDA_diamonds.html”)
 </div>
 <div id="individual-statement-score-calculation" class="section level4 hasAnchor" number="4.4.4.8">
 <h4><span class="header-section-number">4.4.4.8</span> Individual Statement Score Calculation<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#individual-statement-score-calculation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb51-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span>      <span class="fu">colMeans</span>(<span class="fu">subset</span>(PAB, <span class="at">select =</span> <span class="fu">c</span>(Anticipatory , Absorptive , Transformative , Adaptive , Financial, Social ,</span>
-<span id="cb51-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb51-2" aria-hidden="true" tabindex="-1"></a>          Institutional ,Humancapital , Information)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb52-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(a)</span>
-<span id="cb52-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(a) <span class="ot">&lt;-</span> <span class="st">&quot;AverageValue&quot;</span></span>
-<span id="cb52-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb52-3" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb52-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span>      <span class="fu">colMeans</span>(<span class="fu">subset</span>(PAB, <span class="at">select =</span> <span class="fu">c</span>(Anticipatory , Absorptive , Transformative , Adaptive , Financial, Social ,</span>
+<span id="cb52-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb52-2" aria-hidden="true" tabindex="-1"></a>          Institutional ,Humancapital , Information)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb53-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(a)</span>
+<span id="cb53-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(a) <span class="ot">&lt;-</span> <span class="st">&quot;AverageValue&quot;</span></span>
+<span id="cb53-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb53-3" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
 <pre><code>##                AverageValue
 ## Anticipatory       5.000000
 ## Absorptive         2.996632
@@ -569,41 +589,37 @@ output_file = “EDA_diamonds.html”)
 ## Humancapital       2.948705
 ## Information        3.040415</code></pre>
 </div>
-<div id="rcs-data-viz" class="section level4 hasAnchor" number="4.4.4.9">
-<h4><span class="header-section-number">4.4.4.9</span> RCS Data Viz<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#rcs-data-viz" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div id="spider-map" class="section level5 hasAnchor" number="4.4.4.9.1">
-<h5><span class="header-section-number">4.4.4.9.1</span> Spider Map<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#spider-map" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><strong>Resilience Capacities Spider Map</strong></p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-1" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Anticipatory =</span> <span class="fu">mean</span>(Anticipatory),</span>
-<span id="cb54-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="at">Absorptive   =</span> <span class="fu">mean</span>(Absorptive         ),</span>
-<span id="cb54-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-3" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="at">Transformative =</span> <span class="fu">mean</span>(Transformative     ),</span>
-<span id="cb54-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-4" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="at">Adaptive =</span> <span class="fu">mean</span>(Adaptive           ))</span>
-<span id="cb54-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-5" aria-hidden="true" tabindex="-1"></a>sRowMax <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)</span>
-<span id="cb54-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-6" aria-hidden="true" tabindex="-1"></a>sRowMin <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb54-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-8"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-9"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-9" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> <span class="fu">rbind</span>(sResilienceCapacities, sRowMax, sRowMin)</span>
-<span id="cb54-10"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-10" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span>  <span class="fu">as.data.frame</span>(sResilienceCapacities)</span>
-<span id="cb54-11"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-11" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(sResilienceCapacities[,<span class="sc">-</span><span class="dv">1</span>], <span class="at">row.names=</span>sResilienceCapacities[,<span class="dv">1</span>])</span>
-<span id="cb54-12"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-12" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> sResilienceCapacities[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>),] </span>
-<span id="cb54-13"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-14"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-14" aria-hidden="true" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>),</span>
-<span id="cb54-15"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-15" aria-hidden="true" tabindex="-1"></a>           <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
-<span id="cb54-16"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-17"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-18"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill colors</span></span>
-<span id="cb54-19"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-19" aria-hidden="true" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>),</span>
-<span id="cb54-20"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-20" aria-hidden="true" tabindex="-1"></a>           <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
-<span id="cb54-21"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-22"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-22" aria-hidden="true" tabindex="-1"></a><span class="fu">radarchart</span>(sResilienceCapacities,</span>
-<span id="cb54-23"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">cglty =</span> <span class="dv">1</span>,       <span class="co"># Grid line type</span></span>
-<span id="cb54-24"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">cglcol =</span> <span class="st">&quot;gray&quot;</span>, <span class="co"># Grid line color</span></span>
-<span id="cb54-25"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">pcol =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,      <span class="co"># Color for each line</span></span>
-<span id="cb54-26"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">plwd =</span> <span class="dv">2</span>,        <span class="co"># Width for each line</span></span>
-<span id="cb54-27"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">plty =</span> <span class="dv">1</span>,        <span class="co"># Line type for each line</span></span>
-<span id="cb54-28"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb54-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">pfcol =</span> areas)   <span class="co"># Color of the areas  </span></span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
-</div>
+<div id="resilience-capacity-score-spider-map" class="section level4 hasAnchor" number="4.4.4.9">
+<h4><span class="header-section-number">4.4.4.9</span> Resilience Capacity Score Spider Map<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#resilience-capacity-score-spider-map" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-1" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Anticipatory =</span> <span class="fu">mean</span>(Anticipatory),</span>
+<span id="cb55-2"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-2" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="at">Absorptive   =</span> <span class="fu">mean</span>(Absorptive         ),</span>
+<span id="cb55-3"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-3" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="at">Transformative =</span> <span class="fu">mean</span>(Transformative     ),</span>
+<span id="cb55-4"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-4" aria-hidden="true" tabindex="-1"></a>                                                                 <span class="at">Adaptive =</span> <span class="fu">mean</span>(Adaptive           ))</span>
+<span id="cb55-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-5" aria-hidden="true" tabindex="-1"></a>sRowMax <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb55-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-6" aria-hidden="true" tabindex="-1"></a>sRowMin <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb55-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-9"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-9" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> <span class="fu">rbind</span>(sResilienceCapacities, sRowMax, sRowMin)</span>
+<span id="cb55-10"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-10" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span>  <span class="fu">as.data.frame</span>(sResilienceCapacities)</span>
+<span id="cb55-11"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-11" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(sResilienceCapacities[,<span class="sc">-</span><span class="dv">1</span>], <span class="at">row.names=</span>sResilienceCapacities[,<span class="dv">1</span>])</span>
+<span id="cb55-12"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-12" aria-hidden="true" tabindex="-1"></a>sResilienceCapacities <span class="ot">&lt;-</span> sResilienceCapacities[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>),] </span>
+<span id="cb55-13"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-14"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-14" aria-hidden="true" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb55-15"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-15" aria-hidden="true" tabindex="-1"></a>           <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
+<span id="cb55-16"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-17"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-18"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill colors</span></span>
+<span id="cb55-19"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-19" aria-hidden="true" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb55-20"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-20" aria-hidden="true" tabindex="-1"></a>           <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
+<span id="cb55-21"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-22"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-22" aria-hidden="true" tabindex="-1"></a><span class="fu">radarchart</span>(sResilienceCapacities,</span>
+<span id="cb55-23"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">cglty =</span> <span class="dv">1</span>,       <span class="co"># Grid line type</span></span>
+<span id="cb55-24"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">cglcol =</span> <span class="st">&quot;gray&quot;</span>, <span class="co"># Grid line color</span></span>
+<span id="cb55-25"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">pcol =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,      <span class="co"># Color for each line</span></span>
+<span id="cb55-26"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">plwd =</span> <span class="dv">2</span>,        <span class="co"># Width for each line</span></span>
+<span id="cb55-27"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">plty =</span> <span class="dv">1</span>,        <span class="co"># Line type for each line</span></span>
+<span id="cb55-28"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb55-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">pfcol =</span> areas)   <span class="co"># Color of the areas  </span></span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 </div>
 </div>
 <div id="other-smart-logframe-indicators-for-cva" class="section level3 hasAnchor" number="4.4.5">
@@ -614,8 +630,10 @@ output_file = “EDA_diamonds.html”)
 <li>Exclusion - inclusion errors</li>
 <li>Resilience scores</li>
 <li>Beneficiary perception positive ratios</li>
-<li>ECMEN based indicators (please kindly google this aspect, very important)</li>
+<li>ECMEN based indicators (please kindly Google this aspect, very important)</li>
 </ul>
+<p>Check more indicators at: <a href="https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook" class="uri">https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook</a></p>
+<p>Check more indicators at: <a href="https://www.indikit.net/" class="uri">https://www.indikit.net/</a></p>
 
 </div>
 </div>

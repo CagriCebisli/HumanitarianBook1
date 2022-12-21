@@ -1,5 +1,4 @@
-```{r,warning=FALSE,error=FALSE,message=FALSE,echo=FALSE}
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```{r,warning=FALSE,error=FALSE,message=FALSE,echo=FALSE,include=FALSE}
 library(readxl)
 library(xlsx)
 library(dplyr)
@@ -10,8 +9,10 @@ library(simputation)
 library(fmsb)
 library(rstatix)
 library(ggpubr)
-PAB<- read_xlsx("C:/R Working Directory/R Bookdown/HumanitarianBook1/Dummy Data.xlsx",sheet = "RawPDM")
+#PAB<- read_xlsx("C:/R Working Directory/R Bookdown/HumanitarianBook1/Dummy Data.xlsx",sheet = "RawPDM")
+PAB<- read_xlsx("Dummy Data.xlsx",sheet = "RawPDM")
 ```
+
 
 # Descriptive - Primelinary Analysis (Exploratory Data Analysis - EDA)
 
@@ -218,18 +219,26 @@ There are some really cool packages for EDA in R. These packages-codings below g
 
 Here is the deal. These outputs are very long consumes time to read it all. But, I strongly recommend creating and reading these reports. If you go somewhere as delegate and your task is to writing a report over monitoring survey data, this exercise allows you to intimate the data, all of the variables and their distributions. Spending an hour with this output will make you to have a way more efficient data analysis step.
 
-********
+
+
 ExpReport(diamonds, op_file = 'smarteda.html')
 
 diagnose_report(diamonds)
 
 library(dlookr)
+
 diamonds %>%
+
   eda_report(
+  
     target        = clarity, 
+    
     output_format = "html", 
+    
     output_file   = "EDA_diamonds.html")
-********
+    
+
+
 
 **Kindly run this code and check output. It will be saved as "EDA_diamonds.html"**
 
@@ -241,6 +250,9 @@ Through this page, you will see basic logframe indicators of cash-based interven
 Also, it would be nice to go and check *https://www.indikit.net/* where you can find a detailed explanations and examples of most of the humanitarian indicators.
 
 Disaggregation of indicators are important. Here, disaggregation only made for resilience capacity score index to show how I personally do it. 
+
+
+Visualization of indicators and their codings will be shared in **"dashboards"** section.
 
 ###   RCSI (Reduced Coping Strategy Index)
 
@@ -273,7 +285,7 @@ prop.table(table(PAB$FCG))*100
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 #Extract
-livelihoodcoping <- PAB %>% select(starts_with("lhood_"))
+livelihoodcoping <- PAB %>% dplyr::select(dplyr::starts_with("lhood_"))
 
 #Recode
 vars <- names(livelihoodcoping)
@@ -297,6 +309,8 @@ PAB$LCSI <- livelihoodcoping$LCSI
 ```
 
 ### Resilience Capacity Score
+
+https://resources.vam.wfp.org/data-analysis/quantitative/resilience/resilience-capacity-score-rcs
 
 #### Calculation of RCS
 
@@ -364,11 +378,7 @@ colnames(a) <- "AverageValue"
 a
 ```
 
-#### RCS Data Viz
-
-##### Spider Map
-
-**Resilience Capacities Spider Map**
+#### Resilience Capacity Score Spider Map
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 sResilienceCapacities <- PAB %>% group_by(Control) %>% summarise(Anticipatory = mean(Anticipatory),
@@ -409,7 +419,11 @@ radarchart(sResilienceCapacities,
 -   Exclusion - inclusion errors
 -   Resilience scores
 -   Beneficiary perception positive ratios 
--   ECMEN based indicators (please kindly google this aspect, very important)
+-   ECMEN based indicators (please kindly Google this aspect, very important)
+
+Check more indicators at: https://www.icrc.org/en/publication/4505-economic-security-indicators-cookbook
+
+Check more indicators at: https://www.indikit.net/
 
 
 

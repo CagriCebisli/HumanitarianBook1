@@ -73,7 +73,7 @@ This book mainly runs in two pillars; i) Monitoring and evaluation design in hum
 Data sets will be random, the ones comes with packages. Anyhow, for different exercises I will be using random data sets from some packages but main concept will be same with humanitarian data. Here, mentality of tidy data comes into play, where every row stands for analysis unit and every column stands for variables. 
 
 
-![Structure of the Book](C:\R Working Directory\R Bookdown\HumanitarianBook1\BookStructure.JPG)
+![Structure of the Book](BookStructure.JPG)
 
 
 
@@ -82,11 +82,11 @@ Data sets will be random, the ones comes with packages. Anyhow, for different ex
 
 Before moving forward, a basic set of project-monitoring definitions could be useful. There are several types of monitoring in any programme such as; process monitoring, results monitoring, context monitoring, risk monitoring, impact monitoring etc. Monitoring4CTP, a monitoring guidance for CTP made by USAid and CALP, is a fruitful and well-tailored document. I strongly advise this document to anyone who works in humanitarian sector.
 
-![Project Monitoring by CALP](C:\R Working Directory\R Bookdown\HumanitarianBook1\Project Monitoring.JPG)
+![Project Monitoring by CALP](Project Monitoring.JPG)
 
 As per monitoring type, there are several method intersections. Yet, the data skills comes into play when we ask evaluation questions. An amazing visual prepared by IFRC, we can clearly see those steps and questions. 
 
-![Project Monitoring by CALP](C:\R Working Directory\R Bookdown\HumanitarianBook1\Evaluation and Logframe.JPG)
+![Project Monitoring by CALP](Evaluation and Logframe.JPG)
 
 Yes, all good, but why M&E is important ?
 
@@ -129,11 +129,11 @@ In humanitarian sector research design is actually links with monitoring and eva
 
 Through logframe, there will be several indicators that is measured by M&E teams. Team must tailor surveys to collect these indicators. There are several different methods of reflecting a log frame, yet, the one I propose is below. This version reflects anything needed; a description of indicator, data source, baseline, target, data source, frequency, main responsible, and most importantly, assumption and risks.
 
-![Logframe overlook, kindly zoom in to read, sorry!](C:\R Working Directory\R Bookdown\HumanitarianBook1\Logframe Indicators.JPG)
+![Logframe overlook, kindly zoom in to read, sorry!](Logframe Indicators.JPG)
 
 Lets say, you are an M&E specialist to a humanitarian programme. Donor asks you to use SMART indicators (please do google it, very useful topic). Then, with the blessings of donor, or in your proposal to a donor, you reflect that your indicators will be rCSI and FCS. Second step is to designing your PDMs. rCSI is an indicator that builds over 5 questions. Thus, you have to have these questions to calculate and report rCSI. We will dig more into these indicators, how to calculate them with R in the following sessions. In a nutshell, questionnaire design orients around logframe indicators. Simple as that. 
 
-![Calculation of rCSI](C:\R Working Directory\R Bookdown\HumanitarianBook1\rCSI Indicator.JPG)
+![Calculation of rCSI](rCSI Indicator.JPG)
 
 Additional parts of questionnaire design comes from analyst. If analyst wants to conduct a vulnerability study depending on multi-dimensional aspect, that includes household assets, these can be added as wished. So any metric compounds of set of questions can be added to the questionnaire. There are two things analyst must be careful about;
 
@@ -179,7 +179,7 @@ Keep in mind that one survey can have several different target populations. For 
 
 Please kindly refer to document mentioned above. Here, I will be giving some tips and tricks from my personal experiences and try to reflect how I do things operationally, in a most simplified way.
 
-![Sampling Roadmap](C:\R Working Directory\R Bookdown\HumanitarianBook1\Sampling.JPG)
+![Sampling Roadmap](Sampling.JPG)
 
 ###   Analysis Unit
 
@@ -270,7 +270,7 @@ theme_ipsum()
 
 Key differences between sample and population happens due to we give same importance to each cut category. But in reality, their distribution (their frequency-density in population) is different, yet we did draw 780 sample from each of them. This is where one must apply weights in order to balance the outcomes and to have better accuracy while making assumptions of population values. Weights can be calculated as: each categories' sample size ratio (# of survey of each category divided by total sample-survey number) divided by each categories' population size ratio (frequency of each category divided by total population number) will give you weights. 
 
-**PUT WEIGHT TABLE HERE**
+![Calculating Sample Weights](SampleWeights.JPG)
 
 ####    Random Sampling
 
