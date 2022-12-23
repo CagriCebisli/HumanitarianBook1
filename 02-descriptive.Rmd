@@ -227,15 +227,7 @@ diagnose_report(diamonds)
 
 library(dlookr)
 
-diamonds %>%
-
-  eda_report(
-  
-    target        = clarity, 
-    
-    output_format = "html", 
-    
-    output_file   = "EDA_diamonds.html")
+diamonds %>% eda_report(target= clarity, output_format = "html", output_file   = "EDA_diamonds.html")
     
 
 
