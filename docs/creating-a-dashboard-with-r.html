@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html"/>
-
+<link rel="next" href="inferential-statistics.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -198,6 +198,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="creating-a-dashboard-with-r.html"><a href="creating-a-dashboard-with-r.html#preparing-outcome-activity-based-x-table"><i class="fa fa-check"></i><b>5.2</b> Preparing Outcome-Activity Based X-Table</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>6</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#text-mining"><i class="fa fa-check"></i><b>6.1</b> Text Mining</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -273,8 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb57-7"><a href="creating-a-dashboard-with-r.html#cb57-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">warning =</span> <span class="fu">c</span>(<span class="dv">41</span>,<span class="dv">62</span>),</span>
 <span id="cb57-8"><a href="creating-a-dashboard-with-r.html#cb57-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">danger =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">41</span>))</span>
 <span id="cb57-9"><a href="creating-a-dashboard-with-r.html#cb57-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div id="htmlwidget-289b4992c98297050817" style="width:672px;height:480px;" class="gauge html-widget"></div>
-<script type="application/json" data-for="htmlwidget-289b4992c98297050817">{"x":{"value":61.5,"min":0,"max":112,"customSectors":{"percents":false,"ranges":[{"lo":63,"hi":65,"color":"rgba(63, 182, 24, 0.7)"},{"lo":41,"hi":62,"color":"rgba(255, 117, 24, 0.7)"},{"lo":0,"hi":41,"color":"rgba(255, 0, 57, 0.7)"}]},"symbol":null,"label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c7c1139a2c86185a218b" style="width:672px;height:480px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7c1139a2c86185a218b">{"x":{"value":61.5,"min":0,"max":112,"customSectors":{"percents":false,"ranges":[{"lo":63,"hi":65,"color":"rgba(63, 182, 24, 0.7)"},{"lo":41,"hi":62,"color":"rgba(255, 117, 24, 0.7)"},{"lo":0,"hi":41,"color":"rgba(255, 0, 57, 0.7)"}]},"symbol":null,"label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
 <p><strong>Dynamic Reporting</strong></p>
 <p>If you have more than one PDM (PAB / baseline) it does makes sense to report this all together, including confidence levels. From graph below you can easily interpret:</p>
 <ul>
@@ -323,14 +327,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb59-20"><a href="creating-a-dashboard-with-r.html#cb59-20" aria-hidden="true" tabindex="-1"></a><span class="st">section OSMs</span></span>
 <span id="cb59-21"><a href="creating-a-dashboard-with-r.html#cb59-21" aria-hidden="true" tabindex="-1"></a><span class="st">On Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01</span></span>
 <span id="cb59-22"><a href="creating-a-dashboard-with-r.html#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-4534d6e57cbaa69a4422" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4534d6e57cbaa69a4422">{"x":{"diagram":"\ngantt\ndateFormat  YYYY-MM-DD\n\nsection PDMs\nPDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01\nPDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15\nPDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15\n\n\nsection FGDs\nFGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01\nFGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01\nFGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01\nFGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01\n\nsection OSMs\nOn Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-357c7495783e789ce091" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-357c7495783e789ce091">{"x":{"diagram":"\ngantt\ndateFormat  YYYY-MM-DD\n\nsection PDMs\nPDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01\nPDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15\nPDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15\n\n\nsection FGDs\nFGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01\nFGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01\nFGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01\nFGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01\n\nsection OSMs\nOn Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01\n"},"evals":[],"jsHooks":[]}</script>
 <p>This Gannt is a must to follow-up activities mentioned in M&amp;E plan and programme proposal. I strongly advise to make one during designing M&amp;E plan and costs.</p>
-<p>This marks the end of this section. Main take aways are:</p>
+<p>This marks the end of this section. Main takeaways are:</p>
 <ul>
 <li><p>Use flexdashboard or shiny (I don’t know how to use shiny, tho it may be better than flex dashboard) to report indicators, give clear messages and tailor graphs for different audience.</p></li>
 <li><p>I reflected few visuals that I like to use. You can expand this and use different version as well.</p></li>
 <li><p>Carefully track down indicators. They must speak with each other and reflect a full story of what is happening with target group and programme efficiency.</p></li>
+<li><p>There are some apps and programmes such as ActivityInfo (<a href="https://www.activityinfo.org/" class="uri">https://www.activityinfo.org/</a>) where you can key entry your indicators to follow up and some more details. Further, you can link any intelligence tool like PowerBI or Tableau to create-reflect dashboards. Of course most of these tools costs money. Building these tools is not a hard stuff to pull, so I would encourage M&amp;E analysts to always have an indicator track sheet and with a dashboard.</p></li>
+<li><p>Reflect indicators that helps you to explain trends in your core log-frame indicators. Select important variables to fill the gaps in the puzzle. For me, expenditure and income always a piece of puzzle to comment on log frame indicators as we are usually track down socio-economic indicators.</p></li>
+<li><p>Reflecting MEB and programme coverage (if you are in cash modality) is a great indicator to understand if current cash amount is enough or not. Always reflect MEB, if available, and GAP-Coverage graphs in your dashboards.</p></li>
 </ul>
 
 </div>
@@ -340,8 +347,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="inferential-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

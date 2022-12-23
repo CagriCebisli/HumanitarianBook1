@@ -152,13 +152,19 @@ On Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01
 
 This Gannt is a must to follow-up activities mentioned in M&E plan and programme proposal. I strongly advise to make one during designing M&E plan and costs.
 
-This marks the end of this section. Main take aways are:
+This marks the end of this section. Main takeaways are:
 
 -   Use flexdashboard or shiny (I don't know how to use shiny, tho it may be better than flex dashboard) to report indicators, give clear messages and tailor graphs for different audience.
 
 -   I reflected few visuals that I like to use. You can expand this and use different version as well.
 
 -   Carefully track down indicators. They must speak with each other and reflect a full story of what is happening with target group and programme efficiency.
+
+-   There are some apps and programmes such as ActivityInfo (https://www.activityinfo.org/) where you can key entry your indicators to follow up and some more details. Further, you can link any intelligence tool like PowerBI or Tableau to create-reflect dashboards. Of course most of these tools costs money. Building these tools is not a hard stuff to pull, so I would encourage M&E analysts to always have an indicator track sheet and with a dashboard.
+
+-   Reflect indicators that helps you to explain trends in your core log-frame indicators. Select important variables to fill the gaps in the puzzle. For me, expenditure and income always a piece of puzzle to comment on log frame indicators as we are usually track down socio-economic indicators.
+
+-   Reflecting MEB and programme coverage (if you are in cash modality) is a great indicator to understand if current cash amount is enough or not. Always reflect MEB, if available, and GAP-Coverage graphs in your dashboards.
 
 
 

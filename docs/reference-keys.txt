@@ -47,3 +47,5 @@ income-and-expenditure
 income-and-expenditure-disaggregated-by-cluster
 reporting-programme-indicators
 preparing-outcome-activity-based-x-table
+inferential-statistics
+text-mining
