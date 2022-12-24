@@ -1,6 +1,6 @@
 ```{r,warning=FALSE,error=FALSE,message=FALSE,echo=FALSE,include=FALSE}
 library(readxl)
-library(xlsx)
+#library(xlsx)
 library(dplyr)
 library(visdat)
 library(naniar)
@@ -342,7 +342,7 @@ prop.table(table(PAB$RCSG)) * 100
 
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
-PAB %>% group_by(ESSN_Status,Control) %>% summarise(mean(RCSX))
+PAB %>% dplyr::group_by(Programme_Status,Control) %>% summarise(mean(RCSX))
 ```
 
 #### Disaggregation by GenderHHH

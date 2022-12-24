@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Descriptive - Primelinary Analysis (Exploratory Data Analysis - EDA) | Data Science Within Monitoring and Evaluation in Humanitarian Context</title>
   <meta name="description" content="Chapter 4 Descriptive - Primelinary Analysis (Exploratory Data Analysis - EDA) | Data Science Within Monitoring and Evaluation in Humanitarian Context" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Descriptive - Primelinary Analysis (Exploratory Data Analysis - EDA) | Data Science Within Monitoring and Evaluation in Humanitarian Context" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2022-12-23" />
+<meta name="date" content="2022-12-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -201,6 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>6</b> Inferential Statistics</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#text-mining"><i class="fa fa-check"></i><b>6.1</b> Text Mining</a></li>
+<li class="chapter" data-level="6.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlations"><i class="fa fa-check"></i><b>6.2</b> Correlations</a></li>
+<li class="chapter" data-level="6.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#some-key-visuals-to-interpret"><i class="fa fa-check"></i><b>6.3</b> Some Key Visuals to Interpret</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -258,10 +260,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-5"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb13-6"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb13-6" aria-hidden="true" tabindex="-1"></a>DiamondsRenamed <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">&quot;renamed_table&quot;</span><span class="ot">=</span><span class="st">&quot;table&quot;</span>)</span>
 <span id="cb13-7"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(diamonds)</span></code></pre></div>
-<pre><code>##  [1] &quot;carat&quot;   &quot;cut&quot;     &quot;color&quot;   &quot;clarity&quot; &quot;depth&quot;   &quot;table&quot;   &quot;price&quot;   &quot;x&quot;       &quot;y&quot;       &quot;z&quot;       &quot;Type&quot;</code></pre>
+<pre><code>##  [1] &quot;carat&quot;   &quot;cut&quot;     &quot;color&quot;   &quot;clarity&quot; &quot;depth&quot;   &quot;table&quot;   &quot;price&quot;   &quot;x&quot;       &quot;y&quot;       &quot;z&quot;      
+## [11] &quot;Type&quot;</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DiamondsRenamed)</span></code></pre></div>
-<pre><code>##  [1] &quot;carat&quot;         &quot;cut&quot;           &quot;color&quot;         &quot;clarity&quot;       &quot;depth&quot;         &quot;renamed_table&quot; &quot;price&quot;         &quot;x&quot;            
-##  [9] &quot;y&quot;             &quot;z&quot;             &quot;Type&quot;</code></pre>
+<pre><code>##  [1] &quot;carat&quot;         &quot;cut&quot;           &quot;color&quot;         &quot;clarity&quot;       &quot;depth&quot;         &quot;renamed_table&quot;
+##  [7] &quot;price&quot;         &quot;x&quot;             &quot;y&quot;             &quot;z&quot;             &quot;Type&quot;</code></pre>
 </div>
 <div id="converting-multiple-selections-into-dummy-variables" class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Converting Multiple Selections into Dummy Variables<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#converting-multiple-selections-into-dummy-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -293,21 +296,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-22"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(DiamondsRenamed)</span></code></pre></div>
 <pre><code>## Rows: 53,940
 ## Columns: 15
-## $ carat                    &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22, 0.31, 0.20, 0.32, 0.30, 0.30, 0.30…
-## $ cut                      &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, Very Good, Good, Ideal, Premium, Ide…
-## $ color                    &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G, I, J, D, F, F, F, E, E, D, F, E, H…
-## $ clarity                  &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2, I1, SI2, SI1, SI1, SI1, SI2, VS2, V…
-## $ depth                    &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4, 62.2, 60.2, 60.9, 62.0, 63.4, 63.8…
-## $ renamed_table            &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, 59, 56, 55, 57, 62, 62, 58, 57, 57, …
-## $ price                    &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 345, 348, 351, 351, 351, 351, 352, 35…
-## $ x                        &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88, 4.35, 3.79, 4.38, 4.31, 4.23, 4.23…
-## $ y                        &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84, 4.37, 3.75, 4.42, 4.34, 4.29, 4.26…
-## $ z                        &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33, 2.71, 2.27, 2.68, 2.68, 2.70, 2.71…
-## $ Type                     &lt;chr&gt; &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, …
-## $ MultSelec                &lt;chr&gt; &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection2,Selection5&quot;, &quot;Sel…
-## $ examplecolumn_Selection1 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ examplecolumn_Selection2 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ examplecolumn_Selection5 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…</code></pre>
+## $ carat                    &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22…
+## $ cut                      &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, …
+## $ color                    &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G…
+## $ clarity                  &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2,…
+## $ depth                    &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4…
+## $ renamed_table            &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, …
+## $ price                    &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 3…
+## $ x                        &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88…
+## $ y                        &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84…
+## $ z                        &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33…
+## $ Type                     &lt;chr&gt; &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Popul…
+## $ MultSelec                &lt;chr&gt; &quot;Selection1,Selection2,Selection5&quot;, &quot;Selection1,Selection2,Selection5&quot;, &quot;Sel…
+## $ examplecolumn_Selection1 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ examplecolumn_Selection2 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ examplecolumn_Selection5 &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…</code></pre>
 </div>
 <div id="missing-values" class="section level3 hasAnchor" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Missing Values<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -531,15 +534,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="disaggregation-by-eligibility" class="section level4 hasAnchor" number="4.4.4.5">
 <h4><span class="header-section-number">4.4.4.5</span> Disaggregation by Eligibility<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#disaggregation-by-eligibility" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb45-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(ESSN_Status,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb45-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(Programme_Status,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
-## # Groups:   ESSN_Status [2]
-##   ESSN_Status     Control  `mean(RCSX)`
-##   &lt;chr&gt;           &lt;chr&gt;           &lt;dbl&gt;
-## 1 Beneficiary     Controlz         55.0
-## 2 Beneficiary     Testz            55.5
-## 3 Non-Beneficiary Controlz         54.8
-## 4 Non-Beneficiary Testz            56.6</code></pre>
+## # Groups:   Programme_Status [2]
+##   Programme_Status Control  `mean(RCSX)`
+##   &lt;chr&gt;            &lt;chr&gt;           &lt;dbl&gt;
+## 1 Non-Recipient    Controlz         54.8
+## 2 Non-Recipient    Testz            56.6
+## 3 Recipient        Controlz         55.0
+## 4 Recipient        Testz            55.5</code></pre>
 </div>
 <div id="disaggregation-by-genderhhh" class="section level4 hasAnchor" number="4.4.4.6">
 <h4><span class="header-section-number">4.4.4.6</span> Disaggregation by GenderHHH<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#disaggregation-by-genderhhh" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -558,18 +561,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#cb49-1" aria-hidden="true" tabindex="-1"></a>PAB <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(stratum,Control) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(RCSX))</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 3
 ## # Groups:   stratum [5]
-##    stratum         Control  `mean(RCSX)`
-##    &lt;chr&gt;           &lt;chr&gt;           &lt;dbl&gt;
-##  1 Aegean          Controlz         55.1
-##  2 Aegean          Testz            56.3
-##  3 Anatolia/Thrace Controlz         53.7
-##  4 Anatolia/Thrace Testz            56.3
-##  5 Istanbul        Controlz         55.1
-##  6 Istanbul        Testz            56.3
-##  7 Mediterranean   Controlz         56.1
-##  8 Mediterranean   Testz            55.9
-##  9 South-east      Controlz         54.5
-## 10 South-east      Testz            55.7</code></pre>
+##    stratum Control  `mean(RCSX)`
+##    &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 RegionA Controlz         56.1
+##  2 RegionA Testz            55.9
+##  3 RegionB Controlz         53.7
+##  4 RegionB Testz            56.3
+##  5 RegionC Controlz         54.5
+##  6 RegionC Testz            55.7
+##  7 RegionD Controlz         55.1
+##  8 RegionD Testz            56.3
+##  9 RegionE Controlz         55.1
+## 10 RegionE Testz            56.3</code></pre>
 </div>
 <div id="individual-statement-score-calculation" class="section level4 hasAnchor" number="4.4.4.8">
 <h4><span class="header-section-number">4.4.4.8</span> Individual Statement Score Calculation<a href="descriptive---primelinary-analysis-exploratory-data-analysis---eda.html#individual-statement-score-calculation" class="anchor-section" aria-label="Anchor link to header"></a></h4>

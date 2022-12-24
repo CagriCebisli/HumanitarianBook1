@@ -49,3 +49,5 @@ reporting-programme-indicators
 preparing-outcome-activity-based-x-table
 inferential-statistics
 text-mining
+correlations
+some-key-visuals-to-interpret
