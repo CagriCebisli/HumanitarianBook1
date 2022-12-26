@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Research Design for Monitoring and Evaluation Studies | Data Science Within Monitoring and Evaluation in Humanitarian Context</title>
   <meta name="description" content="Chapter 3 Research Design for Monitoring and Evaluation Studies | Data Science Within Monitoring and Evaluation in Humanitarian Context" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Research Design for Monitoring and Evaluation Studies | Data Science Within Monitoring and Evaluation in Humanitarian Context" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2022-12-24" />
+<meta name="date" content="2022-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,7 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.1" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#analysis-unit"><i class="fa fa-check"></i><b>3.3.1</b> Analysis Unit</a></li>
 <li class="chapter" data-level="3.3.2" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#non-response-rates"><i class="fa fa-check"></i><b>3.3.2</b> Non-Response Rates</a></li>
 <li class="chapter" data-level="3.3.3" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#camp-context"><i class="fa fa-check"></i><b>3.3.3</b> Camp Context</a></li>
-<li class="chapter" data-level="3.3.4" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#drawing-sample-with-r"><i class="fa fa-check"></i><b>3.3.4</b> Drawing Sample with R</a></li>
+<li class="chapter" data-level="3.3.4" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#understanding-bottlenecks"><i class="fa fa-check"></i><b>3.3.4</b> Understanding Bottlenecks</a></li>
+<li class="chapter" data-level="3.3.5" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#drawing-sample-with-r"><i class="fa fa-check"></i><b>3.3.5</b> Drawing Sample with R</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#modality-of-surveys"><i class="fa fa-check"></i><b>3.4</b> Modality of Surveys</a></li>
 </ul></li>
@@ -203,6 +204,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#text-mining"><i class="fa fa-check"></i><b>6.1</b> Text Mining</a></li>
 <li class="chapter" data-level="6.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlations"><i class="fa fa-check"></i><b>6.2</b> Correlations</a></li>
 <li class="chapter" data-level="6.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#some-key-visuals-to-interpret"><i class="fa fa-check"></i><b>6.3</b> Some Key Visuals to Interpret</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="extras.html"><a href="extras.html"><i class="fa fa-check"></i><b>7</b> Extras</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="extras.html"><a href="extras.html#team-structure"><i class="fa fa-check"></i><b>7.1</b> Team Structure</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -279,6 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Every question must serve to a purpose. Avoid unnecessary questions or any open-ended ones for quantitative study.</li>
 </ul>
+<p>More information in chapter #4.4, Designing the Logframe - Calculation of Exampled Indicators.</p>
 </div>
 <div id="data-collection-tools" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Data Collection Tools<a href="research-design-for-monitoring-and-evaluation-studies.html#data-collection-tools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -327,10 +333,22 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <p>There you have it. A random selection by containers for sampling. You may need satellite image to see the number of containers and where they are settled. If approved, a drone may do as well.</p>
 <p>Attention is required for analysis unit-container relationship. If your analysis unit is households, than your sampling unit must be as well. Yet, imagine a concept where containers are not obtained by per household. Than, different set of approach is required. Thus, effecting questionnaire design.</p>
 </div>
-<div id="drawing-sample-with-r" class="section level3 hasAnchor" number="3.3.4">
-<h3><span class="header-section-number">3.3.4</span> Drawing Sample with R<a href="research-design-for-monitoring-and-evaluation-studies.html#drawing-sample-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="layered-clustered-sample" class="section level4 hasAnchor" number="3.3.4.1">
-<h4><span class="header-section-number">3.3.4.1</span> Layered-Clustered Sample<a href="research-design-for-monitoring-and-evaluation-studies.html#layered-clustered-sample" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="understanding-bottlenecks" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Understanding Bottlenecks<a href="research-design-for-monitoring-and-evaluation-studies.html#understanding-bottlenecks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Clear understanding of bottlenecks is an optimization issue between resources, quality and speed. Let’s open these a bit more. There is an optimal point of data collection cycle-human resources-number of surveys-length of survey. So if your human resource is not enough, you may consider few options to deliver study within promised timing (of course in sake of losing information…);</p>
+<ul>
+<li><p>Reduce CI to %90, thus reduce number of surveys needed.</p></li>
+<li><p>Eliminate clusters of sample if there is any.</p></li>
+<li><p>Reduce the length of survey. Keep it short.</p></li>
+<li><p>Promise less number of PDM cycles (reduce number 3 to 2 in your log frame and MnE plan).</p></li>
+<li><p>Better use of FMAs. There are always gaps in operational plannings. Fill them.</p></li>
+<li><p>Try to merge any other data collection activity with PDMs, thus save human resources.</p></li>
+</ul>
+</div>
+<div id="drawing-sample-with-r" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Drawing Sample with R<a href="research-design-for-monitoring-and-evaluation-studies.html#drawing-sample-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="layered-clustered-sample" class="section level4 hasAnchor" number="3.3.5.1">
+<h4><span class="header-section-number">3.3.5.1</span> Layered-Clustered Sample<a href="research-design-for-monitoring-and-evaluation-studies.html#layered-clustered-sample" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In humanitarian sector, I see that programme monitors usually applies clustered samples. Cluster layers could be regions, nationality, gender etc. where researchers wants to have a representative knowledge for each cluster group. There are several different methods for sampling. I personally like machine learning style of sampling.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -350,17 +368,17 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <span id="cb3-2"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diamonds)</span></code></pre></div>
 <pre><code>## Rows: 53,940
 ## Columns: 11
-## $ carat   &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22, 0.31, 0.20, 0.3…
-## $ cut     &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, Very Good, Good, …
-## $ color   &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G, I, J, D, F, F, …
-## $ clarity &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2, I1, SI2, SI1, SI…
-## $ depth   &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4, 62.2, 60.2, 60.…
-## $ table   &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, 59, 56, 55, 57, 6…
-## $ price   &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 345, 348, 351, 351…
-## $ x       &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88, 4.35, 3.79, 4.3…
-## $ y       &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84, 4.37, 3.75, 4.4…
-## $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33, 2.71, 2.27, 2.6…
-## $ Type    &lt;chr&gt; &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Populati…</code></pre>
+## $ carat   &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22, 0.31, 0.20, 0.32, 0.30, 0.30, 0.30, 0.30, 0.30, 0.2…
+## $ cut     &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, Very Good, Good, Ideal, Premium, Ideal, Premium, Prem…
+## $ color   &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G, I, J, D, F, F, F, E, E, D, F, E, H, D, I, I, J, D, …
+## $ clarity &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2, I1, SI2, SI1, SI1, SI1, SI2, VS2, VS1, SI1, SI1, VVS…
+## $ depth   &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4, 62.2, 60.2, 60.9, 62.0, 63.4, 63.8, 62.7, 63.3, 63.…
+## $ table   &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, 59, 56, 55, 57, 62, 62, 58, 57, 57, 61, 57, 57, 57, 5…
+## $ price   &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 345, 348, 351, 351, 351, 351, 352, 353, 353, 353, 354,…
+## $ x       &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88, 4.35, 3.79, 4.38, 4.31, 4.23, 4.23, 4.21, 4.26, 3.8…
+## $ y       &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84, 4.37, 3.75, 4.42, 4.34, 4.29, 4.26, 4.27, 4.30, 3.9…
+## $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33, 2.71, 2.27, 2.68, 2.68, 2.70, 2.71, 2.66, 2.71, 2.4…
+## $ Type    &lt;chr&gt; &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Po…</code></pre>
 <p>Lets take “cut” as region here. This variable is categorical with 5 unique values. There are several good-ends of taking sample with data partition. More info can be found in: <strong><a href="http://topepo.github.io/caret/data-splitting.html" class="uri">http://topepo.github.io/caret/data-splitting.html</a></strong></p>
 <p>If you need to calculate threshold (desired number for representative sample), <strong>Raosoft (<a href="http://www.raosoft.com/samplesize.html" class="uri">http://www.raosoft.com/samplesize.html</a>)</strong> is a good sample size calculator. So in this example, lets decide metrics wih Raosoft; with %5 margin of error, %95 confidence level, population size of 53940 and %50 response distribution (maximum unknown) our sample size is 382. Including %50 non-response rate sample size (a call list or interviewee list) is 764. In the current situation we are using cluster sampling so that for five different categories (could be region, nationality etc. in humanitarian sector) we need to draw 382 (764) for each of them. We did take ‘cut’ as our layer in the sampling. Thus, for five categories we need sample of 764 * 5 = 3820 sample which is ~%7.1 of our population.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Easiest way to draw layered sample. One row coding, amazing package!</span></span>
@@ -398,8 +416,8 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <p class="caption">Calculating Sample Weights</p>
 </div>
 </div>
-<div id="random-sampling" class="section level4 hasAnchor" number="3.3.4.2">
-<h4><span class="header-section-number">3.3.4.2</span> Random Sampling<a href="research-design-for-monitoring-and-evaluation-studies.html#random-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="random-sampling" class="section level4 hasAnchor" number="3.3.5.2">
+<h4><span class="header-section-number">3.3.5.2</span> Random Sampling<a href="research-design-for-monitoring-and-evaluation-studies.html#random-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For random sampling, without any clusters, data partition technique is amazing. Lets say we want to draw 3820 sample out of 53940 (row number of diamonds data), which is ~7.1% of our total population. “p” metric in data goes as 0.71. We mark selected cases as index, and split data by sampled and outsampled. Distribution here will be more accurate then layered sampling. Please do check linear line and table of cut variable.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select rows - proportionally depending on &quot;cut&quot;~ acts as region.</span></span>
 <span id="cb9-2"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library caret contains &quot;createDataPartition&quot; function.</span></span>
@@ -434,8 +452,8 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>You can see that linear models are overlaps better, if you compare it to clustered sample. This is also another good example of why we need to apply weights in clustered samples, before making an assumption towards population.</p>
 </div>
-<div id="lessons-learned-from-sampling" class="section level4 hasAnchor" number="3.3.4.3">
-<h4><span class="header-section-number">3.3.4.3</span> Lessons Learned from Sampling<a href="research-design-for-monitoring-and-evaluation-studies.html#lessons-learned-from-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="lessons-learned-from-sampling" class="section level4 hasAnchor" number="3.3.5.3">
+<h4><span class="header-section-number">3.3.5.3</span> Lessons Learned from Sampling<a href="research-design-for-monitoring-and-evaluation-studies.html#lessons-learned-from-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>I would also like to reflect few lessons learned from my end towards sampling-operational balance.</p>
 <ul>
 <li><p>If you cluster your sample with regions, select proper enumerator for proper regions. In some cases, some regions may speak different language, or attendees may be more coherent when enumerator speaks their language or when enumerators are from same region.</p></li>

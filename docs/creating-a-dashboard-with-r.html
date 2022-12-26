@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Creating a Dashboard with R | Data Science Within Monitoring and Evaluation in Humanitarian Context</title>
   <meta name="description" content="Chapter 5 Creating a Dashboard with R | Data Science Within Monitoring and Evaluation in Humanitarian Context" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Creating a Dashboard with R | Data Science Within Monitoring and Evaluation in Humanitarian Context" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2022-12-24" />
+<meta name="date" content="2022-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,7 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.1" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#analysis-unit"><i class="fa fa-check"></i><b>3.3.1</b> Analysis Unit</a></li>
 <li class="chapter" data-level="3.3.2" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#non-response-rates"><i class="fa fa-check"></i><b>3.3.2</b> Non-Response Rates</a></li>
 <li class="chapter" data-level="3.3.3" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#camp-context"><i class="fa fa-check"></i><b>3.3.3</b> Camp Context</a></li>
-<li class="chapter" data-level="3.3.4" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#drawing-sample-with-r"><i class="fa fa-check"></i><b>3.3.4</b> Drawing Sample with R</a></li>
+<li class="chapter" data-level="3.3.4" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#understanding-bottlenecks"><i class="fa fa-check"></i><b>3.3.4</b> Understanding Bottlenecks</a></li>
+<li class="chapter" data-level="3.3.5" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#drawing-sample-with-r"><i class="fa fa-check"></i><b>3.3.5</b> Drawing Sample with R</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="research-design-for-monitoring-and-evaluation-studies.html"><a href="research-design-for-monitoring-and-evaluation-studies.html#modality-of-surveys"><i class="fa fa-check"></i><b>3.4</b> Modality of Surveys</a></li>
 </ul></li>
@@ -203,6 +204,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#text-mining"><i class="fa fa-check"></i><b>6.1</b> Text Mining</a></li>
 <li class="chapter" data-level="6.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlations"><i class="fa fa-check"></i><b>6.2</b> Correlations</a></li>
 <li class="chapter" data-level="6.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#some-key-visuals-to-interpret"><i class="fa fa-check"></i><b>6.3</b> Some Key Visuals to Interpret</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="extras.html"><a href="extras.html"><i class="fa fa-check"></i><b>7</b> Extras</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="extras.html"><a href="extras.html#team-structure"><i class="fa fa-check"></i><b>7.1</b> Team Structure</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -279,8 +284,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb57-7"><a href="creating-a-dashboard-with-r.html#cb57-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">warning =</span> <span class="fu">c</span>(<span class="dv">41</span>,<span class="dv">62</span>),</span>
 <span id="cb57-8"><a href="creating-a-dashboard-with-r.html#cb57-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">danger =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">41</span>))</span>
 <span id="cb57-9"><a href="creating-a-dashboard-with-r.html#cb57-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div id="htmlwidget-fee8e9af9373a17e97db" style="width:672px;height:480px;" class="gauge html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fee8e9af9373a17e97db">{"x":{"value":61.5,"min":0,"max":112,"customSectors":{"percents":false,"ranges":[{"lo":63,"hi":65,"color":"rgba(63, 182, 24, 0.7)"},{"lo":41,"hi":62,"color":"rgba(255, 117, 24, 0.7)"},{"lo":0,"hi":41,"color":"rgba(255, 0, 57, 0.7)"}]},"symbol":null,"label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-907d5ef753b8f4b6193f" style="width:672px;height:480px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-907d5ef753b8f4b6193f">{"x":{"value":61.5,"min":0,"max":112,"customSectors":{"percents":false,"ranges":[{"lo":63,"hi":65,"color":"rgba(63, 182, 24, 0.7)"},{"lo":41,"hi":62,"color":"rgba(255, 117, 24, 0.7)"},{"lo":0,"hi":41,"color":"rgba(255, 0, 57, 0.7)"}]},"symbol":null,"label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
 <p><strong>Dynamic Reporting</strong></p>
 <p>If you have more than one PDM (PAB / baseline) it does makes sense to report this all together, including confidence levels. From graph below you can easily interpret:</p>
 <ul>
@@ -329,8 +334,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb59-20"><a href="creating-a-dashboard-with-r.html#cb59-20" aria-hidden="true" tabindex="-1"></a><span class="st">section OSMs</span></span>
 <span id="cb59-21"><a href="creating-a-dashboard-with-r.html#cb59-21" aria-hidden="true" tabindex="-1"></a><span class="st">On Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01</span></span>
 <span id="cb59-22"><a href="creating-a-dashboard-with-r.html#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-e85c78d20f65ffa7c91a" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e85c78d20f65ffa7c91a">{"x":{"diagram":"\ngantt\ndateFormat  YYYY-MM-DD\n\nsection PDMs\nPDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01\nPDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15\nPDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15\n\n\nsection FGDs\nFGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01\nFGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01\nFGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01\nFGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01\n\nsection OSMs\nOn Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fc2c9833eeaffc3a34cb" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fc2c9833eeaffc3a34cb">{"x":{"diagram":"\ngantt\ndateFormat  YYYY-MM-DD\n\nsection PDMs\nPDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01\nPDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15\nPDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15\n\n\nsection FGDs\nFGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01\nFGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01\nFGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01\nFGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01\n\nsection OSMs\nOn Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01\n"},"evals":[],"jsHooks":[]}</script>
 <p>This Gannt is a must to follow-up activities mentioned in M&amp;E plan and programme proposal. I strongly advise to make one during designing M&amp;E plan and costs.</p>
 <p>This marks the end of this section. Main takeaways are:</p>
 <ul>

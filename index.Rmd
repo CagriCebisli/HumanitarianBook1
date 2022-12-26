@@ -63,7 +63,7 @@ The primary audience for this book is data science / data analyst practitioners 
 -    IM teams involved in humanitarian data analysis
 -    MEAL specialists etc.
 
-The secondary intended audience is other humanitarian stakeholders involved in advancing CTP monitoring and evaluation practices. Thus, may include TPM institutions as well.
+The secondary intended audience is other humanitarian stakeholders involved in advancing CTP monitoring and evaluation practices. Thus, may include TPM institutions as well. Please note that monitoring and evaluation is an expensive exercise, and things explained-commented in this doodle are mostly orients for large-scale programmes. Thus, even this mainly concerns big programmes with big resources, still it is a good-to-know for any analysts in the sector.
 
 ##    Why Is This a Book Needed?
 
@@ -149,6 +149,8 @@ Additional parts of questionnaire design comes from analyst. If analyst wants to
     
 -   Every question must serve to a purpose. Avoid unnecessary questions or any open-ended ones for quantitative study.
 
+More information in chapter #4.4, Designing the Logframe - Calculation of Exampled Indicators.
+
 ##    Data Collection Tools
 
 There are several different tools to collect data. IFRC generally uses KOBO. If you google, there are two links for KOBO. IFRC one called https://kobonew.ifrc.org/ and other one is https://www.kobotoolbox.org/. As far as I am aware Kobotoolbox is under OCHA's administration. But why we have two different KOBO? That is because of servers. IFRC servers in Frankfurt, OCHA based in US. Thus, your data copyrights are protected by those laws.
@@ -204,6 +206,22 @@ In camp context, most easy-to-apply method is following;
 There you have it. A random selection by containers for sampling. You may need satellite image to see the number of containers and where they are settled. If approved, a drone may do as well. 
 
 Attention is required for analysis unit-container relationship. If your analysis unit is households, than your sampling unit must be as well. Yet, imagine a concept where containers are not obtained by per household. Than, different set of approach is required. Thus, effecting questionnaire design.
+
+###   Understanding Bottlenecks
+
+Clear understanding of bottlenecks is an optimization issue between resources, quality and speed. Let's open these a bit more. There is an optimal point of data collection cycle-human resources-number of surveys-length of survey. So if your human resource is not enough, you may consider few options to deliver study within promised timing (of course in sake of losing information...);
+
+-   Reduce CI to %90, thus reduce number of surveys needed.
+
+-   Eliminate clusters of sample if there is any.
+
+-   Reduce the length of survey. Keep it short.
+
+-   Promise less number of PDM cycles (reduce number 3 to 2 in your log frame and MnE plan).
+
+-   Better use of FMAs. There are always gaps in operational plannings. Fill them.
+
+-   Try to merge any other data collection activity with PDMs, thus save human resources.
 
 ###   Drawing Sample with R
 

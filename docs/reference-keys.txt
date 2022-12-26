@@ -10,6 +10,7 @@ sample
 analysis-unit
 non-response-rates
 camp-context
+understanding-bottlenecks
 drawing-sample-with-r
 layered-clustered-sample
 random-sampling
@@ -51,3 +52,5 @@ inferential-statistics
 text-mining
 correlations
 some-key-visuals-to-interpret
+extras
+team-structure
