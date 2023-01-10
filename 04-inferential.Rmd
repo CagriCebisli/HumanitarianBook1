@@ -285,6 +285,20 @@ library("GGally")
 PAB %>% dplyr::select(rCSI,RCS,FCS,LCSI,Debt) %>% GGally::ggpairs()
 ```
 
+##    Regressions
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+
+library("broom")
+
+pdmbt %>% 
+  group_by(stratum) %>% 
+  nest() %>% 
+  mutate(model = map(data, ~lm(Income~LCSI+rCSI+FCG+x_total+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, data= .) %>%
+                       tidy)) %>% unnest(model) %>% filter(p.value < 0.5) %>% filter(term != "(Intercept)") %>%
+  ggplot(aes(x = reorder(term,estimate), y=estimate, fill=stratum)) + geom_col() + coord_flip() + facet_wrap(~stratum, scales = "free")
+
+```
 
 ##    Some Key Visuals to Interpret
 

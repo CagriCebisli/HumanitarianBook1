@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2022-12-26" />
+<meta name="date" content="2023-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#text-mining"><i class="fa fa-check"></i><b>6.1</b> Text Mining</a></li>
 <li class="chapter" data-level="6.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlations"><i class="fa fa-check"></i><b>6.2</b> Correlations</a></li>
-<li class="chapter" data-level="6.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#some-key-visuals-to-interpret"><i class="fa fa-check"></i><b>6.3</b> Some Key Visuals to Interpret</a></li>
+<li class="chapter" data-level="6.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regressions"><i class="fa fa-check"></i><b>6.3</b> Regressions</a></li>
+<li class="chapter" data-level="6.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#some-key-visuals-to-interpret"><i class="fa fa-check"></i><b>6.4</b> Some Key Visuals to Interpret</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="extras.html"><a href="extras.html"><i class="fa fa-check"></i><b>7</b> Extras</a>
 <ul>
@@ -284,8 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb57-7"><a href="creating-a-dashboard-with-r.html#cb57-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">warning =</span> <span class="fu">c</span>(<span class="dv">41</span>,<span class="dv">62</span>),</span>
 <span id="cb57-8"><a href="creating-a-dashboard-with-r.html#cb57-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">danger =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">41</span>))</span>
 <span id="cb57-9"><a href="creating-a-dashboard-with-r.html#cb57-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div id="htmlwidget-907d5ef753b8f4b6193f" style="width:672px;height:480px;" class="gauge html-widget"></div>
-<script type="application/json" data-for="htmlwidget-907d5ef753b8f4b6193f">{"x":{"value":61.5,"min":0,"max":112,"customSectors":{"percents":false,"ranges":[{"lo":63,"hi":65,"color":"rgba(63, 182, 24, 0.7)"},{"lo":41,"hi":62,"color":"rgba(255, 117, 24, 0.7)"},{"lo":0,"hi":41,"color":"rgba(255, 0, 57, 0.7)"}]},"symbol":null,"label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f0b45322555bf26f689a" style="width:672px;height:480px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f0b45322555bf26f689a">{"x":{"value":61.5,"min":0,"max":112,"customSectors":{"percents":false,"ranges":[{"lo":63,"hi":65,"color":"rgba(63, 182, 24, 0.7)"},{"lo":41,"hi":62,"color":"rgba(255, 117, 24, 0.7)"},{"lo":0,"hi":41,"color":"rgba(255, 0, 57, 0.7)"}]},"symbol":null,"label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
 <p><strong>Dynamic Reporting</strong></p>
 <p>If you have more than one PDM (PAB / baseline) it does makes sense to report this all together, including confidence levels. From graph below you can easily interpret:</p>
 <ul>
@@ -312,30 +313,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="preparing-outcome-activity-based-x-table" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Preparing Outcome-Activity Based X-Table<a href="creating-a-dashboard-with-r.html#preparing-outcome-activity-based-x-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Probably there is a better way to report this, but this is how I do it. If you know a better way to make a Gannt; please do contact me!</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="creating-a-dashboard-with-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DiagrammeR)</span>
-<span id="cb59-2"><a href="creating-a-dashboard-with-r.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co">#title Monitoring and Evaluation Outcome Indicators</span></span>
-<span id="cb59-3"><a href="creating-a-dashboard-with-r.html#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="creating-a-dashboard-with-r.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mermaid</span>(<span class="st">&quot;</span></span>
-<span id="cb59-5"><a href="creating-a-dashboard-with-r.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="st">gantt</span></span>
-<span id="cb59-6"><a href="creating-a-dashboard-with-r.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="st">dateFormat  YYYY-MM-DD</span></span>
-<span id="cb59-7"><a href="creating-a-dashboard-with-r.html#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-8"><a href="creating-a-dashboard-with-r.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="st">section PDMs</span></span>
-<span id="cb59-9"><a href="creating-a-dashboard-with-r.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="st">PDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01</span></span>
-<span id="cb59-10"><a href="creating-a-dashboard-with-r.html#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="st">PDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15</span></span>
-<span id="cb59-11"><a href="creating-a-dashboard-with-r.html#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="st">PDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15</span></span>
-<span id="cb59-12"><a href="creating-a-dashboard-with-r.html#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-13"><a href="creating-a-dashboard-with-r.html#cb59-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-14"><a href="creating-a-dashboard-with-r.html#cb59-14" aria-hidden="true" tabindex="-1"></a><span class="st">section FGDs</span></span>
-<span id="cb59-15"><a href="creating-a-dashboard-with-r.html#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="st">FGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01</span></span>
-<span id="cb59-16"><a href="creating-a-dashboard-with-r.html#cb59-16" aria-hidden="true" tabindex="-1"></a><span class="st">FGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01</span></span>
-<span id="cb59-17"><a href="creating-a-dashboard-with-r.html#cb59-17" aria-hidden="true" tabindex="-1"></a><span class="st">FGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01</span></span>
-<span id="cb59-18"><a href="creating-a-dashboard-with-r.html#cb59-18" aria-hidden="true" tabindex="-1"></a><span class="st">FGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01</span></span>
-<span id="cb59-19"><a href="creating-a-dashboard-with-r.html#cb59-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-20"><a href="creating-a-dashboard-with-r.html#cb59-20" aria-hidden="true" tabindex="-1"></a><span class="st">section OSMs</span></span>
-<span id="cb59-21"><a href="creating-a-dashboard-with-r.html#cb59-21" aria-hidden="true" tabindex="-1"></a><span class="st">On Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01</span></span>
-<span id="cb59-22"><a href="creating-a-dashboard-with-r.html#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-fc2c9833eeaffc3a34cb" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fc2c9833eeaffc3a34cb">{"x":{"diagram":"\ngantt\ndateFormat  YYYY-MM-DD\n\nsection PDMs\nPDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01\nPDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15\nPDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15\n\n\nsection FGDs\nFGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01\nFGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01\nFGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01\nFGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01\n\nsection OSMs\nOn Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01\n"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="creating-a-dashboard-with-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DiagrammeR)</span></code></pre></div>
+<pre><code>## Warning: package &#39;DiagrammeR&#39; was built under R version 4.2.2</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="creating-a-dashboard-with-r.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">#title Monitoring and Evaluation Outcome Indicators</span></span>
+<span id="cb61-2"><a href="creating-a-dashboard-with-r.html#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="creating-a-dashboard-with-r.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mermaid</span>(<span class="st">&quot;</span></span>
+<span id="cb61-4"><a href="creating-a-dashboard-with-r.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="st">gantt</span></span>
+<span id="cb61-5"><a href="creating-a-dashboard-with-r.html#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="st">dateFormat  YYYY-MM-DD</span></span>
+<span id="cb61-6"><a href="creating-a-dashboard-with-r.html#cb61-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-7"><a href="creating-a-dashboard-with-r.html#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="st">section PDMs</span></span>
+<span id="cb61-8"><a href="creating-a-dashboard-with-r.html#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="st">PDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01</span></span>
+<span id="cb61-9"><a href="creating-a-dashboard-with-r.html#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="st">PDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15</span></span>
+<span id="cb61-10"><a href="creating-a-dashboard-with-r.html#cb61-10" aria-hidden="true" tabindex="-1"></a><span class="st">PDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15</span></span>
+<span id="cb61-11"><a href="creating-a-dashboard-with-r.html#cb61-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-12"><a href="creating-a-dashboard-with-r.html#cb61-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-13"><a href="creating-a-dashboard-with-r.html#cb61-13" aria-hidden="true" tabindex="-1"></a><span class="st">section FGDs</span></span>
+<span id="cb61-14"><a href="creating-a-dashboard-with-r.html#cb61-14" aria-hidden="true" tabindex="-1"></a><span class="st">FGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01</span></span>
+<span id="cb61-15"><a href="creating-a-dashboard-with-r.html#cb61-15" aria-hidden="true" tabindex="-1"></a><span class="st">FGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01</span></span>
+<span id="cb61-16"><a href="creating-a-dashboard-with-r.html#cb61-16" aria-hidden="true" tabindex="-1"></a><span class="st">FGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01</span></span>
+<span id="cb61-17"><a href="creating-a-dashboard-with-r.html#cb61-17" aria-hidden="true" tabindex="-1"></a><span class="st">FGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01</span></span>
+<span id="cb61-18"><a href="creating-a-dashboard-with-r.html#cb61-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-19"><a href="creating-a-dashboard-with-r.html#cb61-19" aria-hidden="true" tabindex="-1"></a><span class="st">section OSMs</span></span>
+<span id="cb61-20"><a href="creating-a-dashboard-with-r.html#cb61-20" aria-hidden="true" tabindex="-1"></a><span class="st">On Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01</span></span>
+<span id="cb61-21"><a href="creating-a-dashboard-with-r.html#cb61-21" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-881e21c1ce84b34b4265" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-881e21c1ce84b34b4265">{"x":{"diagram":"\ngantt\ndateFormat  YYYY-MM-DD\n\nsection PDMs\nPDM5+CPDM1                   :done,          first_1,    2022-06-01, 2022-11-01\nPDM6+CPDM2                   :active,        first_2,    2022-11-01, 2023-01-15\nPDM7+CPDM3                   :               first_3,    2023-01-16, 2023-04-15\n\n\nsection FGDs\nFGD1, Food Security           :crit, done,    import_1,   2022-04-01, 2022-05-01\nFGD2, Shelter and TV          :crit, done,    import_2,   2022-08-01, 2022-09-01\nFGD3, Topics TBD              :crit,          import_3,   2022-12-01, 2023-01-01\nFGD4, Topics TBD              :crit,          import_3,   2023-02-01, 2023-03-01\n\nsection OSMs\nOn Site Monitoring            :active,        extras_1,   2022-10-01, 2023-04-01\n"},"evals":[],"jsHooks":[]}</script>
 <p>This Gannt is a must to follow-up activities mentioned in M&amp;E plan and programme proposal. I strongly advise to make one during designing M&amp;E plan and costs.</p>
 <p>This marks the end of this section. Main takeaways are:</p>
 <ul>

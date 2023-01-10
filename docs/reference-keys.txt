@@ -51,6 +51,7 @@ preparing-outcome-activity-based-x-table
 inferential-statistics
 text-mining
 correlations
+regressions
 some-key-visuals-to-interpret
 extras
 team-structure
