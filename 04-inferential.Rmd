@@ -348,6 +348,9 @@ So, in humanitarian data analysis with regressions, or any other statistical ana
 
 Let's build a logistic regression using same model above where we try to understand which variables are significant in retro of income of the household. Income and expenditure can be revert to binary versions with sensible thresholds. Income, threshold can be minimum wage, or something equivalent to that and for expenditure, minimum expenditure baskets or world banks thresholds (5$ in day per capita) could be your threshold. One simply tries to draw those thresholds to see whether household is above or below those lines, and may mark them as poor - non poor etc.
 
+**Optimal Cutpoints**
+
+
 Let's try to get a sensible threshold for income, and then convert it to a binary variable. For this analysis, I am going to use cutpointr (source: https://cran.r-project.org/web/packages/cutpointr/vignettes/cutpointr.html).
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
