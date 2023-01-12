@@ -23,7 +23,7 @@
 <meta name="author" content="Cagri Cebisli" />
 
 
-<meta name="date" content="2023-01-09" />
+<meta name="date" content="2023-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#text-mining"><i class="fa fa-check"></i><b>6.1</b> Text Mining</a></li>
 <li class="chapter" data-level="6.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlations"><i class="fa fa-check"></i><b>6.2</b> Correlations</a></li>
-<li class="chapter" data-level="6.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regressions"><i class="fa fa-check"></i><b>6.3</b> Regressions</a></li>
+<li class="chapter" data-level="6.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regressions"><i class="fa fa-check"></i><b>6.3</b> Regressions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#linear-regressions"><i class="fa fa-check"></i><b>6.3.1</b> Linear Regressions</a></li>
+<li class="chapter" data-level="6.3.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#logistic-regression"><i class="fa fa-check"></i><b>6.3.2</b> Logistic Regression</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#some-key-visuals-to-interpret"><i class="fa fa-check"></i><b>6.4</b> Some Key Visuals to Interpret</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="extras.html"><a href="extras.html"><i class="fa fa-check"></i><b>7</b> Extras</a>
@@ -354,32 +358,31 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diamonds,<span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 11
-##   carat cut     color clarity depth table price     x     y     z Type      
-##   &lt;dbl&gt; &lt;ord&gt;   &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
-## 1  0.23 Ideal   E     SI2      61.5    55   326  3.95  3.98  2.43 Population
-## 2  0.21 Premium E     SI1      59.8    61   326  3.89  3.84  2.31 Population
-## 3  0.23 Good    E     VS1      56.9    65   327  4.05  4.07  2.31 Population
-## 4  0.29 Premium I     VS2      62.4    58   334  4.2   4.23  2.63 Population
-## 5  0.31 Good    J     SI2      63.3    58   335  4.34  4.35  2.75 Population</code></pre>
+<pre><code>## # A tibble: 5 × 10
+##   carat cut     color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;   &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  0.23 Ideal   E     SI2      61.5    55   326  3.95  3.98  2.43
+## 2  0.21 Premium E     SI1      59.8    61   326  3.89  3.84  2.31
+## 3  0.23 Good    E     VS1      56.9    65   327  4.05  4.07  2.31
+## 4  0.29 Premium I     VS2      62.4    58   334  4.2   4.23  2.63
+## 5  0.31 Good    J     SI2      63.3    58   335  4.34  4.35  2.75</code></pre>
 <p>Lets do this exercise over “Diamonds” data comes with tidyverse package. Thus, this data is population data and you need to draw some samples for a study.</p>
 <p><strong>Setting the Scene:</strong></p>
 <p>You are a data scientist works with monitoring and evaluation unit in country office x. There is a cash-based intervention and you are responsible for designing a PDM. In programme objective, it says; increasing economic situation of the target population. So this is basically your research question. Now it is time to build a research design. In secondary data review, you find out that for specific regions, socio-economical indicators are very different (livelihoods and expenditures etc.). Thus, to have an accurate outcomes, you design a representative sample for each region, to have a better understanding of the concept. Operationally, you have enough capacity to collect data within promised time (I am stating that because dividing sample into layers means more surveys, it could be overall 385 or for two regions 385 x 2). Now, you have the population data and sample stage is at hand. In first version, we will draw a quick sample from overall population and then move to more simplified version of layered sample.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A quick overlook to data</span></span>
 <span id="cb3-2"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diamonds)</span></code></pre></div>
 <pre><code>## Rows: 53,940
-## Columns: 11
-## $ carat   &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22, 0.31, 0.20, 0.32, 0.30, 0.30, 0.30, 0.30, 0.30, 0.2…
-## $ cut     &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, Very Good, Good, Ideal, Premium, Ideal, Premium, Prem…
-## $ color   &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G, I, J, D, F, F, F, E, E, D, F, E, H, D, I, I, J, D, …
-## $ clarity &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2, I1, SI2, SI1, SI1, SI1, SI2, VS2, VS1, SI1, SI1, VVS…
-## $ depth   &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4, 62.2, 60.2, 60.9, 62.0, 63.4, 63.8, 62.7, 63.3, 63.…
-## $ table   &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, 59, 56, 55, 57, 62, 62, 58, 57, 57, 61, 57, 57, 57, 5…
-## $ price   &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 345, 348, 351, 351, 351, 351, 352, 353, 353, 353, 354,…
-## $ x       &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88, 4.35, 3.79, 4.38, 4.31, 4.23, 4.23, 4.21, 4.26, 3.8…
-## $ y       &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84, 4.37, 3.75, 4.42, 4.34, 4.29, 4.26, 4.27, 4.30, 3.9…
-## $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33, 2.71, 2.27, 2.68, 2.68, 2.70, 2.71, 2.66, 2.71, 2.4…
-## $ Type    &lt;chr&gt; &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Population&quot;, &quot;Po…</code></pre>
+## Columns: 10
+## $ carat   &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.30, 0.23, 0.22, 0.31, 0.20, 0.32, 0.30, 0.30, 0.30, 0.30, 0.30, 0.23, 0.23, 0.31, 0.31, 0.23…
+## $ cut     &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Very Good, Fair, Very Good, Good, Ideal, Premium, Ideal, Premium, Premium, Ideal, Good, Good, V…
+## $ color   &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I, E, H, J, J, G, I, J, D, F, F, F, E, E, D, F, E, H, D, I, I, J, D, D, H, F, H, H, E, H, F, G…
+## $ clarity &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, SI1, SI2, SI2, I1, SI2, SI1, SI1, SI1, SI2, VS2, VS1, SI1, SI1, VVS2, VS1, VS2, VS2, VS1, VS…
+## $ depth   &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64.0, 62.8, 60.4, 62.2, 60.2, 60.9, 62.0, 63.4, 63.8, 62.7, 63.3, 63.8, 61.0, 59.4, 58.1, 60.4…
+## $ table   &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58, 54, 54, 56, 59, 56, 55, 57, 62, 62, 58, 57, 57, 61, 57, 57, 57, 59, 58, 58, 59, 59, 54, 59…
+## $ price   &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 342, 344, 345, 345, 348, 351, 351, 351, 351, 352, 353, 353, 353, 354, 355, 357, 357, 357, 402,…
+## $ x       &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.25, 3.93, 3.88, 4.35, 3.79, 4.38, 4.31, 4.23, 4.23, 4.21, 4.26, 3.85, 3.94, 4.39, 4.44, 3.97…
+## $ y       &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.28, 3.90, 3.84, 4.37, 3.75, 4.42, 4.34, 4.29, 4.26, 4.27, 4.30, 3.92, 3.96, 4.43, 4.47, 4.01…
+## $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.73, 2.46, 2.33, 2.71, 2.27, 2.68, 2.68, 2.70, 2.71, 2.66, 2.71, 2.48, 2.41, 2.62, 2.59, 2.41…</code></pre>
 <p>Lets take “cut” as region here. This variable is categorical with 5 unique values. There are several good-ends of taking sample with data partition. More info can be found in: <strong><a href="http://topepo.github.io/caret/data-splitting.html" class="uri">http://topepo.github.io/caret/data-splitting.html</a></strong></p>
 <p>If you need to calculate threshold (desired number for representative sample), <strong>Raosoft (<a href="http://www.raosoft.com/samplesize.html" class="uri">http://www.raosoft.com/samplesize.html</a>)</strong> is a good sample size calculator. So in this example, lets decide metrics wih Raosoft; with %5 margin of error, %95 confidence level, population size of 53940 and %50 response distribution (maximum unknown) our sample size is 382. Including %50 non-response rate sample size (a call list or interviewee list) is 764. In the current situation we are using cluster sampling so that for five different categories (could be region, nationality etc. in humanitarian sector) we need to draw 382 (764) for each of them. We did take ‘cut’ as our layer in the sampling. Thus, for five categories we need sample of 764 * 5 = 3820 sample which is ~%7.1 of our population.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Easiest way to draw layered sample. One row coding, amazing package!</span></span>
@@ -400,7 +403,7 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <span id="cb7-6"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">color =</span> clarity), <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
 <span id="cb7-7"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">color_palette</span>(<span class="st">&quot;jco&quot;</span>)<span class="sc">+</span></span>
 <span id="cb7-8"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">theme_pubclean</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>Let’s double check with numeric variables and compare them by type. Depth and Table variables taken into consider. Check how both linear models does not aligns with each other perfectly, but does well enough. Here, we can assume that our sample does really well!</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hrbrthemes)</span>
 <span id="cb8-2"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-2" aria-hidden="true" tabindex="-1"></a>Compare <span class="sc">%&gt;%</span> </span>
@@ -410,7 +413,7 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <span id="cb8-6"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Variable Table&quot;</span>,</span>
 <span id="cb8-7"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">&quot;Variable depth&quot;</span>) <span class="sc">+</span>    </span>
 <span id="cb8-8"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_ipsum</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
 <p>Key differences between sample and population happens due to we give same importance to each cut category. But in reality, their distribution (their frequency-density in population) is different, yet we did draw 780 sample from each of them. This is where one must apply weights in order to balance the outcomes and to have better accuracy while making assumptions of population values. Weights can be calculated as: each categories’ sample size ratio (# of survey of each category divided by total sample-survey number) divided by each categories’ population size ratio (frequency of each category divided by total population number) will give you weights.</p>
 <div class="figure">
 <img src="SampleWeights.JPG" alt="" />
@@ -450,7 +453,7 @@ If UNOCHA receives a notice alleging that material from your account infringes a
 <span id="cb12-11"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Variable Table&quot;</span>,</span>
 <span id="cb12-12"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb12-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">&quot;Variable depth&quot;</span>) <span class="sc">+</span>    </span>
 <span id="cb12-13"><a href="research-design-for-monitoring-and-evaluation-studies.html#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_ipsum</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 <p>You can see that linear models are overlaps better, if you compare it to clustered sample. This is also another good example of why we need to apply weights in clustered samples, before making an assumption towards population.</p>
 </div>
 <div id="lessons-learned-from-sampling" class="section level4 hasAnchor" number="3.3.5.3">

@@ -52,6 +52,9 @@ inferential-statistics
 text-mining
 correlations
 regressions
+linear-regressions
+sampling-layers-and-regression
+logistic-regression
 some-key-visuals-to-interpret
 extras
 team-structure

@@ -287,8 +287,47 @@ PAB %>% dplyr::select(rCSI,RCS,FCS,LCSI,Debt) %>% GGally::ggpairs()
 
 ##    Regressions
 
-```{r,warning=FALSE,error=FALSE,message=FALSE}
+###   Linear Regressions
 
+Regression analysis is a statistical tool used to explain the relationship between a response (dependent, outcome) variable as a function of one or more predictor (independent) variables.
+
+Multiple linear regression is an extension of simple linear regression used to predict an outcome variable (y) on the basis of multiple distinct predictor variables (x).
+
+With three predictor variables (x), the prediction of y is expressed by the following equation:
+
+y = b0 + b1*x1 + b2*x2 + b3*x3
+
+The “b” values are called the regression weights (or beta coefficients). They measure the association between the predictor variable and the outcome. “b_j” can be interpreted as the average effect on y of a one unit increase in “x_j”, holding all other predictors fixed (taken from STHDA.com, a fruitful source, go and visit!).
+
+**For humanitarian sector, here are some examples of relationships between independent and dependent variables:**
+
+-   Share of food expenditure or per capita food expenditure might be related with food security.
+
+-   Income, when living in certain area or region, may be related to number of adults, copings and gender.
+
+-   Expenditure, when being IDP or not, may be related to household assets, house type and individual capitas.
+
+
+As you can see, even vulnerability can be related with many different aspects as well. In this key step, imagine a survey with 100+ questions, thus variables. So eventually you end up with trying to understand what effects which components and to which direction. There are several methods to see the links, eventually you will end up with mediation affects, which is inevitable. Humanitarian data is extremely complex due to all the variables are actually linked with each other, some more than others. Variable selection will be held in upcoming session. Here, I would like to reflect few key important tricks about regressions.
+
+####    Sampling Layers and Regression
+
+Let's say, you will build a regression and try to predict income, or, to understand which variables have significant affects on income. Your sample is representative over regions, thus, you believe that regions differs from each other in terms of socio-economical attributes such as livelihoods, expenditures, seasonality etc.
+
+For these models do not stick with independent variables as this is for an examples to reflect disaggregating (building different regressions) over sampling layers, or any other categorical variable that you think as they have different profiles (will have different regression outcomes). In the first example we will not build different regressions for each category, and in the second one we will build different models for different categories. Check how models are different from each other. This is one of the key knowledge  for humanitarian data analysis.
+
+In the first regression model below, you can see that we are trying to understand which variables have significant effect on income. We did not disaggregate data by regions, thus most of the variables seems significant except for FCG borderline and poor. Also, please kindly remember their estimated affect on the impact such as for x_rent it goes as 3.689e-01.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+model_simple <- lm(Income~LCSI+rCSI+FCG+x_total+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, data = pdmbt)
+summary(model_simple)
+```
+
+In the following regression, divided (grouped) by regions (stratums). We filtered only significant variables in the graphs. Lets give comments on Region A. Most significant two variables are FCG poor and borderline, negatively effects income. But in the previous (overall) regression, these values are not even significant. Woa! Changes a lot right? But it does makes sense. In the beginning you clustered you sample, believing that regions are, as their profile, different from each other. Thus, your regression models should be conducted for each of them, resulting different outcomes.
+
+Let's compare RegionB and RegionC. In RegionB, number of individual in household plays exceptional role on income, in a negative direction. For RegionC, having poor food consumption is significant and extremely strong.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 library("broom")
 
 pdmbt %>% 
@@ -297,8 +336,40 @@ pdmbt %>%
   mutate(model = map(data, ~lm(Income~LCSI+rCSI+FCG+x_total+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, data= .) %>%
                        tidy)) %>% unnest(model) %>% filter(p.value < 0.5) %>% filter(term != "(Intercept)") %>%
   ggplot(aes(x = reorder(term,estimate), y=estimate, fill=stratum)) + geom_col() + coord_flip() + facet_wrap(~stratum, scales = "free")
-
 ```
+
+So, in humanitarian data analysis with regressions, or any other statistical analysis, there is two take aways from that analysis:
+
+-   Get your hands to sampling methodology if you did not involved with process. It is extremely important for data analysis step.
+
+-   Try to build different regressions for significant variables and clusters, try to capture if there is any significant differences between them.
+
+###   Logistic Regression
+
+Let's build a logistic regression using same model above where we try to understand which variables are significant in retro of income of the household. Income and expenditure can be revert to binary versions with sensible thresholds. Income, threshold can be minimum wage, or something equivalent to that and for expenditure, minimum expenditure baskets or world banks thresholds (5$ in day per capita) could be your threshold. One simply tries to draw those thresholds to see whether household is above or below those lines, and may mark them as poor - non poor etc.
+
+Let's try to get a sensible threshold for income, and then convert it to a binary variable. For this analysis, I am going to use cutpointr (source: https://cran.r-project.org/web/packages/cutpointr/vignettes/cutpointr.html).
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+summary(pdmbt$Income)
+```
+
+So median value is 2200 and mean is 2566, but what is the optimal cutpoint for it? An optimal threshold linked with some socio-economical indicator. I always like using food consumption - convert it to binary and use it as an input for cutpointr package.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+library("cutpointr")
+pdmbt$FCGBinary <- ifelse(pdmbt$FCG=="acceptable", "acceptable", "belowconsumption") 
+opt_cut_b <- cutpointr(pdmbt, Income, FCGBinary, boot_runs = 50)
+
+summary(opt_cut_b)
+
+plot(opt_cut_b)
+```
+
+
+
+
+
 
 ##    Some Key Visuals to Interpret
 
