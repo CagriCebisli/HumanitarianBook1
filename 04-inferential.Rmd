@@ -357,7 +357,7 @@ Let's try to get a sensible threshold for income, and then convert it to a binar
 summary(pdmbt$Income)
 ```
 
-So median value is 2200 and mean is 2566, but what is the optimal cutpoint for it? An optimal threshold linked with some socio-economical indicator. I always like using food consumption - convert it to binary and use it as an input for cutpointr package.
+So median value is 2200 and mean is 2566, but what is the optimal cut point for it? An optimal threshold linked with some socio-economical indicator. I always like using food consumption - convert it to binary and use it as an input for cutpointr package.
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 library("cutpointr")
@@ -367,11 +367,71 @@ opt_cut_b <- cutpointr(pdmbt, Income, FCGBinary, boot_runs = 50)
 summary(opt_cut_b)
 
 plot(opt_cut_b)
+
+plot_metric(opt_cut_b)
+
+plot_x(opt_cut_b)
 ```
 
 
+Cutpointr, in regards of acceptable food consumptions, reflects that optimal cut point is 1560. Seems pretty valid point for a good cut.
+
+Let's recode and see some xtab (this is cross tabulation, shortly called xtabs).
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#recoding income to binary variable
+pdmbt$incomebinarycutpoint <- (ifelse(pdmbt$Income <= 1560, "Below", "Above"))
+pdmbt$incomebinary <- (ifelse(pdmbt$Income <= mean(pdmbt$Income), "Below", "Above"))
+summary(pdmbt)
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#proportion of mean splitted binary income
+prop.table(table(pdmbt$incomebinary))*100
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#proportion of cutpoint splitted binary income
+prop.table(table(pdmbt$incomebinarycutpoint))*100
+```
+
+**Extremely different results, as for mean cut 39% above and for cutpoint cut 67.7% above.** Let's see which one correlates more with food security.
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#proportion of mean splitted binary income
+prop.table(table(pdmbt$incomebinary,pdmbt$FCG),1)*100
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#proportion of mean splitted binary income
+prop.table(table(pdmbt$incomebinarycutpoint,pdmbt$FCG),1)*100
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#proportion of mean splitted binary income
+prop.table(table(pdmbt$FCG,pdmbt$incomebinarycutpoint),1)*100
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#proportion of mean splitted binary income
+prop.table(table(pdmbt$FCG,pdmbt$incomebinary),1)*100
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+chisq.test(pdmbt$FCG,pdmbt$incomebinary)
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+chisq.test(pdmbt$FCG,pdmbt$incomebinarycutpoint)
+```
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+#proportion of mean splitted binary income
+prop.table(table(pdmbt$FCG[pdmbt$PDM==5,]))*100
 
 
+pdmbt[pdmbt$PDM==5,]$FCG
+```
 
 
 ##    Some Key Visuals to Interpret
