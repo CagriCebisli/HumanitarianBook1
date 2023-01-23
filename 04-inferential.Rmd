@@ -348,7 +348,7 @@ So, in humanitarian data analysis with regressions, or any other statistical ana
 
 Let's build a logistic regression using same model above where we try to understand which variables are significant in retro of income of the household. Income and expenditure can be revert to binary versions with sensible thresholds. Income, threshold can be minimum wage, or something equivalent to that and for expenditure, minimum expenditure baskets or world banks thresholds (5$ in day per capita) could be your threshold. One simply tries to draw those thresholds to see whether household is above or below those lines, and may mark them as poor - non poor etc.
 
-**Optimal Cutpoints**
+####    Optimal Cutpoints
 
 
 Let's try to get a sensible threshold for income, and then convert it to a binary variable. For this analysis, I am going to use cutpointr (source: https://cran.r-project.org/web/packages/cutpointr/vignettes/cutpointr.html).
@@ -425,14 +425,46 @@ chisq.test(pdmbt$FCG,pdmbt$incomebinary)
 chisq.test(pdmbt$FCG,pdmbt$incomebinarycutpoint)
 ```
 
+####    Logistic Regression Setup
+
+After converting numeric variable to a binary one, followings procedures can be applied to held logistic regression. For the sake of comparison, same predictors will be in place for same dependent variable, as we used in lienar regression. 
+
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
-#proportion of mean splitted binary income
-prop.table(table(pdmbt$FCG[pdmbt$PDM==5,]))*100
+library(tidyverse)
+library(broom)
+theme_set(theme_classic())
+
+#Conversion to 1 and 0 of incomebinary (which was "Below" and "Above" before) for log reg.
+
+pdmbt$incomebinarylog <- ifelse(pdmbt$incomebinary =="Above",1,0)
+
+pdmbt2 <- pdmbt %>% select(incomebinarylog,LCSI,rCSI,FCG,x_total,Coverage_Needs_TL,x_food30days_total,x_rent,num_IndividualinHH)
+
+#Logistic Regression model, same inputs as linear model.
+
+model <- glm(incomebinarylog~LCSI+rCSI+FCG+x_total+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, 
+               data = pdmbt, 
+               family = binomial)
+
+#Extracting probabilities
+
+probabilities <- predict(model, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "pos", "neg")
+head(predicted.classes)
 
 
-pdmbt[pdmbt$PDM==5,]$FCG
+mydata <- PimaIndiansDiabetes2 %>%
+  dplyr::select_if(is.numeric) 
+predictors <- colnames(mydata)
+
+
+predictors <- c("incomebinarylog","LCSI","rCSI","FCG","x_total","Coverage_Needs_TL","x_food30days_total",
+                "x_rent","num_IndividualinHH")
+
+pdmbt2 <- pdmbt %>%
+  mutate(logit = log(probabilities/(1-probabilities))) %>%
+  gather(key = "predictors", value = "predictor.value", -logit)
 ```
-
 
 ##    Some Key Visuals to Interpret
 
