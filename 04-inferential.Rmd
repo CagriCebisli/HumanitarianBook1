@@ -431,6 +431,8 @@ After converting numeric variable to a binary one, followings procedures can be 
 
 ```{r,warning=FALSE,error=FALSE,message=FALSE}
 library(tidyverse)
+library(dplyr)
+library(tidyr)
 library(broom)
 theme_set(theme_classic())
 
@@ -438,32 +440,21 @@ theme_set(theme_classic())
 
 pdmbt$incomebinarylog <- ifelse(pdmbt$incomebinary =="Above",1,0)
 
-pdmbt2 <- pdmbt %>% select(incomebinarylog,LCSI,rCSI,FCG,x_total,Coverage_Needs_TL,x_food30days_total,x_rent,num_IndividualinHH)
+pdmbt2 <- pdmbt %>% dplyr::select(incomebinarylog,LCSI,rCSI,x_total,Coverage_Needs_TL,x_food30days_total,x_rent,num_IndividualinHH)
 
 #Logistic Regression model, same inputs as linear model.
 
-model <- glm(incomebinarylog~LCSI+rCSI+FCG+x_total+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, 
-               data = pdmbt, 
+model <- glm(incomebinarylog~LCSI+rCSI+x_total+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, 
+               data = pdmbt2, 
                family = binomial)
 
 #Extracting probabilities
 
 probabilities <- predict(model, type = "response")
 predicted.classes <- ifelse(probabilities > 0.5, "pos", "neg")
-head(predicted.classes)
 
+summary(model)
 
-mydata <- PimaIndiansDiabetes2 %>%
-  dplyr::select_if(is.numeric) 
-predictors <- colnames(mydata)
-
-
-predictors <- c("incomebinarylog","LCSI","rCSI","FCG","x_total","Coverage_Needs_TL","x_food30days_total",
-                "x_rent","num_IndividualinHH")
-
-pdmbt2 <- pdmbt %>%
-  mutate(logit = log(probabilities/(1-probabilities))) %>%
-  gather(key = "predictors", value = "predictor.value", -logit)
 ```
 
 ##    Some Key Visuals to Interpret
