@@ -440,11 +440,15 @@ theme_set(theme_classic())
 
 pdmbt$incomebinarylog <- ifelse(pdmbt$incomebinary =="Above",1,0)
 
-pdmbt2 <- pdmbt %>% dplyr::select(incomebinarylog,LCSI,rCSI,x_total,Coverage_Needs_TL,x_food30days_total,x_rent,num_IndividualinHH)
+pdmbt2_logsimple <- pdmbt %>% dplyr::select(incomebinarylog,LCSI,FCG,rCSI,x_total,Coverage_Needs_TL,x_food30days_total,x_rent,num_IndividualinHH)
+
+#For Machine Learning dependent variable, we are picking factor version of the income.
+
+pdmbt2_logML <- pdmbt %>% dplyr::select(incomebinary,LCSI,FCG,rCSI,x_total,Coverage_Needs_TL,x_food30days_total,x_rent,num_IndividualinHH)
 
 #Logistic Regression model, same inputs as linear model.
 
-model <- glm(incomebinarylog~LCSI+rCSI+x_total+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, 
+model <- glm(incomebinarylog~LCSI+rCSI+x_total+FCG+Coverage_Needs_TL+x_food30days_total+x_rent+num_IndividualinHH, 
                data = pdmbt2, 
                family = binomial)
 
@@ -454,8 +458,13 @@ probabilities <- predict(model, type = "response")
 predicted.classes <- ifelse(probabilities > 0.5, "pos", "neg")
 
 summary(model)
-
 ```
+
+Let's interpret the result and findings:
+
+-   Both logistic and linear regression adresses same variables as significant on income.
+
+-   
 
 ##    Some Key Visuals to Interpret
 
@@ -466,6 +475,7 @@ Personally, I always disaggregate data by key elements, to check region based di
 #Very good example of how column naming is important.
 #I can easly subset related columns by their names.
 #I have limited y axis to 5, to have a better viz of box plots.
+library(reshape2)
 
 xx_expenditure<- (PAB %>% dplyr::select(starts_with("x_",ignore.case = TRUE)))
 xx_expenditure <- scale(xx_expenditure)

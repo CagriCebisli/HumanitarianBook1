@@ -55,6 +55,8 @@ regressions
 linear-regressions
 sampling-layers-and-regression
 logistic-regression
+optimal-cutpoints
+logistic-regression-setup
 some-key-visuals-to-interpret
 extras
 team-structure
